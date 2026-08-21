@@ -1,0 +1,992 @@
+<title>Sei Giorni sull'Øresund</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#0F5C6B">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Øresund">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --ground:#EDEFEE; --surface:#FFFFFF; --surface-2:#E4E8E7; --line:#D2D8D7;
+  --ink:#111A1E; --ink-2:#42545A; --ink-3:#6E8087;
+  --accent:#0F5C6B; --accent-soft:#DCEAEC; --brick:#C2712C; --brick-soft:#F6E7D6;
+  --ok:#2E7D53; --ok-soft:#DCEDE3; --warn:#9A6B12; --warn-soft:#F6ECD5; --risk:#A93A2B; --risk-soft:#F7E0DC;
+  --shadow:0 1px 2px rgba(17,26,30,.06),0 6px 18px rgba(17,26,30,.06);
+  --f-disp:'Familjen Grotesk',ui-sans-serif,system-ui,sans-serif;
+  --f-body:'Public Sans',ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --tab-h:62px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0E1416; --surface:#161E21; --surface-2:#1E282C; --line:#2C383D;
+    --ink:#E7EDEC; --ink-2:#A8B8BC; --ink-3:#7C8F95;
+    --accent:#5FB3BF; --accent-soft:#173136; --brick:#E0A268; --brick-soft:#33241726;
+    --ok:#68C08D; --ok-soft:#15291F; --warn:#D9AE55; --warn-soft:#2A2314; --risk:#E38878; --risk-soft:#2E1A17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0E1416; --surface:#161E21; --surface-2:#1E282C; --line:#2C383D;
+  --ink:#E7EDEC; --ink-2:#A8B8BC; --ink-3:#7C8F95;
+  --accent:#5FB3BF; --accent-soft:#173136; --brick:#E0A268; --brick-soft:#332417;
+  --ok:#68C08D; --ok-soft:#15291F; --warn:#D9AE55; --warn-soft:#2A2314; --risk:#E38878; --risk-soft:#2E1A17;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--f-body); font-size:16px; line-height:1.55;
+  -webkit-text-size-adjust:100%; padding-bottom:calc(var(--tab-h) + env(safe-area-inset-bottom,0px));
+}
+.wrap{max-width:600px; margin:0 auto; padding:0 14px}
+h1,h2,h3,h4{font-family:var(--f-disp); margin:0; text-wrap:balance; letter-spacing:-.015em}
+a{color:var(--accent)}
+button{font:inherit; color:inherit}
+
+/* ---------- top bar ---------- */
+.top{position:sticky; top:0; z-index:40; background:var(--ground); border-bottom:1px solid var(--line)}
+.top-in{max-width:600px; margin:0 auto; padding:10px 14px 9px; display:flex; align-items:baseline; gap:10px}
+.brand{font-family:var(--f-disp); font-weight:700; font-size:1.02rem; letter-spacing:-.02em}
+.brand span{color:var(--accent)}
+.clock{margin-left:auto; font-family:var(--f-mono); font-size:.8rem; color:var(--ink-3); font-variant-numeric:tabular-nums}
+
+/* ---------- tabs ---------- */
+.tabs{
+  position:fixed; left:0; right:0; bottom:0; z-index:50;
+  background:var(--surface); border-top:1px solid var(--line);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+.tabs-in{max-width:600px; margin:0 auto; display:grid; grid-template-columns:repeat(5,1fr)}
+.tab{
+  appearance:none; background:none; border:0; cursor:pointer;
+  height:var(--tab-h); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+  font-size:.66rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-3);
+  border-top:2px solid transparent; margin-top:-1px;
+}
+.tab svg{width:21px; height:21px; stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round}
+.tab[aria-selected="true"]{color:var(--accent); border-top-color:var(--accent)}
+.tab:focus-visible{outline:2px solid var(--accent); outline-offset:-3px}
+
+/* ---------- generic ---------- */
+.panel{display:none; padding-top:16px}
+.panel.on{display:block}
+.eyebrow{
+  font-family:var(--f-mono); font-size:.68rem; text-transform:uppercase; letter-spacing:.12em;
+  color:var(--ink-3); margin:0 0 6px
+}
+.sec-h{font-size:1.35rem; font-weight:700; line-height:1.2; margin:0 0 4px}
+.lede{color:var(--ink-2); font-size:.94rem; margin:0 0 16px}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px; box-shadow:var(--shadow)}
+.card + .card{margin-top:10px}
+.stack{display:flex; flex-direction:column; gap:10px}
+hr.rule{border:0; border-top:1px solid var(--line); margin:22px 0}
+
+/* ---------- badges ---------- */
+.b{
+  display:inline-flex; align-items:center; gap:5px; border-radius:999px;
+  padding:2px 8px; font-family:var(--f-mono); font-size:.66rem; font-weight:500;
+  letter-spacing:.02em; white-space:nowrap; vertical-align:middle;
+}
+.b::before{content:""; width:6px; height:6px; border-radius:50%; background:currentColor; flex:none}
+.b.ok{background:var(--ok-soft); color:var(--ok)}
+.b.warn{background:var(--warn-soft); color:var(--warn)}
+.b.risk{background:var(--risk-soft); color:var(--risk)}
+.b.flat{background:var(--surface-2); color:var(--ink-2)}
+.b.flat::before{display:none}
+
+/* ---------- day nav ---------- */
+.daynav{display:flex; gap:6px; overflow-x:auto; padding:2px 0 12px; scrollbar-width:none}
+.daynav::-webkit-scrollbar{display:none}
+.dbtn{
+  appearance:none; border:1px solid var(--line); background:var(--surface); cursor:pointer;
+  border-radius:10px; padding:7px 11px; white-space:nowrap; text-align:left; line-height:1.15;
+}
+.dbtn b{display:block; font-family:var(--f-disp); font-size:.86rem; font-weight:600}
+.dbtn i{display:block; font-style:normal; font-family:var(--f-mono); font-size:.62rem; color:var(--ink-3); text-transform:uppercase; letter-spacing:.06em}
+.dbtn[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#fff}
+.dbtn[aria-pressed="true"] i{color:rgba(255,255,255,.75)}
+
+/* ---------- day head ---------- */
+.dayhead{margin-bottom:14px}
+.dayhead h2{font-size:1.5rem; line-height:1.15; font-weight:700}
+.daymeta{display:flex; flex-wrap:wrap; gap:6px; margin-top:9px}
+
+/* ---------- timeline ---------- */
+.tl{position:relative; padding-left:58px}
+.tl::before{content:""; position:absolute; left:47px; top:6px; bottom:6px; width:1px; background:var(--line)}
+.stop{position:relative; padding-bottom:14px}
+.stop .t{
+  position:absolute; left:-58px; top:12px; width:42px; text-align:right;
+  font-family:var(--f-mono); font-size:.76rem; font-weight:500; color:var(--ink-2); font-variant-numeric:tabular-nums
+}
+.stop .dot{position:absolute; left:-13px; top:18px; width:9px; height:9px; border-radius:50%; background:var(--line); border:2px solid var(--ground)}
+.stop.key .dot{background:var(--accent)}
+.stop.now .dot{background:var(--brick); box-shadow:0 0 0 4px var(--brick-soft)}
+.stop .box{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:12px 13px; box-shadow:var(--shadow)}
+.stop.now .box{border-color:var(--brick)}
+.stop h3{font-size:1rem; font-weight:600; line-height:1.3}
+.stop h3 .v{
+  display:inline-block; font-family:var(--f-mono); font-size:.66rem; font-weight:600;
+  background:var(--accent-soft); color:var(--accent); border-radius:5px; padding:1px 5px; margin-left:5px; vertical-align:2px
+}
+.stop p{margin:6px 0 0; font-size:.9rem; color:var(--ink-2)}
+.stop p.warnline{color:var(--risk); font-weight:500}
+.meta{display:flex; flex-wrap:wrap; gap:6px; margin-top:9px; align-items:center}
+.pill{
+  font-family:var(--f-mono); font-size:.68rem; background:var(--surface-2); color:var(--ink-2);
+  border-radius:6px; padding:2px 7px; white-space:nowrap
+}
+.pill.money{color:var(--ink); font-weight:500}
+.maplink{
+  font-family:var(--f-mono); font-size:.68rem; text-decoration:none; color:var(--accent);
+  border:1px solid var(--accent); border-radius:6px; padding:2px 7px; white-space:nowrap
+}
+.src{font-family:var(--f-mono); font-size:.64rem; color:var(--ink-3); text-decoration:none; border-bottom:1px dotted var(--ink-3)}
+
+/* ---------- hop (tragitto) ---------- */
+.hop{
+  margin-top:9px; background:var(--accent-soft); border-radius:8px; padding:9px 10px;
+  font-family:var(--f-mono); font-size:.76rem; line-height:1.5; color:var(--ink)
+}
+.hop b{font-weight:600}
+
+/* ---------- food block ---------- */
+.foodblock{margin-top:6px}
+.fitem{display:flex; gap:10px; padding:10px 0; border-top:1px solid var(--line)}
+.fitem:first-of-type{border-top:0}
+.fitem .fmain{flex:1; min-width:0}
+.fitem h4{font-size:.94rem; font-weight:600}
+.fitem p{margin:3px 0 0; font-size:.86rem; color:var(--ink-2)}
+.fprice{font-family:var(--f-mono); font-size:.8rem; font-weight:600; white-space:nowrap; text-align:right}
+.fprice small{display:block; font-weight:400; font-size:.68rem; color:var(--ink-3)}
+
+/* ---------- steps ---------- */
+ol.steps{counter-reset:s; list-style:none; padding:0; margin:12px 0 0}
+ol.steps li{
+  counter-increment:s; position:relative; padding:0 0 14px 38px; font-size:.92rem; color:var(--ink-2)
+}
+ol.steps li::before{
+  content:counter(s); position:absolute; left:0; top:-1px; width:25px; height:25px; border-radius:50%;
+  background:var(--accent); color:#fff; font-family:var(--f-mono); font-size:.76rem; font-weight:600;
+  display:flex; align-items:center; justify-content:center
+}
+ol.steps li b{color:var(--ink)}
+ol.steps li:last-child{padding-bottom:0}
+
+/* ---------- callout ---------- */
+.call{border-radius:12px; padding:13px; font-size:.9rem; border:1px solid}
+.call h4{font-size:.95rem; font-weight:700; margin-bottom:5px}
+.call p{margin:0}
+.call p + p{margin-top:7px}
+.call.do{background:var(--ok-soft); border-color:color-mix(in srgb,var(--ok) 30%,transparent); color:var(--ink)}
+.call.stop{background:var(--risk-soft); border-color:color-mix(in srgb,var(--risk) 32%,transparent); color:var(--ink)}
+.call.note{background:var(--warn-soft); border-color:color-mix(in srgb,var(--warn) 32%,transparent); color:var(--ink)}
+.call.do h4{color:var(--ok)} .call.stop h4{color:var(--risk)} .call.note h4{color:var(--warn)}
+
+/* ---------- table ---------- */
+.tw{overflow-x:auto; -webkit-overflow-scrolling:touch; border:1px solid var(--line); border-radius:12px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.86rem; min-width:420px}
+th,td{padding:9px 11px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top}
+th{font-family:var(--f-mono); font-size:.66rem; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-3); font-weight:500}
+tr:last-child td{border-bottom:0}
+td.num{font-family:var(--f-mono); font-variant-numeric:tabular-nums; white-space:nowrap}
+
+/* ---------- phrase ---------- */
+.ph{display:flex; gap:11px; padding:11px 0; border-bottom:1px solid var(--line); align-items:flex-start}
+.ph:last-child{border-bottom:0}
+.ph .sit{flex:0 0 33%; font-size:.84rem; color:var(--ink-3)}
+.ph .say{flex:1}
+.ph .say b{font-family:var(--f-mono); font-size:.9rem; color:var(--ink); font-weight:600; display:block}
+.ph .say i{font-style:normal; font-size:.78rem; color:var(--ink-3)}
+
+/* ---------- sos ---------- */
+.sos-card{border:2px solid var(--ink); border-radius:12px; padding:15px; background:var(--surface)}
+.addr{font-family:var(--f-mono); font-size:1.15rem; line-height:1.5; font-weight:600; white-space:pre-wrap; margin:0}
+.addr.empty{color:var(--ink-3); font-weight:400; font-size:.95rem}
+.mini{appearance:none; background:var(--surface-2); border:1px solid var(--line); color:var(--ink-2);
+  border-radius:7px; padding:4px 10px; font-family:var(--f-mono); font-size:.7rem; cursor:pointer}
+.mini:hover{border-color:var(--accent); color:var(--accent)}
+.fields{display:flex; flex-direction:column; gap:9px; margin-top:12px}
+.fields label{display:flex; flex-direction:column; gap:4px; font-size:.72rem; font-family:var(--f-mono);
+  text-transform:uppercase; letter-spacing:.08em; color:var(--ink-3)}
+.fields input,.fields textarea{
+  font-family:var(--f-mono); font-size:.95rem; color:var(--ink); background:var(--ground);
+  border:1px solid var(--line); border-radius:8px; padding:9px 10px; width:100%; resize:vertical}
+.fields input:focus,.fields textarea:focus{outline:2px solid var(--accent); outline-offset:1px; border-color:var(--accent)}
+.privacy{font-size:.76rem; color:var(--ink-3); margin:10px 0 0; line-height:1.5}
+.nums{list-style:none; padding:0; margin:0}
+.nums li{display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid var(--line); font-size:.9rem}
+.nums li:last-child{border-bottom:0}
+.nums b{font-family:var(--f-mono); font-weight:600; white-space:nowrap}
+
+.foot{padding:26px 0 30px; color:var(--ink-3); font-size:.78rem; text-align:center; line-height:1.6}
+.legend{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+
+@media print{
+  .tabs,.top,.daynav,.noprint{display:none!important}
+  body{padding:0; background:#fff; color:#000}
+  .panel{display:none!important}
+  #p-sos{display:block!important}
+  .sos-card{border-color:#000; box-shadow:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+
+<header class="top">
+  <div class="top-in">
+    <div class="brand">Sei giorni sull'<span>Øresund</span></div>
+    <div class="clock" id="clock"></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="p-oggi" class="panel on"></section>
+  <section id="p-giorni" class="panel"></section>
+  <section id="p-biglietti" class="panel"></section>
+  <section id="p-cibo" class="panel"></section>
+  <section id="p-sos" class="panel"></section>
+</main>
+
+<nav class="tabs" aria-label="Sezioni">
+  <div class="tabs-in" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-p="oggi">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Oggi</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="giorni">
+      <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Giorni</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="biglietti">
+      <svg viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4Z"/><path d="M14 6v12"/></svg>Biglietti</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="cibo">
+      <svg viewBox="0 0 24 24"><path d="M5 3v8a3 3 0 0 0 6 0V3M8 11v10"/><path d="M18 3c-1.7 1.5-2.5 3.5-2.5 6 0 1.7.8 2.6 2.5 2.6V21"/></svg>Cibo</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="sos">
+      <svg viewBox="0 0 24 24"><path d="M12 3 3 7v6c0 4.5 3.8 7.6 9 8 5.2-.4 9-3.5 9-8V7Z"/><path d="M12 9v4M12 16h.01"/></svg>SOS</button>
+  </div>
+</nav>
+
+<script>
+/* =========================================================================
+   DATI — ogni fatto porta il suo bollino di verifica.
+   ok   = fonte ufficiale controllata il 21/08/2026
+   warn = da ricontrollare sul posto (stagionale, a esaurimento, meteo)
+   risk = non confermato
+   ========================================================================= */
+
+const M = (q) => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+
+const DAYS = [
+{
+ id:"lun", iso:"2026-08-24", label:"Lun 24", sub:"Arrivo",
+ title:"Arrivo, spesa, e il porto la sera stessa",
+ lede:"Atterri all’ora di pranzo. Casa è a una fermata di metro. Il centro lo vedi la sera, con calma.",
+ sun:"20:26",
+ stops:[
+  {t:"12:55", h:"Atterraggio", b:"Ryanair da Roma. Prendi i bagagli con calma: oggi non hai un solo orario da rispettare."},
+  {t:"13:20", h:"Macchinetta danese → City Pass Small 120 ore", key:1,
+   b:"Cerca «City Pass», poi Small, poi 120 hours, Adult × 1. Carta contactless. Esce un biglietto di carta con data e ora stampate: quello è tutto.",
+   warn:"Il conteggio parte dall’acquisto, non dall’attivazione. Comprato alle 13:20 di lunedì scade sabato alle 13:20 — ed è per questo che sabato pomeriggio ti serve un singolo.",
+   price:"340 DKK", badge:["ok","City Pass"]},
+  {t:"13:35", h:"A casa", hop:"<b>M2</b> dir. <b>Vanløse</b> → <b>prima fermata: KASTRUP</b>. Circa 2 minuti.", map:"Kastrup St København metro"},
+  {t:"13:50", h:"Check-in", b:"Disfa la valigia, metti la carta d’identità nel portafoglio — martedì ti serve in tasca, non in borsa."},
+  {t:"14:45", h:"Spesa a Kastrup", key:1,
+   b:"È la spesa che regge tutta la settimana: colazioni, pranzi al sacco, cene a casa. Rugbrød, burro salato, aringa marinata, koldskål con i kammerjunker, frutta, caffè. Netto, Rema 1000 e Lidl sono tutti su Amager, il Rema 1000 di Kastrup è in Præstefælledvej.",
+   badge:["warn","orari da confermare sul posto"], map:"Rema 1000 Præstefælledvej Kastrup"},
+  {t:"16:00", h:"Verso il centro", hop:"<b>M2</b> dir. <b>Vanløse</b> → scendi a <b>Kongens Nytorv</b>."},
+  {t:"16:20", h:"Nyhavn", v:8, key:1, b:"Le case colorate del Seicento, a duecento metri dall’uscita della metro. Poi cinque minuti a nord fino a <b>Ofelia Plads</b> <span class='v'>7</span>, il molo con le scale che scendono in acqua: è dove si siedono i danesi dopo il lavoro, e non c’è un turista.", price:"gratis", badge:["ok","sempre aperto"], map:"Nyhavn, København"},
+  {t:"17:15", h:"Amalienborg", v:8, key:1,
+   b:"La piazza ottagonale con le quattro regge e le guardie in servizio. La piazza è all’aperto e sempre accessibile.",
+   warn:"CORRETTO: la <b>Marmorkirken chiude alle 17:00</b> da lunedì a giovedì. A quest’ora la trovi chiusa — è stata tolta da oggi. La cupola poi si visita <b>solo mar–dom alle 13:30</b>, un giro al giorno, max 15 persone, senza prenotazione.",
+   badge:["ok","verificato su marmorkirken.dk"], src:"https://www.marmorkirken.dk/", map:"Amalienborg Slotsplads"},
+  {t:"18:15", h:"Cena: Killer Kebab", v:8,
+   b:"Borgergade 18, a cinque minuti da Amalienborg. Kebab marinato in casa e falafel dentro un pane piatto a lievito madre sfornato lì. Da asporto: si mangia camminando verso Kastellet.",
+   price:"90–110 DKK", badge:["ok","lun–gio 11:30–20:30"], map:"Killer Kebab Borgergade 18"},
+  {t:"19:15", h:"Kastellet", v:8, b:"La fortezza a stella del 1662, ancora militare, coi bastioni erbosi e il mulino. Si cammina sul perimetro al tramonto. Poi <b>Gefionspringvandet</b> <span class='v'>7</span> e, se ti va, la <b>Sirenetta</b> <span class='v'>5</span> — piccola e sempre circondata, ma è lì.", price:"gratis", badge:["ok","sempre aperto"], map:"Kastellet København"},
+  {t:"20:26", h:"Tramonto", b:"Oggi il sole va giù alle 20:26. Dai bastioni di Kastellet guarda verso l’Øresund: domani sei dall’altra parte.", badge:["ok","effemeridi verificate"]},
+  {t:"20:45", h:"Rientro", hop:"<b>Østerport</b> → <b>M3/M4</b> → <b>Kongens Nytorv</b> → <b>M2</b> dir. <b>Vanløse</b> → <b>KASTRUP</b>."}
+ ],
+ food:{
+  intro:"Oggi mangi con quello che compri. L’unica cosa da fuori è la cena, ed è a cinque minuti dal punto in cui ti trovi.",
+  items:[
+   {n:"Killer Kebab", w:"Borgergade 18 — sulla strada fra Amalienborg e Kastellet. Da asporto.", p:"90–110", u:"DKK", h:"lun–gio 11:30–20:30", badge:"ok", map:"Killer Kebab Borgergade 18"},
+   {n:"DØP · Den Økologiske Pølsemand", w:"Il carretto dell’hot dog biologico. Købmagergade 52 (sotto la Rundetårn) e Helligåndskirken sullo Strøget. <b>Chiude alle 18</b>: se scendi in centro presto, è qui che spendi 5 euro e mangi la cosa più danese del viaggio.", p:"34–39", u:"DKK", h:"lun–ven 11:00–18:00", badge:"ok", map:"DØP Købmagergade 52"},
+   {n:"BUKA Bakery", w:"Frederiksberggade 21 e Nytorv 3, in mezzo allo Strøget. Aperta tutti i giorni fino alle 19: è il ripiego che funziona sempre.", p:"~58", u:"DKK croissant", h:"tutti i giorni 7–19", badge:"warn", map:"BUKA Bakery Frederiksberggade 21"},
+   {n:"Spesa a Kastrup", w:"Netto / Rema 1000 / Lidl. Da qui escono le colazioni di sei giorni e i pranzi al sacco.", p:"~250", u:"DKK settimana", h:"vedi Google Maps", badge:"warn", map:"Netto Kastrup"}
+  ]
+ }
+},
+{
+ id:"mar", iso:"2026-08-25", label:"Mar 25", sub:"Svezia",
+ title:"Svezia: Lund la mattina, Malmö fino al tramonto",
+ lede:"La stazione per la Svezia è dentro il tuo aeroporto, a una fermata da casa. Tutta la mattina è costruita attorno all’orologio del duomo che suona a mezzogiorno.",
+ sun:"20:24",
+ stops:[
+  {t:"09:00", h:"Attiva il biglietto svedese", key:1,
+   b:"Se l’hai comprato in anticipo nell’app Skånetrafiken, <b>attivalo adesso</b>. Non c’è nessun vantaggio ad aspettare: 24 ore da adesso significa fino a mercoledì mattina, e stasera torni alle 22.",
+   warn:"Se invece l’app te l’ha già attivato ieri, il biglietto stasera è SCADUTO. Controlla prima di uscire di casa.",
+   badge:["ok","§4.3.3 condizioni Skånetrafiken"]},
+  {t:"09:45", h:"All’aeroporto", hop:"<b>M2</b> dir. <b>Vanløse</b> → <b>Lufthavnen</b>. Una fermata. Poi segui i cartelli <b>Tog / Trains</b>: la stazione dei treni è <b>265 m a piedi</b> dalla metro, dentro l’aeroporto."},
+  {t:"10:15", h:"Verso Lund", key:1,
+   hop:"<b>CPH Airport Kastrup</b> → <b>Øresundståg</b> → il display deve dire <b>Lund C</b> (o Helsingborg / Göteborg / Kalmar) → <b>Lund C</b>. 37 min.",
+   b:"Partenze reali di oggi: <b>10:15 · 10:30 · 10:45 · 11:00</b>, arrivo <b>10:52 · 11:09 · 11:22 · 11:39</b>. Molti treni terminano a Malmö C e non proseguono: se il display dice solo «Malmö C», sali lo stesso e cambia lì. Il tuo biglietto copre entrambe le cose.",
+   badge:["ok","orari verificati alla data reale"]},
+  {t:"10:52", h:"Lund C", b:"Il duomo è a <b>otto minuti a piedi</b> dalla stazione, dritto per Bangatan e Kyrkogatan.", map:"Lund C station"},
+  {t:"11:05", h:"Domkyrkan", v:10, key:1, b:"Duomo romanico del 1145: tre navate di arenaria e la cripta con le colonne scolpite. Entra e guarda, poi esci e torna per mezzogiorno.", price:"gratis", badge:["ok","fonte ufficiale"], src:"https://www.svenskakyrkan.se/lundsdomkyrka/det-astonomiska-uret", map:"Lunds domkyrka"},
+  {t:"11:30", h:"Lundagård e l’Università", v:7, b:"Il parco davanti al duomo, con la casa del re del 1584 e il palazzo bianco dell’ateneo. Venti minuti, poi rientra.", price:"gratis"},
+  {t:"11:55", h:"L’orologio astronomico — ore 12:00", v:10, key:1,
+   b:"<b>Sii dentro alle 11:55.</b> Suona <i>In dulci jubilo</i> dal più piccolo organo della cattedrale, nascosto dentro l’orologio; si aprono le porticine, i Re Magi sfilano davanti alla Madonna e due trombettieri alzano gli strumenti. Dura pochi minuti. È l’appuntamento della giornata.",
+   b2:"Se lo perdi lo rifà alle 15:00 — ma vorrebbe dire restare a Lund fino alle tre e tagliare mezza Malmö.",
+   badge:["ok","12:00 e 15:00, lun–sab"]},
+  {t:"12:20", h:"Pranzo: Lundafalafel", v:8, key:1,
+   b:"Stora Södergatan 5, accanto al negozio Lindex, a pochi minuti dal duomo. Un buco nel muro con due panche fuori: <b>rulle di falafel a 30 corone svedesi</b>, il preferito degli studenti. È il pasto più economico dell’intera settimana. Si mangia camminando.",
+   price:"30–45 SEK", badge:["ok","prezzo verificato"], map:"Lundafalafel Stora Södergatan 5 Lund"},
+  {t:"12:50", h:"Botaniska trädgården", v:7, b:"Dieci minuti a piedi dall’altra parte del centro. <b>Le serre sono chiuse per restauro fino al 2027</b>: resta il giardino all’aperto, otto ettari, aperto fino alle 20. Bello e gratuito, ma non è più il motivo per venire a Lund.", price:"gratis", badge:["ok","serre chiuse, fonte ufficiale"], src:"https://www.botan.lu.se/renovering-av-vara-vaxthus", map:"Botaniska trädgården Lund"},
+  {t:"13:40", h:"A Malmö", hop:"<b>Lund C</b> → <b>Øresundståg</b> dir. <b>Malmö C</b> / Københavns Lufthavn → <b>Malmö C</b>. 13 min."},
+  {t:"14:10", h:"Malmö Saluhall", v:8, b:"Cinque minuti a piedi dalla stazione, Gibraltargatan 6: un magazzino di mattoni riconvertito in mercato coperto. Qui si guarda e si prende qualcosa di piccolo — hai già mangiato a Lund.", price:"90–130 SEK", badge:["ok","lun–gio 11–20"], src:"https://www.malmosaluhall.se/en/welcome/", map:"Malmö Saluhall"},
+  {t:"15:00", h:"Lilla Torg e Gamla Staden", v:7, b:"Dieci minuti a piedi verso ovest. La piazzetta di case a graticcio del Cinquecento, di quando Malmö era danese. <b>Guarda e non sederti</b>: qui un caffè costa il doppio.", price:"gratis"},
+  {t:"15:40", h:"Malmö Konsthall", v:8, key:1, b:"Quindici minuti a piedi. Una delle più grandi sale espositive d’Europa, col soffitto di 550 lucernari. <b>Il martedì chiude alle 17</b>: è il motivo per cui viene prima della biblioteca.", price:"gratis", badge:["ok","mar 11–17"], src:"https://malmokonsthall.se/en/visit-us/", map:"Malmö Konsthall"},
+  {t:"16:30", h:"Malmö Stadsbibliotek", v:8, b:"Cinque minuti, dall’altra parte di Kungsparken. Il cubo di vetro di Henning Larsen, <i>Ljusets kalender</i>, attaccato al castello di mattoni del 1901. Per uno a cui piacciono le biblioteche è la migliore del viaggio dopo il Diamante Nero — e qui si entra e basta.", price:"gratis", badge:["warn","mar ~9–21, conferma in loco"], map:"Malmö Stadsbibliotek"},
+  {t:"17:20", h:"Örum Bageri", v:8, key:1,
+   b:"NUOVO. Citadellsvägen 23, esattamente sulla strada fra la biblioteca e il porto. Bulle al cardamomo, croissant al pecorino e kimchi. <b>Aperta martedì fino alle 18:00</b>: se ci arrivi entro le 17:40 sei dentro, altrimenti salta e vai avanti.",
+   badge:["ok","mar–ven 7:30–18"], map:"Örum Bageri Citadellsvägen 23 Malmö"},
+  {t:"17:45", h:"Slottsträdgården e Malmöhus da fuori", v:8, b:"Otto giardini a tema attorno al castello col fossato, roseto e giardino giapponese. L’esterno vale più dell’interno, e non costa niente.", price:"gratis", badge:["ok","fonte ufficiale"], src:"https://malmo.se/"},
+  {t:"18:15", h:"Västra Hamnen e Turning Torso", v:8,
+   b:"Venti minuti a piedi lungo il canale. Il grattacielo di Calatrava che ruota di 90 gradi — <b>non è più il più alto di Scandinavia</b> (dal 2022 lo è il Karlatornet di Göteborg) e i piani panoramici <b>si visitano solo giovedì, venerdì e sabato</b>: oggi si guarda da fuori. Poi il lungomare fra <b>Scaniaparken</b> e <b>Daniaparken</b>, dove ci si tuffa dalle scogliere di cemento.",
+   price:"gratis", map:"Turning Torso Malmö"},
+  {t:"18:15", h:"L’alternativa forte: Ribersborgs Kallbadhus", v:8,
+   b:"Bagno freddo del 1898 su palafitte in mare aperto, <b>sei saune</b> e il tuffo nell’Øresund. <b>Martedì 09:00–21:00, 90 SEK.</b> In sauna il costume non è ammesso: lato uomini e lato donne, separati. Se ci vai, salta Slottsträdgården e arrivaci alle 17:30 — due ore, e ne esci che è un’altra vacanza.",
+   price:"90 SEK", badge:["ok","orari e prezzo verificati"], src:"https://www.ribersborgskallbadhus.se/bad", map:"Ribersborgs Kallbadhus"},
+  {t:"20:24", h:"Tramonto sull’Øresund", b:"Alle 20:24, dritto sull’acqua, con la Danimarca in faccia.", badge:["ok","effemeridi verificate"]},
+  {t:"21:20", h:"Rientro", key:1,
+   hop:"<b>Malmö C</b> → <b>Øresundståg</b> dir. <b>Københavns Lufthavn</b> / København H → <b>Københavns Lufthavn</b> (~22 min) → <b>M2</b> dir. <b>Vanløse</b> → <b>prima fermata: KASTRUP</b>.",
+   b:"A casa verso le 22:00. <b>Non hai fretta:</b> i treni passano di continuo fino a tarda sera e poi uno all’ora tutta la notte. Non esiste lo scenario in cui resti bloccato in Svezia — e il tuo biglietto è valido fino a domani mattina.",
+   badge:["warn","orario esatto: controlla Google Maps"]}
+ ],
+ food:{
+  intro:"Oggi è l’unico giorno in corone svedesi, ed è anche il giorno in cui si mangia meglio spendendo meno. Il falafel è la risposta: Malmö e Lund ne sono la capitale nordica.",
+  items:[
+   {n:"Lundafalafel", w:"Stora Södergatan 5, Lund, accanto a Lindex. Rulle in due misure, si mangia in piedi o al parco.", p:"30–45", u:"SEK", h:"pranzo", badge:"ok", map:"Lundafalafel Stora Södergatan 5 Lund"},
+   {n:"Möllevångstorget", w:"La piazza più multietnica di Scandinavia, a 20 min a piedi da Malmö C (o pochi minuti di bus, <b>incluso nel tuo biglietto</b>). Un rullo di falafel enorme sta sulle 70–75 SEK.", p:"70–75", u:"SEK", h:"mercato la mattina", badge:"warn", map:"Möllevångstorget Malmö"},
+   {n:"Örum Bageri", w:"Citadellsvägen 23, sulla strada del pomeriggio. Bulle al cardamomo, croissant salati.", p:"—", u:"", h:"mar–ven 7:30–18", badge:"ok", map:"Örum Bageri Citadellsvägen 23 Malmö"},
+   {n:"Malmö Saluhall", w:"Gibraltargatan 6, cinque minuti da Malmö C. Mercato coperto: qui si assaggia, non si pranza — costa da centro città.", p:"90–130", u:"SEK", h:"lun–gio 11–20", badge:"ok", map:"Malmö Saluhall"},
+   {n:"Cena", w:"Torni a casa alle 22. Mangia qualcosa di leggero a Malmö prima di salire, oppure tieni pronto qualcosa in frigo: dopo un giorno intero in piedi, la cena a casa è la scelta giusta.", p:"—", u:"", h:"", badge:"flat"}
+  ]
+ }
+},
+{
+ id:"mer", iso:"2026-08-26", label:"Mer 26", sub:"Musei gratis",
+ title:"Il mercoledì gratis, e Nørrebro la sera",
+ lede:"Oggi entri gratis in due musei che insieme valgono 260 corone — ma solo perché il 26 è l’ultimo mercoledì di agosto. Non è una regola settimanale: è una coincidenza a tuo favore.",
+ sun:"20:21",
+ stops:[
+  {t:"09:45", h:"Verso Nørreport", hop:"<b>M2</b> dir. <b>Vanløse</b> → <b>Nørreport</b>."},
+  {t:"10:05", h:"Sankt Peders Bageri", v:9, key:1,
+   b:"Sankt Peders Stræde 29, il forno più antico della città: <b>1652</b>. L’<i>onsdagssnegl</i>, la lumaca alla cannella del mercoledì, è grande il doppio del normale. Ne fanno circa 4.000: alle dieci ce ne sono ancora, e non serve alzarsi all’alba.",
+   price:"~25 DKK", badge:["ok","lun–ven 7:30–17"], map:"Sankt Peders Bageri Sankt Peders Stræde 29"},
+  {t:"10:35", h:"Rundetårn — opzionale", v:7,
+   b:"Tre minuti a piedi. La rampa elicoidale del 1642, larga abbastanza per una carrozza. <b>Nel 2026 l’osservatorio e la cupola sono chiusi per il restauro del telescopio</b>: resta la rampa e la vista dalla piattaforma, che valgono comunque. Mezz’ora.",
+   price:"60 DKK · studenti 40", badge:["ok","tutti i giorni 10–20"], src:"https://www.rundetaarn.dk/en/visit-us/", map:"Rundetårn København"},
+  {t:"11:15", h:"Ørstedsparken e Vor Frue Kirke", v:7, b:"Il parco sul vecchio bastione, poi il duomo di Copenaghen: dentro c’è il <b>Cristo di Thorvaldsen</b> con le braccia aperte, il modello più copiato al mondo, e i dodici apostoli. Si entra e basta.", price:"gratis", badge:["ok","~8–17, ingresso libero"], map:"Vor Frue Kirke København"},
+  {t:"11:45", h:"Davids Samling", v:8, key:1,
+   b:"Kronprinsessegade 30. La più bella collezione di arte islamica del Nord Europa, dentro un palazzo borghese. <b>Gratis sempre</b>, e il mercoledì resta aperta fino alle 21. Al banco ti danno un tagliando da zero corone: prendilo ed entra.",
+   price:"gratis", badge:["ok","mer 10–21, ingresso libero"], src:"https://www.davidmus.dk/en/", map:"Davids Samling Kronprinsessegade 30"},
+  {t:"12:45", h:"Kongens Have e Botanisk Have", v:8, b:"Il giardino del re col Rosenborg, poi l’orto botanico: <b>gratis, aperto 8:30–18</b>. Il Palmehuset di vetro del 1874 costa 70 corone e oggi è aperto — è l’unico extra della giornata che valuterei.", price:"gratis · Palmehuset 70", badge:["ok","8:30–18, lun chiuso il Palmehuset"], src:"https://snm.dk/en/botanical-garden", map:"Botanisk Have København"},
+  {t:"13:15", h:"Pranzo a Torvehallerne", v:8,
+   b:"Frederiksborggade 21, dentro Nørreport. Due padiglioni di vetro: smørrebrød da 68 corone al pezzo, tacos di Hija de Sanchez da ~56, il caffè di Coffee Collective. <b>Compra e portalo fuori</b>: c’è la piazza davanti e Ørstedsparken a due passi.",
+   price:"70–150 DKK", badge:["ok","lun–ven 10–19"], map:"Torvehallerne København"},
+  {t:"14:25", h:"Thorvaldsens Museum", v:8, key:1,
+   b:"Il museo giallo-ocra accanto a Christiansborg, tutto dedicato allo scultore. <b>Oggi è gratis</b> perché è l’ultimo mercoledì del mese — dal 1° luglio 2024 il Comune ha tolto il gratis di tutti i mercoledì. Negli altri giorni sono 110 corone.",
+   price:"gratis oggi · 110 DKK", badge:["ok","regola comunale verificata"], src:"https://cphmuseum.kk.dk/en/news/change-regarding-free-admission-on-wednesdays", map:"Thorvaldsens Museum"},
+  {t:"15:25", h:"Ny Carlsberg Glyptotek", v:9, key:1,
+   b:"Il colpo grosso della giornata: antichità egizie, etrusche, romane, e la seconda collezione di Rodin al mondo, dentro un giardino d’inverno con le palme sotto la cupola di vetro.",
+   warn:"PRENOTA DA CASA il biglietto da 0 corone. Il museo scrive che <b>nei giorni gratuiti la capienza è limitata e consiglia vivamente di riservare</b>, per non trovare la fila e andarci per niente. Chiude alle 17: entra entro le 15:30.",
+   price:"gratis oggi · 150 DKK", badge:["ok","mar–dom 10–17"], src:"https://glyptoteket.com/visit/tickets", map:"Ny Carlsberg Glyptotek"},
+  {t:"17:10", h:"Torre di Christiansborg", v:9, key:1,
+   b:"La torre più alta di Copenaghen, e la vista è <b>gratis</b>. Si entra dal <b>Kongeporten</b>, il portone su Christiansborg Slotsplads: ci sono <b>due file</b>, una per la vista e una per il ristorante — mettiti in quella giusta. C’è un controllo di sicurezza tipo aeroporto. In cima si sale <b>max 40 persone alla volta</b>, quindi la coda è normale.",
+   b2:"Aperta <b>mar–sab 11:00–21:00</b>, ultimo ingresso 15 minuti prima. Nessuna prenotazione. La piattaforma è a 44 m; i 106 m sono l’altezza della torre.",
+   price:"gratis", badge:["ok","verificato sul sito del Folketinget"], src:"https://www.ft.dk/da/taarnet/besoeg", map:"Christiansborg Tårnet"},
+  {t:"17:55", h:"Den Sorte Diamant e Bibliotekshaven", v:8, b:"Il Diamante Nero: granito nero lucidato che si specchia nel canale, atrio a tutta altezza, aree pubbliche <b>gratis fino alle 19</b>. Dietro c’è la Bibliotekshaven, il giardino più nascosto della città.", price:"gratis", badge:["ok","mar–ven 10–19"], src:"https://www.kb.dk/en/visit-us/black-diamond-copenhagen", map:"Den Sorte Diamant København"},
+  {t:"18:40", h:"A Nørrebro", hop:"<b>M3</b> (Cityringen) → leggi la lista delle prossime fermate sul cartello del binario, <b>non il capolinea</b> → scendi a <b>Nørrebros Runddel</b>."},
+  {t:"19:00", h:"Assistens Kirkegård e Superkilen", v:8, b:"Il cimitero del 1760 che i danesi usano come parco: ci sono Kierkegaard e Andersen, e la gente che legge sull’erba. <b>D’estate aperto fino alle 22.</b> Poi Superkilen, la piazza rossa e nera di BIG con gli oggetti raccolti in tutto il mondo.", price:"gratis", badge:["ok","estate 7–22"], map:"Assistens Kirkegård"},
+  {t:"20:15", h:"Cena in Jægersborggade", v:8, b:"La via più bella di Nørrebro: botteghe, ceramisti, <b>Coffee Collective</b> e il gelato all’azoto liquido di <b>Istid</b>. Qui la cena la componi camminando.", price:"varie", map:"Jægersborggade København"},
+  {t:"21:45", h:"Rientro", hop:"<b>Nørrebros Runddel</b> → <b>M3</b> → <b>Kongens Nytorv</b> → <b>M2</b> dir. <b>Vanløse</b> → <b>KASTRUP</b>."}
+ ],
+ food:{
+  intro:"Giornata in centro, quindi il pranzo è facile: sei dentro Torvehallerne. La sera Jægersborggade ti dà una cena a pezzi, camminando.",
+  items:[
+   {n:"Sankt Peders Bageri", w:"Colazione. L’onsdagssnegl del mercoledì, dal forno del 1652.", p:"~25", u:"DKK", h:"lun–ven 7:30–17", badge:"ok", map:"Sankt Peders Bageri Sankt Peders Stræde 29"},
+   {n:"DØP", w:"Købmagergade 52 è <b>sotto la Rundetårn</b>: alle 11 apre, e tu alle 10:35 sei lì. Se salti la torre, questo è il pranzo da 5 euro.", p:"34–39", u:"DKK", h:"lun–ven 11–18", badge:"ok", map:"DØP Købmagergade 52"},
+   {n:"Torvehallerne", w:"Pranzo. Smørrebrød da 68, tacos da 56, formaggi, caffè. Compra e mangia fuori.", p:"70–150", u:"DKK", h:"lun–ven 10–19", badge:"ok", map:"Torvehallerne København"},
+   {n:"Jægersborggade", w:"Cena a pezzi: Coffee Collective, Istid, botteghe. Nørrebro, la sera.", p:"varie", u:"", h:"sera", badge:"warn", map:"Jægersborggade"},
+   {n:"Poulette", w:"Møllegade 1, a due passi da Jægersborggade. Panino di pollo fritto piccante, solo asporto: si mangia al parco. <b>Chiude alle 20.</b>", p:"~95", u:"DKK", h:"fino alle 20", badge:"warn", map:"Poulette Møllegade 1 København"}
+  ]
+ }
+},
+{
+ id:"gio", iso:"2026-08-27", label:"Gio 27", sub:"Costa nord",
+ title:"Costa nord: Kronborg, Louisiana, e tua sorella",
+ lede:"Il giorno più lungo in treno e il più bello del viaggio. Finisce agli arrivi — e poi, con tua sorella, dritti in centro: è la sua unica sera libera.",
+ sun:"20:19",
+ stops:[
+  {t:"09:40", h:"Macchinetta a Kastrup → City Pass Large 24 ore", key:1,
+   b:"Oggi esci dalle zone 1–4: Helsingør e Humlebæk richiedono il Large. Cerca «City Pass», poi <b>Large</b>, poi <b>24 hours</b>, Adult × 1.",
+   b2:"Avrai due biglietti attivi insieme: se sale un controllore mostri il <b>Large</b>, che copre tutto.",
+   price:"200 DKK", badge:["ok","zone 1–99"]},
+  {t:"09:50", h:"A Nørreport", hop:"<b>M2</b> dir. <b>Vanløse</b> → <b>Nørreport</b>."},
+  {t:"10:10", h:"Kystbanen verso nord", key:1,
+   hop:"<b>Nørreport</b> → treno regionale dir. <b>Helsingør</b> → <b>Helsingør</b>. <b>52 minuti, diretto, zero cambi.</b>",
+   b:"Partenze reali di oggi: <b>10:10 · 10:28 · 10:40</b> → arrivo <b>11:02 · 11:20 · 11:32</b>. Nessun bus sostitutivo: i lavori Snekkersten–Helsingør sono le sere del 25 e 26, non oggi.",
+   badge:["ok","verificato sul pianificatore alla data reale"]},
+  {t:"11:15", h:"Kronborg", v:8, key:1,
+   b:"Il castello di Amleto sullo stretto, patrimonio UNESCO: le casematte sotterranee con Holger Danske che dorme, gli appartamenti reali, il cortile rinascimentale. <b>Agosto: tutti i giorni 10:00–18:00.</b>",
+   b2:"<b>Compra online:</b> 135 invece di 150, e salti la cassa. Il biglietto vale un anno, quindi puoi comprarlo adesso da casa senza rischi.",
+   price:"150 DKK · 135 online", badge:["ok","prezzo e orari verificati"], src:"https://kronborg.dk/en/tickets/day-ticket", map:"Kronborg Slot Helsingør"},
+  {t:"13:25", h:"Pranzo a Helsingør", b:"Il centro pedonale è fra il castello e la stazione. Panetterie e chioschi: compri e mangi sul porto, guardando la Svezia che è a quattro chilometri.", price:"60–100 DKK", badge:["warn","da scegliere sul posto"]},
+  {t:"14:10", h:"M/S Museet for Søfart", v:8, key:1,
+   b:"Il museo marittimo di BIG, costruito <b>dentro un bacino di carenaggio asciutto</b>, tutto sottoterra attorno al vuoto della nave che non c’è più. È il pezzo di architettura contemporanea migliore fuori Copenaghen. Luglio–agosto: tutti i giorni 10–18.",
+   price:"145 DKK · studenti 110", badge:["ok","prezzo corretto: 145, non 130"], src:"https://mfs.dk/aabningstider-og-priser", map:"M/S Museet for Søfart Helsingør"},
+  {t:"15:20", h:"A Humlebæk", hop:"<b>Helsingør</b> → treno regionale dir. sud → <b>Humlebæk</b>. 11 min. Poi <b>10 minuti a piedi</b> fino al museo."},
+  {t:"15:45", h:"Louisiana", v:10, key:1,
+   b:"Il museo più bello di Scandinavia: un percorso di padiglioni bassi che scendono nel parco sopra l’Øresund, con le sculture di Calder e Moore sul prato e la Svezia sull’orizzonte. Non è un museo che si visita, è un museo in cui si sta.",
+   b2:"<b>Giovedì è aperto fino alle 22:00</b> — hai molto più margine di quanto pensi. <b>Non serve prenotare</b>: si compra all’ingresso.",
+   price:"145 DKK · studenti 130", badge:["ok","mar–ven 10–22, lun chiuso"], src:"https://louisiana.dk/en/plan-your-visit/opening-hours/", map:"Louisiana Museum of Modern Art Humlebæk"},
+  {t:"18:20", h:"Controlla il volo di tua sorella", key:1, b:"Prima di muoverti, guarda se il volo è in orario. Se ha ritardo, resti a Louisiana: è aperta fino alle 22 e non c’è posto migliore dove aspettare.", badge:["ok","margine reale verificato"]},
+  {t:"18:40", h:"Giù verso la città", hop:"<b>Humlebæk</b> → treno regionale → <b>København H</b>. 44 min."},
+  {t:"19:25", h:"In aeroporto", hop:"<b>København H</b> → treno regionale dir. <b>Københavns Lufthavn</b> (o Malmö) → <b>Københavns Lufthavn</b>. 13 min.", b:"⚠️ A København H <b>non c’è la M2</b>: dal 2023 la Kystbanen non prosegue più per l’aeroporto. Si prende il regionale. Coperto dal City Pass Large."},
+  {t:"19:45", h:"La aspetti agli arrivi", b:"Zona arrivi, Terminal 2 o 3 a seconda del volo. <b>Metti in conto 30–45 minuti fra l'atterraggio e il momento in cui esce davvero</b>: sbarco, nastro bagagli, uscita. Se l'aereo tocca alle 19:45, lei è fuori verso le 20:25. Da qui in poi nessuna tappa ha una scadenza, quindi il ritardo non rompe niente."},
+  {t:"20:00", h:"Il biglietto di tua sorella", key:1,
+   b:"Alla macchinetta danese, subito: <b>City Pass Small 48 ore</b>. Attivato ora scade sabato verso le 20:00, cioè <b>dopo il vostro volo</b>. Le copre tutto: stasera in centro, il venerdì intero, Dragør e il rientro di sabato.",
+   price:"~180–200 DKK", badge:["warn","prezzo da confermare alla macchinetta"]},
+  {t:"20:20", h:"A casa, valigie giù, e si mangia qualcosa", key:1,
+   hop:"<b>M2</b> dir. <b>Vanløse</b> → <b>prima fermata: KASTRUP</b>.",
+   b:"Posate le valigie e mangiate a casa con quello che c'è in frigo. <b>Non inseguite un ristorante stasera</b>: lei ha appena volato e nessuno sa a che ora esce davvero dal nastro bagagli.",
+   b2:"POPL, che volevi fare con lei, è spostato a <b>venerdì a pranzo</b> — dove sta già dentro il piano, senza corse. Vedi la giornata di domani."},
+  {t:"21:15", h:"In centro, senza nessuna scadenza", v:9, key:1,
+   b:"Ora sì. Uscite quando siete pronti: <b>Nyhavn non chiude</b>, è un molo all'aperto, e la metro va 24 ore su 24. Se il volo ha ritardato di un'ora, uscite un'ora dopo e non cambia niente.",
+   b2:"È l'unica sera libera che ha, e il resto del suo viaggio — senza questa — è una chiesa di periferia, un inceneritore e un capannone di street food.",
+   hop:"<b>KASTRUP</b> → <b>M2</b> dir. <b>Vanløse</b> → <b>Kongens Nytorv</b>. 13 min, nessun cambio.",
+   badge:["ok","metro attiva tutta la notte"]},
+  {t:"21:30", h:"Nyhavn illuminata", v:9, key:1,
+   b:"Esci dalla metro e ci sei dentro: duecento metri. Le facciate colorate del Seicento accese sull'acqua, le barche di legno ferme, i tavolini lungo il molo. È l'immagine per cui la gente viene a Copenaghen, ed è la prima cosa che vede.",
+   b2:"Se avete voglia di camminare ancora, in cima al molo c'è l'<b>Inderhavnsbroen</b>: 180 metri di ponte pedonale sul porto, che chiamano «il ponte del bacio» perché le due campate centrali si sfiorano quando si chiude. Cinque minuti di là, cinque di qua, e la vista sulla città dall'acqua.",
+   price:"gratis", badge:["ok","sempre aperto"], map:"Nyhavn København"},
+  {t:"22:45", h:"A casa insieme", hop:"<b>Kongens Nytorv</b> → <b>M2</b> dir. <b>Lufthavnen</b> → <b>KASTRUP</b>. 13 min.", b:"Senza fretta: domani si comincia alle 9:45."}
+ ],
+ food:{
+  intro:"Giornata fuori città: qui il sacco dalla spesa di lunedì vale doppio, perché a Helsingør e Humlebæk si paga da posto turistico.",
+  items:[
+   {n:"Il sacco da casa", w:"Panini di rugbrød, frutta, acqua. Il treno è di 52 minuti e a Kronborg ci sono i bastioni: è il posto giusto per mangiare seduti guardando la Svezia.", p:"~0", u:"", h:"", badge:"flat"},
+   {n:"Helsingør, centro pedonale", w:"Fra il castello e la stazione. Panetterie e chioschi da asporto, si mangia sul porto.", p:"60–100", u:"DKK", h:"pranzo", badge:"warn", map:"Helsingør centro"},
+   {n:"Louisiana, il caffè", w:"Bella terrazza sul mare, ma prezzi da museo. Se hai il sacco, mangia sul prato delle sculture: è meglio e non costa niente.", p:"alto", u:"", h:"", badge:"flat"},
+   {n:"Cena a casa", w:"Lei atterra e nessuno sa a che ora esce dal nastro. <b>Non prenotate niente stasera</b>: si mangia con quello che c'è, e poi si esce verso Nyhavn quando siete pronti. POPL è spostato a venerdì a pranzo, dove ci sta senza corse.", p:"~0", u:"", h:"", badge:"flat"}
+  ]
+ }
+},
+{
+ id:"ven", iso:"2026-08-28", label:"Ven 28", sub:"Tivoli",
+ title:"I mattoni gialli, la guglia, il porto industriale, il Tivoli",
+ lede:"Il giorno più bello da fotografare, e finisce con un concerto sul prato del Tivoli.",
+ sun:"20:16",
+ stops:[
+  {t:"09:45", h:"Verso Østerbro", hop:"<b>M2</b> dir. <b>Vanløse</b> → <b>Kongens Nytorv</b> → <b>M3</b> → <b>Trianglen</b>."},
+  {t:"10:20", h:"Juno the Bakery", v:9, key:1,
+   b:"Århusgade 48. La girella al cardamomo di Emil Glaser, ex pasticciere del Noma: quella che ha fatto scuola nel mondo. <b>Costa 30 corone</b> — il documento diceva 45–55, è più economica di così. Chiusa il lunedì, oggi apre alle 7:30.",
+   price:"30 DKK", badge:["ok","prezzo e orari verificati"], map:"Juno the Bakery Århusgade 48"},
+  {t:"10:50", h:"Verso Grundtvigs", hop:"<b>Nørreport</b> → <b>bus 6A</b> dir. <b>Emdrup Torv</b> → scendi a <b>Bispebjerg Torv</b> → 3 minuti a piedi. Ogni 3–8 min, ~15 min di viaggio."},
+  {t:"11:35", h:"Grundtvigs Kirke", v:9, key:1,
+   b:"La chiesa di mattoni gialli che sembra un organo gigante: sei milioni di mattoni identici, posati a mano, in un espressionismo che non esiste da nessun’altra parte. Dentro è vuota, altissima e bianca. <b>Gratis.</b>",
+   warn:"Aperta lun–sab 9–16, ma <b>chiude durante le funzioni, e i funerali non si possono annunciare in anticipo</b>. Aggiornano gli orari su Google in giornata: controlla prima di prendere il bus.",
+   price:"gratis", badge:["ok","lun–sab 9–16"], map:"Grundtvigs Kirke København"},
+  {t:"12:20", h:"A Christianshavn", hop:"<b>Bispebjerg Torv</b> → <b>bus 6A</b> → <b>Nørreport</b> → <b>M2</b> dir. Vanløse? no: <b>M2</b> dir. <b>Lufthavnen</b> → <b>Christianshavn</b>."},
+  {t:"12:40", h:"Pranzo: il duello dei due burger", v:9, key:1,
+   b:"I due posti che volevi fare con tua sorella sono <b>sulla stessa strada, a centocinquanta metri l'uno dall'altro</b>, ed entrambi aperti adesso. Quindi si fanno tutti e due, in una volta sola.",
+   b2:"<b>Gasoline Grill</b> — nato in un ex distributore di benzina, spesso in classifica fra i migliori burger del mondo — sta a <b>Broens Gadekøkken, Strandgade 95</b>. <b>POPL</b> — quello nato dal Noma, carne bio danese e pane fatto in casa — è l'asporto di <b>Strandgade 108</b>, aperto <b>12:00–15:00</b>. Prendete uno per parte, sedetevi sul molo di Broens e confrontateli. Poi litigate su quale è meglio.",
+   warn:"Gasoline <b>chiude a esaurimento</b>, spesso nel primo pomeriggio: è il motivo per cui questo è a mezzogiorno e non a cena. Se lo trovate finito, POPL basta e avanza.",
+   price:"~100 + ~150 DKK", badge:["ok","orari di entrambi verificati"], src:"https://www.poplburger.com", map:"Broens Gadekøkken Strandgade 95"},
+  {t:"13:20", h:"Vor Frelsers Kirke — la guglia", v:9, key:1,
+   b:"400 gradini, gli ultimi <b>150 all’aperto</b> lungo la spirale dorata che avvolge la guglia, fino a 86 metri. È la cosa più spaventosa e più bella che farai.",
+   b2:"70 DKK. Aperta tutti i giorni <b>9:00–20:00</b>, ultimo ingresso 30 minuti prima. <b>Prenotazione consigliata</b>: la capienza è limitata. <b>Chiude con pioggia, neve o vento forte</b> — se il meteo è brutto, oggi salta e non è colpa di nessuno.",
+   price:"70 DKK", badge:["ok","prezzo e orari verificati"], map:"Vor Frelsers Kirke Christianshavn"},
+  {t:"14:20", h:"Christiania", v:7, key:1,
+   b:"La città libera del 1971 dentro una vecchia caserma. <b>Aggiornamento importante</b>: nell’aprile 2024 sono stati gli abitanti stessi a divellere il selciato di Pusher Street e a chiudere il mercato della cannabis. Oggi è un vialetto normale.",
+   b2:"Quindi <b>si può fotografare</b> quasi ovunque — chiedi prima per le persone e le case private, e rispetta i cartelli. Gratis, aperta sempre, solo pedoni e bici.",
+   price:"gratis", badge:["ok","stato 2026 verificato"], map:"Christiania København"},
+  {t:"15:10", h:"A Refshaleøen", hop:"<b>Christianshavn</b> → <b>bus 2A</b> dir. <b>Refshaleøen</b> → capolinea. ~15 min."},
+  {t:"15:25", h:"Reffen — di passaggio", v:7, b:"Banchi di street food sul porto, in mezzo ai capannoni. <b>Tutti i giorni 11:30–21:30</b>, confermato. Ma dopo due burger non avete fame: <b>attraversatelo e basta</b>, è comunque bello da vedere e sta sulla strada per CopenHill. Se cercate qualcosa, prendete un caffè o un gelato.", price:"90–150 DKK", badge:["ok","11:30–21:30 tutti i giorni"], src:"https://reffen.dk/", map:"Reffen Refshalevej"},
+  {t:"16:15", h:"CopenHill", v:9, key:1,
+   b:"L’inceneritore di BIG con la pista da sci sul tetto e la parete d’arrampicata più alta del mondo sulla facciata. <b>Il tetto è gratis, e ci si sale anche in ascensore panoramico</b> — non sei obbligato alla scarpinata. Venerdì aperto 11:00–19:00.",
+   price:"gratis", badge:["ok","ven 11–19"], src:"https://www.copenhill.dk/en/planl%C3%A6g%20dit%20bes%C3%B8g/opening%20hours", map:"CopenHill Copenhagen"},
+  {t:"17:30", h:"Al Tivoli, via mare", key:1,
+   hop:"<b>Refshaleøen</b> → <b>traghetto 991</b> verso sud (incluso nel City Pass) → <b>Nyhavn</b> → <b>M3</b> → <b>København H</b>.",
+   b:"Il 992 va a nord, il 991 torna verso il centro: per tornare serve il <b>991</b>.",
+   b2:"<b>Il traghetto vi scarica proprio a Nyhavn, verso le 17:45.</b> Non scendete di corsa verso la metro: fate cinque minuti sul molo con la luce dorata. Per tua sorella è Nyhavn di giorno, dopo averla vista illuminata giovedì — ed è gratis, perché ci passate comunque."},
+  {t:"18:15", h:"Tivoli", v:9, key:1,
+   b:"Il secondo parco divertimenti più antico del mondo (1843): lanterne, il pavone cinese, le montagne russe di legno del 1914. Al buio diventa un’altra cosa.",
+   b2:"Venerdì il parco è aperto <b>fino a mezzanotte</b> (gli altri giorni fino alle 23), ultimo ingresso mezz’ora prima. Ingresso base 175 DKK.",
+   price:"175 DKK", badge:["ok","orari e prezzo verificati"], map:"Tivoli Gardens København"},
+  {t:"20:16", h:"Tramonto, e le luci", b:"Alle 20:16 il sole va giù e il Tivoli si accende: è il momento per cui esiste questo posto."},
+  {t:"21:00", h:"Al Plænen, per il posto", b:"Il prato dei concerti. Un’ora prima è il momento giusto per essere davanti senza spingere."},
+  {t:"22:00", h:"Fredagsrock: TV‑2", v:9, key:1,
+   b:"<b>Confermato:</b> venerdì 28 agosto suonano i <b>TV‑2</b>, alle 22:00, sul Plænen. Classici danesi da cantare tutti insieme — <i>Juice</i>, <i>Elsker Dig Så Meget</i>. <b>È incluso nel biglietto d’ingresso</b>: non serve comprare nulla in più.",
+   price:"incluso", badge:["ok","programma ufficiale verificato"]},
+  {t:"23:30", h:"Rientro", hop:"<b>København H</b> → <b>M3/M4</b> → <b>Kongens Nytorv</b> → <b>M2</b> dir. <b>Lufthavnen</b> → <b>KASTRUP</b>. La metro va 24 ore su 24."}
+ ],
+ food:{
+  intro:"Oggi è il giorno dei burger, ed è il giorno in cui c’è tua sorella. Gasoline Grill e POPL sono sulla stessa strada a Christianshavn, a 150 metri l’uno dall’altro, ed entrambi aperti a mezzogiorno: si prende uno per parte e si confrontano seduti sul molo.",
+  items:[
+   {n:"Juno the Bakery", w:"Colazione, Århusgade 48. La girella al cardamomo migliore che esista.", p:"30", u:"DKK", h:"mar–sab 7:30–18", badge:"ok", map:"Juno the Bakery Århusgade 48"},
+   {n:"Gasoline Grill · Broens", w:"Strandgade 95. Dalle 12:00 <b>fino a esaurimento</b> — è il motivo per cui il pranzo è a mezzogiorno e non a cena.", p:"~100–110", u:"DKK", h:"lun–ven dalle 12", badge:"ok", map:"Broens Gadekøkken Strandgade 95"},
+   {n:"POPL Burger · asporto", w:"Strandgade 108, centocinquanta metri più in là. Nato dal Noma. <b>L’asporto è aperto 12:00–15:00</b>: a pranzo lo prendi senza corse, la sera invece chiudono le comande alle 21 ed è una scommessa.", p:"~150", u:"DKK", h:"asporto 12–15 e 17–21", badge:"ok", map:"POPL Burger Strandgade 108 København"},
+   {n:"Reffen", w:"Dopo due burger non avete fame: attraversatelo e basta. Semmai un caffè o un gelato.", p:"90–150", u:"DKK", h:"11:30–21:30", badge:"ok", map:"Reffen Refshalevej"},
+   {n:"Dentro il Tivoli", w:"Si paga caro. Mangia prima, o portati qualcosa: al Plænen si sta seduti sul prato per un’ora.", p:"alto", u:"", h:"", badge:"flat"}
+  ]
+ }
+},
+{
+ id:"sab", iso:"2026-08-29", label:"Sab 29", sub:"Partenza",
+ title:"Dragør la mattina, smørrebrød a mezzogiorno",
+ lede:"Il giorno della partenza è pieno lo stesso: il villaggio di pescatori, dieci cucine di smørrebrød in una piazza sola, e poi il centro vero a piedi fino a Nyhavn — da dove la metro va dritta in aeroporto.",
+ sun:"20:14",
+ stops:[
+  {t:"09:00", h:"Colazione, e finite la spesa", b:"Svuotate il frigo. Quello che avanza non torna in Italia."},
+  {t:"09:45", h:"Check-out", b:"Chiudete casa. Da qui in poi girate con i bagagli fino all’aeroporto.", badge:["warn","orario di check-out da confermare con l’host"]},
+  {t:"09:55", h:"In aeroporto a lasciare i bagagli", key:1,
+   b:"Armadietti ufficiali del CPH, <b>Terminal 3, vicino al Parcheggio 4 (P4)</b>. Piccolo 60 DKK / 4 ore, 80 per 24 ore. Grande 80 / 100. Vi serve il grande o due piccoli.",
+   warn:"Sono 80–100 corone che nel vecchio budget non c’erano. Mettetele in conto.",
+   price:"80–100 DKK", badge:["ok","tariffe ufficiali CPH"], map:"Copenhagen Airport Terminal 3 luggage lockers"},
+  {t:"10:36", h:"Bus 35 per Dragør", key:1,
+   hop:"<b>Københavns Lufthavn</b> → <b>bus 35</b> dir. <b>Dragør Stationsplads</b> → capolinea. <b>18 minuti.</b>",
+   b:"CORRETTO: il sabato il 35 passa <b>ogni 30 minuti, ai minuti :06 e :36</b>. Il piano precedente diceva 10:25 — <b>quel bus non esiste</b>. Le corse reali di oggi: 10:06 · <b>10:36</b> · 11:06 · 11:36. Si sale davanti e si mostra il biglietto all’autista: è l’unica volta del viaggio in cui qualcuno lo guarda davvero.",
+   badge:["ok","orari verificati alla data reale"]},
+  {t:"10:54", h:"Dragør", v:9, key:1,
+   b:"Il villaggio di pescatori del Seicento: case gialle a un piano, tetti di tegole rosse, malvarosa contro i muri, vicoli di ciottoli che finiscono sul porto. È zona 4, quindi <b>coperto dal City Pass</b>. Un’ora e un quarto, senza fretta.",
+   price:"gratis", badge:["ok","fonte turistica ufficiale"], map:"Dragør Gamle By"},
+  {t:"12:10", h:"Verso Kødbyen", hop:"<b>Dragør Stationsplads</b> → <b>bus 35</b> → <b>Københavns Lufthavn</b> → <b>M2</b> dir. Vanløse → <b>Kongens Nytorv</b> → <b>M3</b> → <b>København H</b>. Poi 10 min a piedi."},
+  {t:"13:00", h:"Smørrebrødets Dag", v:10, key:1,
+   b:"<b>Confermato:</b> sabato 29 agosto, <b>11:00–15:00</b>, Festivalpladsen, Flæsketorvet 45, dentro Copenhagen Cooking. I banchi dei ristoranti di smørrebrød più famosi di Danimarca in una piazza sola — Aamanns 1921, Restaurant Kronborg, Hallernes, Judie, Rørt — a gettoni.",
+   b2:"Da Schønnemann un pranzo costa 400–500 corone: qui assaggi dieci cucine con 150–250. <b>Ingresso gratuito, i gettoni si comprano sul posto.</b>",
+   warn:"PORTATE PIATTO E POSATE DA CASA. Non è una dimenticanza degli organizzatori: è parte del concetto, e se non li avete mangiate con le mani.",
+   price:"150–250 DKK", badge:["ok","evento e orari verificati"], map:"Flæsketorvet 45 København"},
+  {t:"15:05", h:"Strøget, il centro e lo shopping", v:8, key:1,
+   b:"Da Flæsketorvet a <b>Rådhuspladsen</b> sono dieci minuti a piedi, e lì comincia lo <b>Strøget</b>: <b>1,1 km di strada pedonale</b> fino a Kongens Nytorv. È la spina dorsale della città vecchia — Gammeltorv con la fontana del 1610, Amagertorv, la Rundetårn che spunta a destra su Købmagergade — e insieme è la via dello shopping.",
+   b2:"È il pezzo di Copenaghen che tua sorella si aspetta di vedere, e finora nel piano non c'era. Passandoci a piedi verso la fine, ci arrivate senza spostare niente.",
+   warn:"Il sabato i negozi chiudono alle 17:00. Uscite dallo smørrebrød alle 15 e siete larghi; uscite alle 16 e fate solo la passeggiata.",
+   price:"gratis", badge:["ok","sab 10–17, verificato"], map:"Strøget København"},
+  {t:"16:20", h:"Kongens Nytorv e Nyhavn di giorno", v:8,
+   b:"Lo Strøget finisce dentro <b>Kongens Nytorv</b>, e Nyhavn è a duecento metri. Per lei è la chiusura giusta: l'ha vista illuminata giovedì sera, adesso la vede con la luce. Venti minuti sul molo e poi si scende in metro, che parte da qui.",
+   price:"gratis", map:"Nyhavn København"},
+  {t:"16:45", h:"In aeroporto", key:1,
+   hop:"<b>Kongens Nytorv</b> → <b>M2</b> dir. <b>Lufthavnen</b> → <b>Københavns Lufthavn</b>. 14 min, diretta.",
+   b:"⚠️ Il tuo City Pass Small è scaduto stamattina: alla macchinetta fai un <b>singolo</b> con destinazione <b>Københavns Lufthavn</b> — la zona la calcola lei, sono circa <b>30 DKK</b>. Tua sorella è ancora coperta dal suo 48 ore.",
+   price:"30 DKK", badge:["ok","City Pass scaduto sab ~13:20"]},
+  {t:"17:00", h:"Bagagli e check-in", b:"Riprendete le valigie dagli armadietti al P4, poi drop-off e controlli. Due ore e mezza di margine: sono giuste, non troppe."},
+  {t:"19:35", h:"FR406 → Roma Fiumicino", b:"Arrivo previsto 22:10.", badge:["warn","controlla il volo la mattina stessa"]}
+ ],
+ food:{
+  intro:"Oggi si mangia una cosa sola e vale il viaggio. Tutto il resto è contorno.",
+  items:[
+   {n:"Smørrebrødets Dag", w:"Flæsketorvet 45, 11:00–15:00. Dieci cucine a gettoni. <b>Piatto e posate da casa.</b>", p:"150–250", u:"DKK", h:"sab 11–15", badge:"ok", map:"Flæsketorvet 45 København"},
+   {n:"CPH Smash", w:"Slagterboderne 12, a duecento metri dal mercato. Se dopo i gettoni avete ancora fame, è qui e non altrove — dalle 15 in poi camminate verso il centro e non ripassate.", p:"105", u:"DKK", h:"tutti i giorni", badge:"warn", map:"CPH Smash Slagterboderne 12"},
+   {n:"Sullo Strøget", w:"Panetterie ovunque, e <b>BUKA</b> ha due sedi proprio lì (Frederiksberggade 21 e Nytorv 3). Caffè e dolce mentre lei guarda le vetrine.", p:"~58", u:"DKK", h:"fino alle 19", badge:"warn", map:"BUKA Bakery Nytorv 3"},
+   {n:"Colazione a casa", w:"Finite quello che c’è in frigo. Il koldskål coi kammerjunker è il modo giusto di chiudere.", p:"~0", u:"", h:"", badge:"flat"},
+   {n:"In aeroporto", w:"Caro come tutti gli aeroporti. Se avanzano gettoni di fame, usateli a Kødbyen prima di partire.", p:"alto", u:"", h:"", badge:"flat"}
+  ]
+ }
+}
+];
+
+/* ---------------- rendering ---------------- */
+
+function badge(b){ if(!b) return ""; const [k,txt]=b; return `<span class="b ${k}">${txt}</span>`; }
+
+function stopHTML(s, isNow){
+  const cls = ["stop", s.key?"key":"", isNow?"now":""].filter(Boolean).join(" ");
+  let m = [];
+  if(s.price) m.push(`<span class="pill money">${s.price}</span>`);
+  if(s.badge) m.push(badge(s.badge));
+  if(s.map) m.push(`<a class="maplink" href="${M(s.map)}" target="_blank" rel="noopener">↗ mappa</a>`);
+  if(s.src) m.push(`<a class="src" href="${s.src}" target="_blank" rel="noopener">fonte</a>`);
+  return `<article class="${cls}">
+    <div class="t">${s.t}</div><div class="dot"></div>
+    <div class="box">
+      <h3>${s.h}${s.v?`<span class="v">${s.v}</span>`:""}</h3>
+      ${s.b?`<p>${s.b}</p>`:""}
+      ${s.b2?`<p>${s.b2}</p>`:""}
+      ${s.hop?`<div class="hop">${s.hop}</div>`:""}
+      ${s.warn?`<p class="warnline">⚠ ${s.warn}</p>`:""}
+      ${m.length?`<div class="meta">${m.join("")}</div>`:""}
+    </div></article>`;
+}
+
+function foodHTML(f){
+  return `<div class="card foodblock">
+    <p class="eyebrow">Dove mangi oggi</p>
+    <p class="lede" style="margin-bottom:6px">${f.intro}</p>
+    ${f.items.map(i=>`<div class="fitem">
+      <div class="fmain">
+        <h4>${i.n} ${i.badge!=="flat"?`<span class="b ${i.badge}">${i.h||"—"}</span>`:""}</h4>
+        <p>${i.w}</p>
+        ${i.map?`<p style="margin-top:5px"><a class="maplink" href="${M(i.map)}" target="_blank" rel="noopener">↗ mappa</a></p>`:""}
+      </div>
+      <div class="fprice">${i.p}<small>${i.u}</small></div>
+    </div>`).join("")}
+  </div>`;
+}
+
+function dayHTML(d, withNow){
+  const today = new Date();
+  const isToday = fmtISO(today) === d.iso;
+  const nowMin = today.getHours()*60 + today.getMinutes();
+  let nowIdx = -1;
+  if(withNow && isToday){
+    d.stops.forEach((s,i)=>{ const [H,Mi]=s.t.split(":").map(Number); if(H*60+Mi <= nowMin) nowIdx = i; });
+  }
+  return `<div class="dayhead">
+      <p class="eyebrow">${d.label} · ${d.sub}</p>
+      <h2>${d.title}</h2>
+      <p class="lede" style="margin:8px 0 0">${d.lede}</p>
+      <div class="daymeta">
+        <span class="b flat">${d.stops.length} tappe</span>
+        <span class="b flat">tramonto ${d.sun}</span>
+      </div>
+    </div>
+    <div class="tl">${d.stops.map((s,i)=>stopHTML(s, i===nowIdx)).join("")}</div>
+    ${foodHTML(d.food)}`;
+}
+
+function fmtISO(dt){
+  return dt.getFullYear()+"-"+String(dt.getMonth()+1).padStart(2,"0")+"-"+String(dt.getDate()).padStart(2,"0");
+}
+
+/* -------- OGGI -------- */
+function renderOggi(){
+  const iso = fmtISO(new Date());
+  const d = DAYS.find(x=>x.iso===iso);
+  const el = document.getElementById("p-oggi");
+  if(d){ el.innerHTML = dayHTML(d, true); return; }
+  const next = DAYS.find(x=>x.iso > iso);
+  const first = DAYS[0];
+  el.innerHTML = `<div class="card" style="margin-bottom:14px">
+      <p class="eyebrow">Non sei ancora in viaggio</p>
+      <h2 class="sec-h">${next?`Si parte ${next.label.toLowerCase()}`:"Viaggio concluso"}</h2>
+      <p class="lede" style="margin:8px 0 0">${next?"Questa schermata mostrerà da sola la giornata giusta quando ci sarai dentro. Intanto, ecco cosa conviene fare adesso.":"Sei tornato. Questa app resta consultabile."}</p>
+    </div>
+    ${next?`<div class="stack">
+      <div class="call do"><h4>Da fare stasera, da casa</h4>
+        <p>1 · <b>Prenota il biglietto da 0 corone del Glyptotek</b> per mercoledì 26, fascia verso le 15:30. È gratis ma la capienza è limitata.</p>
+        <p>2 · <b>Compra Kronborg online</b>: 135 invece di 150, e il biglietto vale un anno.</p>
+        <p>3 · <b>Compra il biglietto svedese nell’app Skånetrafiken</b> scegliendo «attiva più tardi». Vedi la scheda Biglietti.</p>
+        <p>4 · <b>Prenota la guglia di Vor Frelsers</b> per venerdì pomeriggio.</p>
+        <p>5 · Scarica <b>Google Maps offline</b> di Copenaghen e Malmö, e il pacchetto danese di Google Traduttore.</p>
+      </div>
+      <div class="call note"><h4>Da mettere in valigia</h4>
+        <p><b>Carta d’identità o passaporto</b> — martedì in Svezia la polizia controlla a Hyllie, e la patente non vale.</p>
+        <p><b>Un piatto e delle posate</b> — servono davvero sabato a Smørrebrødets Dag.</p>
+        <p><b>Una borraccia</b> — in Danimarca l’acqua del rubinetto è ottima e si beve ovunque.</p>
+      </div>
+    </div>`:""}
+    <hr class="rule">
+    <div class="dayhead"><p class="eyebrow">Anteprima · ${first.label}</p><h2>${first.title}</h2></div>
+    <div class="tl">${first.stops.map(s=>stopHTML(s,false)).join("")}</div>`;
+}
+
+/* -------- GIORNI -------- */
+let curDay = 0;
+function renderGiorni(){
+  const el = document.getElementById("p-giorni");
+  const nav = `<div class="daynav">${DAYS.map((d,i)=>
+    `<button class="dbtn" data-d="${i}" aria-pressed="${i===curDay}"><b>${d.label}</b><i>${d.sub}</i></button>`).join("")}</div>`;
+  el.innerHTML = nav + `<div id="daybody">${dayHTML(DAYS[curDay], false)}</div>`;
+  el.querySelectorAll(".dbtn").forEach(b=>b.addEventListener("click", ()=>{
+    curDay = +b.dataset.d; renderGiorni();
+    document.getElementById("p-giorni").scrollIntoView({block:"start"});
+  }));
+}
+
+/* -------- BIGLIETTI -------- */
+function renderBiglietti(){
+  document.getElementById("p-biglietti").innerHTML = `
+  <p class="eyebrow">La cosa che non puoi sbagliare</p>
+  <h2 class="sec-h">Biglietti</h2>
+  <p class="lede">Cinque acquisti in sei giorni. Due sistemi separati che non si parlano: la Danimarca è di carta, la Svezia è nell’app.</p>
+
+  <div class="tw" style="margin-bottom:18px"><table>
+    <thead><tr><th>Quando</th><th>Cosa</th><th>Prezzo</th><th>Dove</th></tr></thead>
+    <tbody>
+      <tr><td><b>Lun 24</b><br>all’arrivo</td><td><b>City Pass Small 120 h</b><br>zone 1–4</td><td class="num">340 DKK</td><td>macchinetta danese</td></tr>
+      <tr><td><b>Mar 25</b><br>mattina</td><td><b>Skånetrafiken 24 h</b><br>Öresundszon → Lund C</td><td class="num">360 SEK</td><td>app Skånetrafiken</td></tr>
+      <tr><td><b>Gio 27</b><br>mattina</td><td><b>City Pass Large 24 h</b><br>zone 1–99</td><td class="num">200 DKK</td><td>macchinetta danese</td></tr>
+      <tr><td><b>Gio 27</b><br>arrivo sorella</td><td><b>City Pass Small 48 h</b><br>per lei</td><td class="num">~180–200 DKK</td><td>macchinetta danese</td></tr>
+      <tr><td><b>Sab 29</b><br>pomeriggio</td><td><b>Singolo 3 zone</b><br>città → aeroporto</td><td class="num">30 DKK</td><td>macchinetta danese</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="card" style="margin-bottom:12px">
+    <p class="eyebrow">Svezia · app Skånetrafiken</p>
+    <h3 class="sec-h" style="font-size:1.12rem">Scegli «Select stops». Le altre due sono trappole.</h3>
+    <p style="font-size:.92rem;color:var(--ink-2);margin:8px 0 0">
+      <b>Select city zone</b> è una sola città svedese: non copre il treno né il ponte.
+      <b>Select entire Scania</b> sembra la più generosa, ma è <b>tutta e sola Svezia</b> — e tu parti da suolo danese.
+      Solo <b>Select stops</b> accetta una fermata danese.</p>
+    <ol class="steps">
+      <li><b>Select stops</b> → «Add stop or station», aggiungi <b>tre</b> fermate: <b>CPH Airport Kastrup</b>, <b>Lund C</b>, <b>Malmö C</b>.</li>
+      <li>Sotto deve comparire <b>Öresundszon</b>. Se non c’è scritto Öresund, fermati: hai sbagliato zona.</li>
+      <li>Tocca <b>See zone</b>: la mappa deve coprire Malmö, Lund e il pezzo di Copenaghen con l’aeroporto.</li>
+      <li>Tipo: <b>24 hours</b>. Passeggeri: <b>Adult × 1</b>.</li>
+      <li>Il totale deve dire <b>360,00 kr</b>. 300 sarebbe solo-Malmö; meno ancora è una zona senza ponte.</li>
+    </ol>
+  </div>
+
+  <div class="stack" style="margin-bottom:18px">
+    <div class="call stop"><h4>L’unico modo per rovinarlo</h4>
+      <p>Se compri in anticipo e l’app te lo <b>attiva subito</b>, le 24 ore partono da quel momento e martedì sera è già scaduto — a Malmö, dove a bordo non si vendono biglietti e la multa è <b>1.500 SEK</b>.</p>
+      <p>Al momento dell’acquisto scegli <b>«attiva più tardi»</b>. Martedì mattina, prima di uscire, controlla che risulti <b>non ancora attivo</b>. Se non ti è chiaro cosa hai scelto, non comprarlo in anticipo: compralo martedì in aeroporto.</p></div>
+    <div class="call do"><h4>Attivarlo presto non costa niente</h4>
+      <p>24 ore dall’attivazione. Attivato alle 9 di martedì scade alle 9 di mercoledì, e tu torni alle 22. <b>Attivalo appena arrivi in aeroporto</b> e togliti il pensiero.</p></div>
+  </div>
+
+  <h3 class="sec-h" style="font-size:1.12rem;margin-bottom:8px">Cosa copre il biglietto svedese</h3>
+  <div class="card" style="margin-bottom:18px">
+    <p style="font-size:.92rem;color:var(--ink-2);margin:0">
+    Viaggi <b>illimitati</b> dentro la zona per 24 ore: non è un «da A a B», non ha direzione, non si consuma. Aeroporto→Lund, Lund→Malmö, Malmö→aeroporto sono tre viaggi nella stessa zona.
+    Include i <b>bus urbani di Malmö e Lund</b> — verificato aggiungendo una fermata di bus di Malmö: il prezzo non cambia.
+    Sul lato danese vale su Øresundståg, treni DSB, bus Movia, traghetti del porto e <b>metro</b>.</p>
+    <div class="meta"><span class="b ok">condizioni ufficiali §4.3.1</span>
+    <a class="src" href="https://www.skanetrafiken.se/sa-reser-du-med-oss/resor-till-danmark/" target="_blank" rel="noopener">fonte</a></div>
+  </div>
+
+  <div class="card" style="margin-bottom:12px">
+    <p class="eyebrow">Danimarca · macchinetta</p>
+    <h3 class="sec-h" style="font-size:1.12rem">I cinque tocchi</h3>
+    <ol class="steps">
+      <li>In alto a destra c’è la <b>bandierina</b>: scegli <b>English</b>.</li>
+      <li>Cerca <b>City Pass</b> — non «Single ticket», non «Rejsekort».</li>
+      <li><b>Small</b> e poi <b>120 hours</b> (giovedì: <b>Large</b> + <b>24 hours</b>; tua sorella: <b>Small</b> + <b>48 hours</b>).</li>
+      <li><b>Adult × 1.</b></li>
+      <li>Carta contactless. Esce un biglietto di carta con data e ora: quello è tutto.</li>
+    </ol>
+    <p style="font-size:.86rem;color:var(--ink-3);margin-top:10px">Se la macchinetta non funziona: chiosco <b>7‑Eleven DSB</b> in stazione, vendono gli stessi biglietti.</p>
+  </div>
+
+  <div class="call note" style="margin-bottom:18px"><h4>Il City Pass parte subito</h4>
+    <p>Non esiste l’attivazione differita: le ore contano dall’acquisto, ed è stampato sul biglietto. Lunedì 13:20 → <b>scade sabato 13:20</b>. Per questo sabato pomeriggio serve il singolo da 30.</p></div>
+
+  <h3 class="sec-h" style="font-size:1.12rem;margin-bottom:8px">Controlli e multe</h3>
+  <div class="tw" style="margin-bottom:18px"><table>
+    <thead><tr><th>Dove</th><th>Multa</th><th>Come funziona</th></tr></thead>
+    <tbody>
+      <tr><td>Svezia · treni e bus</td><td class="num"><b>1.500 SEK</b></td><td>Mostri lo schermo dell’app al controllore. A bordo non si vendono biglietti</td></tr>
+      <tr><td>Danimarca · metro e treni</td><td class="num">750 DKK</td><td>Niente tornelli, ma i controllori girano</td></tr>
+      <tr><td>Danimarca · bus e traghetti</td><td class="num">1.000 DKK</td><td>Sul bus si sale davanti e si mostra all’autista</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="call note"><h4>Documento, in tasca</h4>
+    <p>Per un cittadino italiano serve <b>carta d’identità o passaporto</b>. La <b>patente non vale</b>: vale solo per i cittadini nordici. La polizia sale a <b>Hyllie</b>, prima fermata in Svezia, e controlla tutti — è sistematico, non riguarda te.</p></div>`;
+}
+
+/* -------- CIBO -------- */
+function renderCibo(){
+  document.getElementById("p-cibo").innerHTML = `
+  <p class="eyebrow">Camminando, o al parco</p>
+  <h2 class="sec-h">Cibo</h2>
+  <p class="lede">Hai preso un appartamento con cucina apposta. Qui i ristoranti non contano: contano il banco, il carretto, il forno e il sacco.</p>
+
+  <div class="card" style="margin-bottom:14px">
+    <h3 class="sec-h" style="font-size:1.08rem">Come funziona la settimana</h3>
+    <p style="font-size:.92rem;color:var(--ink-2);margin:8px 0 0">
+      <b>Colazione a casa</b> tutti i giorni, con la spesa di lunedì: rugbrød con burro salato e aringa, tebirkes, koldskål coi kammerjunker.
+      <b>Pranzo fuori</b>, sempre da asporto, sempre entro cinque minuti da dove ti trova il piano.
+      <b>Cena a casa</b> quando gli orari lo permettono — lunedì, martedì e giovedì tornate comunque tardi e stanchi.</p>
+  </div>
+
+  <div class="stack" style="margin-bottom:18px">
+    <div class="call do"><h4>Tre cose che ti fanno risparmiare davvero</h4>
+      <p><b>L’acqua del rubinetto</b> è ottima e si beve ovunque: una borraccia, su sei giorni, sono decine di corone.</p>
+      <p><b>Too Good To Go</b> è nata a Copenaghen. Le panetterie mettono il sacco a fine giornata a circa un terzo del prezzo: è il modo più economico di fare colazione per giorni.</p>
+      <p><b>Al bar la birra costa 55–75 corone, al supermercato 8–15.</b> Stessa birra.</p></div>
+  </div>
+
+  <h3 class="sec-h" style="font-size:1.12rem;margin-bottom:10px">Il meglio, per tipo</h3>
+  <div class="tw" style="margin-bottom:14px"><table>
+    <thead><tr><th>Street food</th><th>Dove</th><th>Prezzo</th><th>Orari</th></tr></thead>
+    <tbody>
+      <tr><td><b>DØP</b> hot dog bio</td><td>Købmagergade 52 · Strøget</td><td class="num">34–39</td><td>lun–ven 11–18</td></tr>
+      <tr><td><b>Gasoline Grill</b></td><td>Broens · Landgreven 10</td><td class="num">~100</td><td>dalle 12, a esaurimento</td></tr>
+      <tr><td><b>Killer Kebab</b></td><td>Borgergade 18</td><td class="num">90–110</td><td>lun–gio 11:30–20:30</td></tr>
+      <tr><td><b>CPH Smash</b></td><td>Slagterboderne 12</td><td class="num">105</td><td>tutti i giorni</td></tr>
+      <tr><td><b>Poulette</b> pollo fritto</td><td>Møllegade 1, Nørrebro</td><td class="num">~95</td><td>fino alle 20</td></tr>
+      <tr><td><b>Lundafalafel</b></td><td>Stora Södergatan 5, Lund</td><td class="num">30 SEK</td><td>pranzo</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="tw" style="margin-bottom:14px"><table>
+    <thead><tr><th>Forni</th><th>Dove</th><th>Cosa</th><th>Orari</th></tr></thead>
+    <tbody>
+      <tr><td><b>Juno the Bakery</b></td><td>Århusgade 48</td><td>cardamomo, 30 DKK</td><td>chiusa lunedì</td></tr>
+      <tr><td><b>Sankt Peders</b> 1652</td><td>Sankt Peders Stræde 29</td><td>onsdagssnegl, ~25</td><td>lun–ven 7:30–17</td></tr>
+      <tr><td><b>BUKA</b></td><td>Frederiksberggade 21 · Nytorv 3</td><td>croissant, ~58</td><td>tutti i giorni 7–19</td></tr>
+      <tr><td><b>Apotek 57</b></td><td>Nyboder, dentro FRAMA</td><td>croissant rotondi</td><td>lun–ven 8–16</td></tr>
+      <tr><td><b>Hart Bageri</b></td><td>Gl. Kongevej 109</td><td>lievito madre</td><td>tutti i giorni 7:30–18</td></tr>
+      <tr><td><b>Örum</b> 🇸🇪</td><td>Citadellsvägen 23, Malmö</td><td>bulle al cardamomo</td><td>mar–ven 7:30–18</td></tr>
+      <tr><td><b>Lille Bakery</b></td><td>Refshaleøen</td><td>focaccia, sausage roll</td><td>chiusa lun e mar</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="card" style="margin-bottom:14px">
+    <p class="eyebrow">Da provare, non un posto ma un piatto</p>
+    <p style="font-size:.92rem;color:var(--ink-2);margin:6px 0 0">
+    <b>Koldskål</b> coi biscottini <i>kammerjunker</i>, dal supermercato, ~25 DKK: latticello dolce freddo, quello che i danesi mangiano davvero in agosto.
+    Poi <b>tebirkes</b> (sfoglia ai semi di papavero col marzapane — la vera colazione danese, non il croissant),
+    <b>flæskestegssandwich</b>, <b>hindbærsnitte</b>, <b>frikadeller</b>, e il <b>rugbrød</b> con burro salato e aringa marinata, che ti fai da solo.</p>
+  </div>
+
+  <div class="call note"><h4>Il reel che hai visto</h4>
+    <p><b>BUKA</b> e <b>Apotek 57</b> sono a Copenaghen ed esistono davvero. <b>Örum invece è a Malmö</b>, non in Danimarca — Citadellsvägen 23, ed è aperta proprio il martedì, sulla strada che fai già. Il reel mescolava i due paesi.</p></div>`;
+}
+
+/* -------- SOS -------- */
+function renderSOS(){
+  document.getElementById("p-sos").innerHTML = `
+  <p class="eyebrow">Da stampare, o da sapere a memoria</p>
+  <h2 class="sec-h">Se il telefono muore</h2>
+  <p class="lede">Questa pagina è pensata per essere stampata su un foglio e messa nel portafoglio.</p>
+
+  <div class="sos-card" style="margin-bottom:14px">
+    <p class="eyebrow">Dove abito — da mostrare a un tassista o a un passante</p>
+    <p class="addr empty" id="addrView">Tocca «modifica» e scrivi qui l’indirizzo</p>
+    <p style="font-family:var(--f-mono);font-size:.86rem;margin:10px 0 0">Metro <b>M2 → KASTRUP</b> · prima fermata dall’aeroporto</p>
+    <div style="margin-top:12px"><button class="mini" id="editBtn" type="button">modifica</button></div>
+    <div class="fields" id="fields" hidden>
+      <label>Indirizzo completo
+        <textarea id="fAddr" rows="3" placeholder="Via e numero&#10;CAP e città&#10;Danmark"></textarea></label>
+      <label>Nome dell’host
+        <input id="fHost" type="text" placeholder="—"></label>
+      <label>Telefono dell’host
+        <input id="fTel" type="tel" placeholder="+45 …"></label>
+      <label>Chiavi, check-out, minuti a piedi
+        <textarea id="fNote" rows="2" placeholder="Come si prendono le chiavi, orario di check-out…"></textarea></label>
+      <div><button class="mini" id="saveBtn" type="button">salva</button></div>
+    </div>
+    <p class="privacy">🔒 Questi dati <b>non sono nel sito</b>: restano salvati solo su questo telefono, e nessun altro li vede. Scrivili una volta e ci sono per sempre.</p>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
+    <p class="eyebrow">Numeri</p>
+    <ul class="nums">
+      <li><span>Emergenze (tutto)</span><b>112</b></li>
+      <li><span>Polizia non urgente</span><b>114</b></li>
+      <li><span>Guardia medica Copenaghen</span><b>1813</b></li>
+      <li><span>Ambasciata d’Italia, Copenaghen</span><b>+45 39 62 68 77</b></li>
+      <li><span>Aeroporto CPH</span><b>+45 32 31 32 31</b></li>
+      <li id="hostRow" hidden><span id="hostName">Host</span><b id="hostTel">—</b></li>
+    </ul>
+    <p class="privacy" id="hostNote" hidden></p>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
+    <p class="eyebrow">Le frasi che servono davvero</p>
+    <div class="ph"><div class="sit">Se ti chiedono qualcosa e non capisci</div><div class="say"><b>Sorry, I don’t speak English. I’m Italian.</b><i>funziona ovunque, in Danimarca e in Svezia</i></div></div>
+    <div class="ph"><div class="sit">Al controllore, in Svezia</div><div class="say"><b>My ticket is in the app.</b><i>e giri lo schermo verso di lui</i></div></div>
+    <div class="ph"><div class="sit">Alla polizia a Hyllie</div><div class="say"><b>—</b><i>non serve dire niente: mostri la carta d’identità</i></div></div>
+    <div class="ph"><div class="sit">Al carretto degli hot dog</div><div class="say"><b>One ristet pølse, please.</b><i>si legge «ristet pulse»</i></div></div>
+    <div class="ph"><div class="sit">Grazie</div><div class="say"><b>Tak!</b><i>«tag» — l’unica parola danese che vale la pena imparare</i></div></div>
+    <div class="ph"><div class="sit">Se ti perdi</div><div class="say"><b>—</b><i>non dire niente: risali in cima a questa pagina e mostri il riquadro con l’indirizzo</i></div></div>
+  </div>
+
+  <div class="call note"><h4>Le tre cose che non devono mancarti addosso</h4>
+    <p><b>Carta d’identità</b> in tasca (non in valigia) il martedì · i <b>biglietti di carta</b> danesi nel portafoglio · il <b>telefono carico</b>, perché il biglietto svedese vive lì dentro.</p></div>
+
+  <hr class="rule">
+  <p class="eyebrow">Come leggere i bollini</p>
+  <div class="legend">
+    <span class="b ok">verificato su fonte ufficiale</span>
+    <span class="b warn">da ricontrollare sul posto</span>
+    <span class="b risk">non confermato</span>
+  </div>
+  <p class="foot" style="text-align:left;padding-top:12px">
+    Verificato il <b>21 agosto 2026</b> sui siti ufficiali linkati in ogni scheda.
+    Le voci 🟡 sono stagionali, «fino a esaurimento» o meteo-dipendenti: nessuno può garantirle da qui, e infatti non lo faccio.
+    Prezzi in corone danesi (DKK) e svedesi (SEK). 1 € ≈ 7,47 DKK · 1 € ≈ 11,02 SEK.
+  </p>`;
+  wireCasa();
+}
+
+/* I dati di casa vivono solo in localStorage, su questo dispositivo. */
+const CASA_KEY = "oresund.casa";
+function leggiCasa(){
+  try { return JSON.parse(localStorage.getItem(CASA_KEY)) || {}; } catch(e){ return {}; }
+}
+function mostraCasa(){
+  const c = leggiCasa();
+  const view = document.getElementById("addrView");
+  if(c.addr && c.addr.trim()){
+    view.textContent = c.addr.trim();
+    view.classList.remove("empty");
+  } else {
+    view.textContent = "Tocca «modifica» e scrivi qui l’indirizzo";
+    view.classList.add("empty");
+  }
+  const row = document.getElementById("hostRow");
+  if(c.tel || c.host){
+    row.hidden = false;
+    document.getElementById("hostName").textContent = c.host ? ("Host · " + c.host) : "Host";
+    document.getElementById("hostTel").textContent = c.tel || "—";
+  } else { row.hidden = true; }
+  const note = document.getElementById("hostNote");
+  if(c.note && c.note.trim()){ note.hidden = false; note.textContent = c.note.trim(); }
+  else { note.hidden = true; }
+}
+function wireCasa(){
+  const c = leggiCasa();
+  const F = id => document.getElementById(id);
+  F("fAddr").value = c.addr || ""; F("fHost").value = c.host || "";
+  F("fTel").value  = c.tel  || ""; F("fNote").value = c.note || "";
+  F("editBtn").addEventListener("click", () => {
+    const box = F("fields");
+    box.hidden = !box.hidden;
+    F("editBtn").textContent = box.hidden ? "modifica" : "chiudi";
+    if(!box.hidden) F("fAddr").focus();
+  });
+  F("saveBtn").addEventListener("click", () => {
+    const dati = { addr:F("fAddr").value, host:F("fHost").value, tel:F("fTel").value, note:F("fNote").value };
+    try { localStorage.setItem(CASA_KEY, JSON.stringify(dati)); } catch(e){}
+    F("fields").hidden = true; F("editBtn").textContent = "modifica";
+    mostraCasa();
+  });
+  mostraCasa();
+}
+
+/* ---------------- app ---------------- */
+function tick(){
+  const n = new Date();
+  document.getElementById("clock").textContent =
+    String(n.getHours()).padStart(2,"0")+":"+String(n.getMinutes()).padStart(2,"0");
+}
+setInterval(tick, 15000); tick();
+
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click", ()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected","false"));
+  t.setAttribute("aria-selected","true");
+  document.querySelectorAll(".panel").forEach(p=>p.classList.remove("on"));
+  document.getElementById("p-"+t.dataset.p).classList.add("on");
+  window.scrollTo({top:0});
+}));
+
+renderOggi(); renderGiorni(); renderBiglietti(); renderCibo(); renderSOS();
+
+/* Service worker: rende l'app utilizzabile senza rete una volta installata.
+   Su claude.ai fallisce senza far danni — lì è solo un'anteprima. */
+if ("serviceWorker" in navigator && location.protocol === "https:") {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
+}
+</script>
