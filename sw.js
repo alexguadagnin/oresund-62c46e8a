@@ -4,7 +4,7 @@
  * una versione nuova. Non si aggiorna mai di nascosto: mostra una barretta e
  * aspetta che sia l'utente a toccarla.
  */
-const CACHE = "oresund-v4";
+const CACHE = "oresund-v5";
 const ASSETS = [
   "./", "./index.html", "./manifest.webmanifest",
   "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png",
