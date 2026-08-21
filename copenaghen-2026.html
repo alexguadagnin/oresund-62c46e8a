@@ -61,6 +61,13 @@ button{font:inherit; color:inherit}
 .brand{font-family:var(--f-disp); font-weight:700; font-size:1.02rem; letter-spacing:-.02em}
 .brand span{color:var(--accent)}
 .clock{margin-left:auto; font-family:var(--f-mono); font-size:.8rem; color:var(--ink-3); font-variant-numeric:tabular-nums}
+.askbtn{
+  display:inline-flex; align-items:center; gap:5px; text-decoration:none;
+  font-family:var(--f-mono); font-size:.68rem; color:var(--accent);
+  border:1px solid var(--accent); border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.askbtn:hover{background:var(--accent); color:#fff}
+.askbtn svg{width:13px; height:13px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
 
 /* ---------- tabs ---------- */
 .tabs{
@@ -262,6 +269,10 @@ td.num{font-family:var(--f-mono); font-variant-numeric:tabular-nums; white-space
   <div class="top-in">
     <div class="brand">Sei giorni sull'<span>Øresund</span></div>
     <div class="clock" id="clock"></div>
+    <a class="askbtn" href="https://claude.ai/code" target="_blank" rel="noopener" title="Chiedi una modifica a Claude">
+      <svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.9 8.9 0 0 1-4-.9L3 21l1.9-4.9A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4Z"/></svg>
+      chiedi
+    </a>
   </div>
 </header>
 
