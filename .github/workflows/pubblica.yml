@@ -1,0 +1,64 @@
+name: Verifica e pubblica
+
+# Il telefono di chi sta viaggiando riceve SOLO ciò che passa la verifica.
+# Se il controllo fallisce, la pubblicazione non parte e l'app installata
+# continua a servire l'ultima versione buona.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  verifica:
+    name: Verifica
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Controlla che la copia di emergenza non sia stata toccata
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch origin ${{ github.base_ref }} --depth=1
+          if git diff --name-only origin/${{ github.base_ref }}...HEAD -- stabile/ | grep -q .; then
+            echo "::error::Questa proposta modifica stabile/, la copia di emergenza del viaggiatore."
+            echo "::error::È l'unica cosa che funziona quando il resto si rompe. Non va toccata."
+            exit 1
+          fi
+          echo "stabile/ intatta"
+
+      - name: Verifica l'app
+        run: python verifica.py
+
+  pubblica:
+    name: Pubblica
+    needs: verifica
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deploy
+        uses: actions/deploy-pages@v4
