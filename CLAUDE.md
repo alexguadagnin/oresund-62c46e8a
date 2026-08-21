@@ -88,6 +88,19 @@ Ogni giornata ha anche un blocco `food` con «dove mangi oggi».
 Il render è in fondo (`stopHTML`, `dayHTML`, `foodHTML`, `renderOggi`…). La scheda **Oggi** risolve
 da sola la data e apre la giornata giusta; prima della partenza mostra la lista delle cose da fare.
 
+### Lavorare senza sprecare contesto
+
+`copenaghen-2026.html` è un file solo da ~90 KB (~25.000 token). Leggerlo tutto per cambiare un
+orario è uno spreco, e su una sessione lunga diventa un problema. Quindi:
+
+- **Non aprire mai il file intero.** Trova prima la riga: `grep -n '"10:36"' copenaghen-2026.html`
+  oppure `grep -n 'id:"ven"' copenaghen-2026.html`, poi leggi solo quelle righe.
+- **Le giornate hanno un id**: `lun mar mer gio ven sab`. Per saltare a una: `grep -n 'id:"gio"'`.
+- **Modifica con Edit mirati**, non riscrivendo blocchi grandi.
+- **Una sessione per richiesta.** Non tenerne una aperta per giorni: ogni sessione cloud riparte
+  pulita clonando il repo, ed è esattamente quello che vuoi.
+- `verifica.py` ti dice in due secondi se hai rotto qualcosa: costa molto meno che rileggere.
+
 ### Controllo prima di consegnare
 
 ```bash
