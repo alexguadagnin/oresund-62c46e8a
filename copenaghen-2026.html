@@ -231,6 +231,20 @@ td.num{font-family:var(--f-mono); font-variant-numeric:tabular-nums; white-space
 .nums li:last-child{border-bottom:0}
 .nums b{font-family:var(--f-mono); font-weight:600; white-space:nowrap}
 
+/* ---------- barra aggiornamento ---------- */
+.updbar{
+  position:fixed; left:0; right:0; bottom:calc(var(--tab-h) + env(safe-area-inset-bottom,0px));
+  z-index:60; background:var(--brick); color:#fff; display:none;
+  padding:11px 14px; font-size:.88rem; font-weight:500;
+  box-shadow:0 -2px 12px rgba(0,0,0,.18);
+}
+.updbar.on{display:flex; align-items:center; gap:10px; justify-content:center}
+.updbar button{
+  appearance:none; border:1px solid rgba(255,255,255,.8); background:rgba(255,255,255,.14);
+  color:#fff; border-radius:8px; padding:5px 12px; font-family:var(--f-mono); font-size:.74rem; cursor:pointer
+}
+.updbar button:hover{background:rgba(255,255,255,.28)}
+
 .foot{padding:26px 0 30px; color:var(--ink-3); font-size:.78rem; text-align:center; line-height:1.6}
 .legend{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
 
@@ -258,6 +272,11 @@ td.num{font-family:var(--f-mono); font-variant-numeric:tabular-nums; white-space
   <section id="p-cibo" class="panel"></section>
   <section id="p-sos" class="panel"></section>
 </main>
+
+<div class="updbar" id="updbar" role="status">
+  <span>C’è una versione aggiornata</span>
+  <button type="button" id="updbtn">aggiorna ora</button>
+</div>
 
 <nav class="tabs" aria-label="Sezioni">
   <div class="tabs-in" role="tablist">
@@ -589,7 +608,7 @@ const DAYS = [
    b:"⚠️ Il tuo City Pass Small è scaduto stamattina: alla macchinetta fai un <b>singolo</b> con destinazione <b>Københavns Lufthavn</b> — la zona la calcola lei, sono circa <b>30 DKK</b>. Tua sorella è ancora coperta dal suo 48 ore.",
    price:"30 DKK", badge:["ok","City Pass scaduto sab ~13:20"]},
   {t:"17:00", h:"Bagagli e check-in", b:"Riprendete le valigie dagli armadietti al P4, poi drop-off e controlli. Due ore e mezza di margine: sono giuste, non troppe."},
-  {t:"19:35", h:"FR406 → Roma Fiumicino", b:"Arrivo previsto 22:10.", badge:["warn","controlla il volo la mattina stessa"]}
+  {t:"19:35", h:"Volo per Roma Fiumicino", b:"Arrivo previsto 22:10. Il numero del volo tienilo nel telefono, non qui: questa pagina è pubblica.", badge:["warn","controlla lo stato del volo la mattina stessa"]}
  ],
  food:{
   intro:"Oggi si mangia una cosa sola e vale il viaggio. Tutto il resto è contorno.",
@@ -907,6 +926,20 @@ function renderSOS(){
     <p><b>Carta d’identità</b> in tasca (non in valigia) il martedì · i <b>biglietti di carta</b> danesi nel portafoglio · il <b>telefono carico</b>, perché il biglietto svedese vive lì dentro.</p></div>
 
   <hr class="rule">
+  <div class="card" style="margin-bottom:14px">
+    <p class="eyebrow">Se serve cambiare qualcosa mentre sei via</p>
+    <h3 class="sec-h" style="font-size:1.12rem">Chiedi una modifica</h3>
+    <p style="font-size:.9rem;color:var(--ink-2);margin:8px 0 0">
+      Apri Claude Code dal telefono e scrivi cosa non va — «Gasoline era chiuso, cosa faccio»,
+      «sposta il pomeriggio di venerdì». Legge il progetto, prepara la modifica e
+      <b>apre una proposta</b>. Niente va online finché non sei tu a confermarla.</p>
+    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px">
+      <a class="maplink" style="padding:7px 12px" href="https://claude.ai/code" target="_blank" rel="noopener">↗ Apri Claude Code</a>
+      <a class="maplink" style="padding:7px 12px" href="https://github.com/alexguadagnin/oresund-62c46e8a/pulls" target="_blank" rel="noopener">↗ Proposte da approvare</a>
+    </div>
+    <p class="privacy">Le modifiche arrivano come <b>pull request</b>: le leggi, tocchi «Merge», e in un minuto l’app si aggiorna da sola con la barretta arancione qui sotto. Se non ti convince, la chiudi e non succede niente.</p>
+  </div>
+
   <p class="eyebrow">Come leggere i bollini</p>
   <div class="legend">
     <span class="b ok">verificato su fonte ufficiale</span>
@@ -984,11 +1017,47 @@ document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click", ()=>{
 
 renderOggi(); renderGiorni(); renderBiglietti(); renderCibo(); renderSOS();
 
-/* Service worker: rende l'app utilizzabile senza rete una volta installata.
-   Su claude.ai fallisce senza far danni — lì è solo un'anteprima. */
+/* Service worker: rende l'app utilizzabile senza rete una volta installata,
+   e avvisa quando esce una versione nuova — senza mai aggiornarsi di nascosto.
+   Su claude.ai fallisce senza far danni: lì è solo un'anteprima. */
 if ("serviceWorker" in navigator && location.protocol === "https:") {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js").catch(() => {});
+  window.addEventListener("load", async () => {
+    let reg;
+    try { reg = await navigator.serviceWorker.register("sw.js"); } catch(e){ return; }
+
+    const barra = document.getElementById("updbar");
+    const proponi = worker => {
+      if(!worker) return;
+      barra.classList.add("on");
+      document.getElementById("updbtn").onclick = () => {
+        document.getElementById("updbtn").textContent = "aggiorno…";
+        worker.postMessage({ type: "AGGIORNA" });
+      };
+    };
+
+    // Versione nuova già in attesa da una visita precedente
+    if (reg.waiting && navigator.serviceWorker.controller) proponi(reg.waiting);
+
+    // Versione nuova trovata adesso
+    reg.addEventListener("updatefound", () => {
+      const nuovo = reg.installing;
+      if(!nuovo) return;
+      nuovo.addEventListener("statechange", () => {
+        if (nuovo.state === "installed" && navigator.serviceWorker.controller) proponi(nuovo);
+      });
+    });
+
+    // Quando il nuovo worker prende il controllo, ricarico una volta sola
+    let ricaricato = false;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (ricaricato) return; ricaricato = true; location.reload();
+    });
+
+    // Controlla se c'è una versione nuova a ogni apertura e ogni 15 minuti
+    const controlla = () => reg.update().catch(() => {});
+    controlla();
+    setInterval(controlla, 15 * 60 * 1000);
+    document.addEventListener("visibilitychange", () => { if(!document.hidden) controlla(); });
   });
 }
 </script>

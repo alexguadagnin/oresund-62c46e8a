@@ -1,0 +1,138 @@
+# Sei Giorni sull'Øresund — istruzioni per chi lavora su questo repo
+
+App di viaggio per **Copenaghen, Malmö e Lund, 24–29 agosto 2026**. Chi la usa è un viaggiatore
+italiano che **non parla inglese**, non è un viaggiatore esperto, ha un budget stretto e vuole
+poter contare su quello che legge. Sua sorella lo raggiunge giovedì 27 sera e riparte con lui
+sabato 29.
+
+---
+
+## ⛔ Le tre regole che vengono prima di tutto
+
+**1 · Proponi, non decidere.**
+Non modificare mai il piano di tua iniziativa. Se scopri che piove, che un posto ha chiuso, che un
+treno è soppresso: **scrivi cosa proponi e perché, e fermati lì.** La decisione è sua, sempre, anche
+quando la tua proposta è ovviamente giusta. Puoi preparare la modifica in una pull request, così
+lui vede esattamente cosa cambierebbe — ma **non unire mai niente da solo**, e non esiste nessun
+auto-merge in questo repo. Se ti viene la tentazione di «sistemare al volo» qualcosa perché tanto è
+banale: quella è esattamente la cosa che non deve succedere.
+
+**2 · Nessun dato personale nel repo.**
+L'indirizzo di casa, il telefono dell'host, i numeri di volo, i dati della carta: **non entrano nel
+codice.** Il repo è pubblico. Quei dati li scrive lui dentro l'app (scheda SOS → «modifica») e
+restano nel `localStorage` del suo telefono. Se ti chiede di metterli nel file, ricordagli che il
+repo è pubblico e proponi il campo nell'app.
+
+**3 · Se cambi un fatto, cambia il bollino.**
+Ogni voce porta il suo grado di certezza. Non spostarne mai uno verso il verde senza aver
+davvero aperto la fonte ufficiale. È l'unica cosa che rende questa app affidabile.
+
+| Bollino | Significato |
+|---|---|
+| `["ok","testo"]` | 🟢 verificato su fonte ufficiale, con `src:` che linka la pagina |
+| `["warn","testo"]` | 🟡 stagionale, «fino a esaurimento», meteo-dipendente: da ricontrollare sul posto |
+| `["risk","testo"]` | 🔴 non confermato |
+
+---
+
+## Com'è fatta
+
+Una pagina sola, autoportante. Nessuna dipendenza esterna a parte i font di Google.
+
+```
+copenaghen-2026.html   LA SORGENTE — si modifica questa
+index.html             copia generata: NON modificarla a mano
+build.py               copia la sorgente in index.html
+manifest.webmanifest   nome, icone, schermo intero (PWA)
+sw.js                  funzionamento offline + avviso di aggiornamento
+icon-*.png             icone generate
+```
+
+**Dopo ogni modifica: `python build.py`.** Se non lo fai, l'app pubblicata resta indietro.
+
+I contenuti stanno tutti nell'array `DAYS` in cima allo `<script>`. Una tappa è:
+
+```js
+{ t:"12:40",              // ora — devono restare in ordine crescente nella giornata
+  h:"Titolo",             // titolo
+  v:9,                    // voto 1–10 (opzionale)
+  key:1,                  // tappa importante: pallino colorato sul binario
+  b:"…", b2:"…",          // corpo, uno o due paragrafi
+  hop:"…",                // riquadro del tragitto: partenza → linea → direzione → scendi a X
+  warn:"…",               // riga rossa di avvertimento
+  price:"70 DKK",
+  badge:["ok","testo"],   // vedi regola 3
+  src:"https://…",        // la fonte ufficiale
+  map:"query per Google Maps" }
+```
+
+Ogni giornata ha anche un blocco `food` con «dove mangi oggi».
+
+Il render è in fondo (`stopHTML`, `dayHTML`, `foodHTML`, `renderOggi`…). La scheda **Oggi** risolve
+da sola la data e apre la giornata giusta; prima della partenza mostra la lista delle cose da fare.
+
+### Controllo prima di consegnare
+
+```bash
+python build.py
+node --check <(python -c "import re;print(re.search(r'<script>(.*)</script>',open('index.html',encoding='utf-8').read(),re.S).group(1))")
+grep -nEi "vej [0-9]{1,3}|[0-9]{4} kastrup|\+45 ?[0-9]{8}" index.html   # dev'essere vuoto
+```
+E verifica che gli orari di ogni giornata restino **in ordine crescente**.
+
+---
+
+## Il viaggiatore, in breve
+
+- **Sveglia alle 9**, sempre. È un vincolo, non una preferenza: gli orari sono calcolati su quello.
+- **Appartamento con cucina, preso apposta per risparmiare.** Colazioni e cene a casa, pranzi da
+  asporto mangiati camminando o al parco. **Niente ristoranti**: banco, carretto, forno, sacco.
+- **Non parla inglese.** Ogni istruzione va scritta come se dovesse eseguirla senza chiedere niente
+  a nessuno. I tragitti nel formato `partenza → linea → direzione (capolinea) → scendi a NOME`, e il
+  documento dice esplicitamente di **non contare le fermate** ma di leggere il nome sul display.
+- **Base a Kastrup**, metro M2, prima fermata dall'aeroporto.
+
+## Biglietti — la parte più delicata
+
+- **Danimarca: carta.** City Pass alle macchinette. Il conteggio parte dall'acquisto, non
+  dall'attivazione.
+- **Svezia: app Skånetrafiken.** `Select stops` → tre fermate (CPH Airport Kastrup, Lund C, Malmö C)
+  → deve comparire **Öresundszon** → `24 hours` → **360,00 kr**. Le altre due voci del selettore
+  (`city zone`, `entire Scania`) **non coprono il ponte**.
+- **Multa in Svezia: 1.500 SEK**, e a bordo non si vendono biglietti.
+- Serve **carta d'identità o passaporto**: la patente non vale, e la polizia controlla a Hyllie.
+
+## Cose già verificate — non rifarle, e non contraddirle senza fonte
+
+Verifica del **21 agosto 2026** su fonti ufficiali. Le correzioni trovate allora:
+
+- **Marmorkirken chiude alle 17** (lun–gio): è stata tolta dal lunedì, dove il piano la metteva alle 17:15.
+- **Bus 35 il sabato: ai minuti :06 e :36, 18 minuti di viaggio.** Il bus delle 10:25 non esiste.
+- **Glyptotek e Thorvaldsens sono gratis solo l'ULTIMO mercoledì del mese** (regola comunale dal
+  1º luglio 2024). Il 26 agosto 2026 lo è — per coincidenza, non per regola.
+- **Il biglietto del Glyptotek va prenotato** anche se è gratis: capienza limitata.
+- Prezzi corretti: Glyptotek **150** (non 120), M/S Søfart **145** (non 130), Juno **30** (non 45–55).
+- **Torre di Christiansborg: mar–sab 11–21**, gratis, senza prenotazione. Un aggregatore diceva
+  «lun–ven 10–17» ed era falso: ha vinto il sito del Folketinget.
+- **Christiania:** Pusher Street smantellata dagli abitanti nell'aprile 2024, oggi **si fotografa**.
+
+⚠️ **Domini che non rispondono a WebFetch** (403, 404 o pagine JavaScript vuote): `skanetrafiken.se`,
+`ft.dk`, `cph.dk`, `timeanddate.com`. Vanno letti con un browser.
+
+## Le voci 🟡 da ricontrollare in loco
+
+Sono marcate gialle **apposta**, non per pigrizia: nessuno può garantirle da remoto.
+Gasoline Grill (chiude a esaurimento) · Grundtvigs (funerali non annunciabili in anticipo) ·
+la guglia di Vor Frelsers (chiude con vento o pioggia) · Reffen e Lille Bakery (stagionali) ·
+i supermercati di Kastrup · il prezzo del City Pass 48 ore.
+
+## Decisioni da non ribaltare senza parlarne
+
+Sono in **`docs/decisioni.md`**, con la motivazione di ciascuna. Il diario completo resta sulla
+macchina locale e non è in questo repo apposta: conteneva l'indirizzo di casa. Le più vincolanti:
+
+- **D-010** — l'app è l'unica consegna (PDF, artifact e Notion sono in pensione)
+- **D-011** — ogni fatto porta il suo grado di certezza; non si promette il 100%
+- **D-004** — biglietto svedese verso **Lund**, non Malmö: Malmö è fermata intermedia
+- **D-003** — carta in Danimarca, app in Svezia
+- **D-009** — la sveglia alle 9 è un vincolo di progetto
