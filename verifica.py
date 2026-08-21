@@ -26,13 +26,23 @@ def avv(m): avvisi.append(m)
 
 
 # --- 1. la copia congelata non si tocca ------------------------------------
+def impronta(percorso: pathlib.Path) -> str:
+    """SHA256 con i fine riga normalizzati.
+
+    Git converte LF↔CRLF a seconda del sistema: senza normalizzare, lo stesso
+    file darebbe hash diversi su Windows e sulla CI Linux, e il controllo
+    fallirebbe per un motivo che non c'entra niente col contenuto.
+    """
+    return hashlib.sha256(percorso.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
 stab = RADICE / "stabile" / "index.html"
 sha_file = RADICE / "stabile" / "SHA256"
 if not stab.exists() or not sha_file.exists():
     err("stabile/: la copia di emergenza è sparita. Va ripristinata prima di procedere.")
 else:
     atteso = sha_file.read_text(encoding="utf-8").strip()
-    trovato = hashlib.sha256(stab.read_bytes()).hexdigest()
+    trovato = impronta(stab)
     if atteso != trovato:
         err(f"stabile/index.html è stato modificato.\n"
             f"   atteso  {atteso}\n   trovato {trovato}\n"
@@ -45,7 +55,7 @@ if not src.exists():
     err("manca copenaghen-2026.html (la sorgente)")
 elif not idx.exists():
     err("manca index.html — lancia `python build.py`")
-elif src.read_bytes() != idx.read_bytes():
+elif src.read_bytes().replace(b"\r\n", b"\n") != idx.read_bytes().replace(b"\r\n", b"\n"):
     err("index.html non corrisponde alla sorgente — lancia `python build.py` e ricommitta")
 
 testo = idx.read_text(encoding="utf-8") if idx.exists() else ""
