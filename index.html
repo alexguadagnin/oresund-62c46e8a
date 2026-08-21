@@ -1015,7 +1015,60 @@ document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click", ()=>{
   window.scrollTo({top:0});
 }));
 
-renderOggi(); renderGiorni(); renderBiglietti(); renderCibo(); renderSOS();
+/* ---------------------------------------------------------------
+   Rete di sicurezza. Se il render fallisce — per una modifica fatta
+   da remoto, un dato malformato, qualunque cosa — l'app non deve
+   restare bianca: deve comunque dare l'indirizzo di casa, il numero
+   dell'host, e una via d'uscita.
+   --------------------------------------------------------------- */
+function schermataEmergenza(err){
+  let casa = {};
+  try { casa = JSON.parse(localStorage.getItem("oresund.casa")) || {}; } catch(e){}
+  document.querySelector(".tabs")?.remove();
+  document.getElementById("updbar")?.remove();
+  document.querySelector("main").innerHTML = `
+    <div class="panel on">
+      <div class="call stop" style="margin-bottom:14px">
+        <h4>Qualcosa si è rotto</h4>
+        <p>L’app non è riuscita a caricare l’itinerario. I tuoi dati sono al sicuro qui sotto,
+        e sotto ancora c’è come rimetterla a posto in dieci secondi.</p>
+      </div>
+      <div class="sos-card" style="margin-bottom:14px">
+        <p class="eyebrow">Dove abito</p>
+        <p class="addr${casa.addr ? "" : " empty"}">${(casa.addr || "— non l’hai ancora inserito —").replace(/</g,"&lt;")}</p>
+        <p style="font-family:var(--f-mono);font-size:.86rem;margin:10px 0 0">Metro <b>M2 → KASTRUP</b> · prima fermata dall’aeroporto</p>
+      </div>
+      <div class="card" style="margin-bottom:14px">
+        <p class="eyebrow">Numeri</p>
+        <ul class="nums">
+          <li><span>Emergenze</span><b>112</b></li>
+          <li><span>Guardia medica</span><b>1813</b></li>
+          <li><span>Ambasciata d’Italia</span><b>+45 39 62 68 77</b></li>
+          ${casa.tel ? `<li><span>Host${casa.host ? " · "+casa.host.replace(/</g,"&lt;") : ""}</span><b>${casa.tel.replace(/</g,"&lt;")}</b></li>` : ""}
+        </ul>
+      </div>
+      <div class="call do">
+        <h4>Rimettila a posto</h4>
+        <p><b>1 ·</b> <a href="./stabile/">Apri la versione bloccata</a> — è la copia congelata prima della
+        partenza: non la tocca nessuno, funziona sempre.</p>
+        <p><b>2 ·</b> Oppure svuota tutto e riscarica: <button class="mini" id="ripristina" type="button">ripristina l’app</button></p>
+        <p style="margin-top:9px;font-size:.8rem;color:var(--ink-3)">Dettaglio tecnico: ${String(err && err.message || err).slice(0,180).replace(/</g,"&lt;")}</p>
+      </div>
+    </div>`;
+  document.getElementById("ripristina")?.addEventListener("click", async () => {
+    try {
+      for (const r of await navigator.serviceWorker.getRegistrations()) await r.unregister();
+      for (const k of await caches.keys()) await caches.delete(k);
+    } catch(e){}
+    location.reload();
+  });
+}
+
+try {
+  renderOggi(); renderGiorni(); renderBiglietti(); renderCibo(); renderSOS();
+} catch (err) {
+  schermataEmergenza(err);
+}
 
 /* Service worker: rende l'app utilizzabile senza rete una volta installata,
    e avvisa quando esce una versione nuova — senza mai aggiornarsi di nascosto.

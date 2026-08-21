@@ -23,6 +23,23 @@ codice.** Il repo è pubblico. Quei dati li scrive lui dentro l'app (scheda SOS 
 restano nel `localStorage` del suo telefono. Se ti chiede di metterli nel file, ricordagli che il
 repo è pubblico e proponi il campo nell'app.
 
+**2-bis · Non puoi rompere l'app, e non devi provarci.**
+Chi la usa è in viaggio: se l'app si rompe, perde l'itinerario mentre è dall'altra parte d'Europa.
+Ci sono quattro strati, e **nessuno dei quattro va indebolito o aggirato**:
+
+- **`stabile/`** è la copia congelata prima della partenza. Non registra il service worker, non ha
+  manifest, non cambia mai. **Non modificarla, per nessun motivo.** `verifica.py` controlla il suo
+  SHA256 e la CI rifiuta ogni proposta che la tocchi.
+- **`verifica.py`** è il cancello: sintassi, 6 giornate, ~90 tappe, orari in ordine crescente,
+  elementi dell'interfaccia presenti, nessun dato personale. **Lancialo prima di proporre qualsiasi
+  cosa.** In CI gira da solo, e se fallisce **GitHub Pages non pubblica**: il telefono continua a
+  servire l'ultima versione buona.
+- **La schermata di emergenza** nell'app: se il render lancia un'eccezione, l'utente vede comunque
+  l'indirizzo di casa, i numeri utili e due vie d'uscita. Non toccare `schermataEmergenza()` né il
+  `try/catch` che la invoca.
+- **Il service worker non si aggiorna di nascosto.** Niente `skipWaiting()` nell'install: la versione
+  nuova aspetta che sia l'utente a toccare la barra. Se metti `skipWaiting` lì, `verifica.py` fallisce.
+
 **3 · Se cambi un fatto, cambia il bollino.**
 Ogni voce porta il suo grado di certezza. Non spostarne mai uno verso il verde senza aver
 davvero aperto la fonte ufficiale. È l'unica cosa che rende questa app affidabile.
