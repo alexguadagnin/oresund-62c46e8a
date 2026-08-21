@@ -1,6 +1,6 @@
 /* Service worker — mette in cache tutto al primo avvio, poi serve sempre dalla cache.
    Risultato: l'app funziona in aereo, in metropolitana, senza campo. */
-const CACHE = "oresund-v1";
+const CACHE = "oresund-v2";
 const ASSETS = [
   "./", "./index.html", "./manifest.webmanifest",
   "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png",

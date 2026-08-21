@@ -43,6 +43,8 @@
 }
 
 *{box-sizing:border-box}
+/* L'attributo hidden deve battere i display:flex/grid dichiarati sotto. */
+[hidden]{display:none !important}
 body{
   margin:0; background:var(--ground); color:var(--ink);
   font-family:var(--f-body); font-size:16px; line-height:1.55;
