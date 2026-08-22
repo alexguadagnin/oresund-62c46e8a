@@ -140,7 +140,9 @@ Verifica del **21 agosto 2026** su fonti ufficiali. Le correzioni trovate allora
 - **Bus 35 il sabato: ai minuti :06 e :36, 18 minuti di viaggio.** Il bus delle 10:25 non esiste.
 - **Glyptotek e Thorvaldsens sono gratis solo l'ULTIMO mercoledì del mese** (regola comunale dal
   1º luglio 2024). Il 26 agosto 2026 lo è — per coincidenza, non per regola.
-- **Il biglietto del Glyptotek va prenotato** anche se è gratis: capienza limitata.
+- **Il biglietto gratuito del Glyptotek non si prenota** (controllato il 22 agosto 2026 nel negozio online
+  del museo: nei giorni a ingresso libero non fa selezionare la data). Si entra dalla biglietteria.
+  Online si vendono solo i biglietti a pagamento dei giorni normali.
 - Prezzi corretti: Glyptotek **150** (non 120), M/S Søfart **145** (non 130), Juno **30** (non 45–55).
 - **Torre di Christiansborg: mar–sab 11–21**, gratis, senza prenotazione. Un aggregatore diceva
   «lun–ven 10–17» ed era falso: ha vinto il sito del Folketinget.
