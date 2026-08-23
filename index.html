@@ -76,16 +76,18 @@ button{font:inherit; color:inherit}
   background:var(--surface); border-top:1px solid var(--line);
   padding-bottom:env(safe-area-inset-bottom,0px);
 }
-.tabs-in{max-width:600px; margin:0 auto; display:grid; grid-template-columns:repeat(5,1fr)}
+.tabs-in{max-width:600px; margin:0 auto; display:grid; grid-template-columns:repeat(6,1fr)}
 .tab{
   appearance:none; background:none; border:0; cursor:pointer;
   height:var(--tab-h); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
-  font-size:.66rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-3);
+  font-size:.62rem; font-weight:600; letter-spacing:.01em; text-transform:uppercase; color:var(--ink-3);
+  white-space:nowrap; min-width:0;
   border-top:2px solid transparent; margin-top:-1px;
 }
 .tab svg{width:21px; height:21px; stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round}
 .tab[aria-selected="true"]{color:var(--accent); border-top-color:var(--accent)}
 .tab:focus-visible{outline:2px solid var(--accent); outline-offset:-3px}
+@media (max-width:359px){ .tab{font-size:.54rem; letter-spacing:0} .tab svg{width:19px; height:19px} }
 
 /* ---------- generic ---------- */
 .panel{display:none; padding-top:16px}
@@ -282,6 +284,7 @@ td.num{font-family:var(--f-mono); font-variant-numeric:tabular-nums; white-space
   <section id="p-giorni" class="panel"></section>
   <section id="p-biglietti" class="panel"></section>
   <section id="p-cibo" class="panel"></section>
+  <section id="p-parlare" class="panel"></section>
   <section id="p-sos" class="panel"></section>
 </main>
 
@@ -300,6 +303,8 @@ td.num{font-family:var(--f-mono); font-variant-numeric:tabular-nums; white-space
       <svg viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4Z"/><path d="M14 6v12"/></svg>Biglietti</button>
     <button class="tab" role="tab" aria-selected="false" data-p="cibo">
       <svg viewBox="0 0 24 24"><path d="M5 3v8a3 3 0 0 0 6 0V3M8 11v10"/><path d="M18 3c-1.7 1.5-2.5 3.5-2.5 6 0 1.7.8 2.6 2.5 2.6V21"/></svg>Cibo</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="parlare">
+      <svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.9 8.9 0 0 1-4-.9L3 21l1.9-4.9A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4Z"/></svg>Parlare</button>
     <button class="tab" role="tab" aria-selected="false" data-p="sos">
       <svg viewBox="0 0 24 24"><path d="M12 3 3 7v6c0 4.5 3.8 7.6 9 8 5.2-.4 9-3.5 9-8V7Z"/><path d="M12 9v4M12 16h.01"/></svg>SOS</button>
   </div>
@@ -1006,6 +1011,109 @@ function renderCibo(){
     <p><b>BUKA</b> e <b>Apotek 57</b> sono a Copenaghen ed esistono davvero. <b>Örum invece è a Malmö</b>, non in Danimarca — Citadellsvägen 23, ed è aperta proprio il martedì, sulla strada che fai già. Il reel mescolava i due paesi.</p></div>`;
 }
 
+/* -------- PARLARE -------- */
+function renderParlare(){
+  document.getElementById("p-parlare").innerHTML = `
+  <p class="eyebrow">Quello che ti diranno, e cosa rispondere</p>
+  <h2 class="sec-h">Parlare</h2>
+  <p class="lede">Nessuno ti parlerà danese. In Danimarca e in Svezia l’inglese lo sanno tutti e lo sanno bene, e appena sentono l’accento passano all’inglese da soli. Quello che serve a te sta tutto qui sotto, ed è corto apposta.</p>
+
+  <div class="call do" style="margin:16px 0 0"><h4>Le due frasi che aprono tutto</h4>
+    <p><b>«Sorry, my English is very bad. Slowly, please.»</b><br>
+    Questa la usi quando <b>vuoi</b> capire: rallentano, semplificano, e spesso tirano fuori il telefono per farti vedere. Funziona molto meglio del silenzio.</p>
+    <p><b>«Sorry, I don’t speak English. I’m Italian.»</b><br>
+    Questa la usi quando <b>non</b> vuoi la conversazione: chi ti ferma per strada, chi vende qualcosa. Chiude e basta.</p>
+  </div>
+
+  <div class="card" style="margin:18px 0 0">
+    <p class="eyebrow">Treni, metro, controlli</p>
+    <h3 class="sec-h" style="font-size:1.08rem">In viaggio</h3>
+    <div class="tw" style="margin:10px 0 0"><table>
+      <thead><tr><th>Ti dicono</th><th>Vuol dire</th><th>Rispondi</th></tr></thead>
+      <tbody>
+        <tr><td><i>Tickets, please</i></td><td>il controllore, in Danimarca</td><td><b>Non dici niente: tiri fuori il biglietto di carta e glielo mostri</b></td></tr>
+        <tr><td><i>Your ticket?</i></td><td>il controllore, in Svezia</td><td><b>«It’s in the app» e giri lo schermo verso di lui</b></td></tr>
+        <tr><td><i>(silenzio, in divisa)</i></td><td>la polizia a Hyllie, martedì</td><td><b>Mostri la carta d’identità. Non si dice niente, e non riguarda te: controllano tutti</b></td></tr>
+        <tr><td><i>Where are you going?</i></td><td>polizia o controllore</td><td><b>«Lund.» Martedì è la risposta vera</b></td></tr>
+        <tr><td><i>(la macchinetta non funziona)</i></td><td>capita</td><td><b>Vai al 7-Eleven in stazione: «City Pass Small, one hundred twenty hours, please»</b></td></tr>
+        <tr><td><i>(sul bus)</i></td><td>in Danimarca si sale davanti</td><td><b>Mostri il biglietto all’autista passando. Un cenno e basta</b></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card" style="margin:18px 0 0">
+    <p class="eyebrow">Biglietterie, ingressi, guardaroba</p>
+    <h3 class="sec-h" style="font-size:1.08rem">Ai musei</h3>
+    <div class="tw" style="margin:10px 0 0"><table>
+      <thead><tr><th>Ti dicono</th><th>Vuol dire</th><th>Rispondi</th></tr></thead>
+      <tbody>
+        <tr><td><i>One adult?</i></td><td>quanti biglietti</td><td><b>«One, please.» Da giovedì in poi: «Two, please»</b></td></tr>
+        <tr><td><i>Do you have a ticket?</i></td><td>l’hai già comprato online?</td><td><b>Mostri il QR sul telefono. Kronborg e Louisiana funzionano così</b></td></tr>
+        <tr><td><i>That’s one hundred fifty kroner</i></td><td>il totale</td><td><b>Non rispondi: avvicini la carta al terminale</b></td></tr>
+        <tr><td><i>Student?</i></td><td>hai lo sconto studenti?</td><td><b>Solo se hai un tesserino da mostrare. Altrimenti «No»</b></td></tr>
+        <tr><td><i>You can leave your bag here</i></td><td>il guardaroba, spesso obbligatorio per gli zaini</td><td><b>«Thank you» e lo lasci. È gratis e sorvegliato</b></td></tr>
+        <tr><td><i>(Glyptotek, mercoledì)</i></td><td>vuoi essere sicuro che sia gratis</td><td><b>«It’s free today, right?» — la risposta è sì, è l’ultimo mercoledì del mese</b></td></tr>
+        <tr><td><i>(la guglia, venerdì)</i></td><td>col vento la chiudono</td><td><b>«Is the tower open today?» prima di pagare, non dopo</b></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card" style="margin:18px 0 0">
+    <p class="eyebrow">Banchi, forni, casse</p>
+    <h3 class="sec-h" style="font-size:1.08rem">Quando mangi o compri</h3>
+    <div class="tw" style="margin:10px 0 0"><table>
+      <thead><tr><th>Ti dicono</th><th>Vuol dire</th><th>Rispondi</th></tr></thead>
+      <tbody>
+        <tr><td><i>Anything else? · Var der andet?</i></td><td>altro?</td><td><b>«No, thank you»</b></td></tr>
+        <tr><td><i>Eat in or take away?</i></td><td>qui o d’asporto</td><td><b>«Take away.» In Svezia ti fa anche pagare meno</b></td></tr>
+        <tr><td><i>Do you want a bag? · Pose?</i></td><td>il sacchetto, che si paga</td><td><b>«No, thank you» — hai la tua borsa</b></td></tr>
+        <tr><td><i>Durum, pita eller box?</i></td><td>al kebab: piadina, tasca o vaschetta</td><td><b>«Durum»</b></td></tr>
+        <tr><td><i>Alt i?</i></td><td>al kebab: dentro tutto?</td><td><b>«Yes, everything»</b></td></tr>
+        <tr><td><i>Hvilken sovs?</i></td><td>quale salsa</td><td><b>«Garlic, mild»</b></td></tr>
+        <tr><td><i>(alla cassa automatica, si blocca)</i></td><td>hai messo dell’alcol: è la verifica dell’età</td><td><b>Non hai sbagliato niente. Aspetti, arriva un commesso e sblocca</b></td></tr>
+      </tbody>
+    </table></div>
+    <p style="font-size:.9rem;color:var(--ink-2);margin:12px 0 0">
+      Il dettaglio lungo — chi ha i tavoli, dove si paga senza aprire bocca, le aliquote — sta nella
+      scheda <b>Cibo</b>.</p>
+  </div>
+
+  <div class="card" style="margin:18px 0 0">
+    <p class="eyebrow">Quando qualcosa va storto</p>
+    <h3 class="sec-h" style="font-size:1.08rem">Imprevisti</h3>
+    <div class="tw" style="margin:10px 0 0"><table>
+      <thead><tr><th>Ti serve</th><th>Dici</th></tr></thead>
+      <tbody>
+        <tr><td>Non hai capito</td><td><b>«Sorry? Slowly, please.»</b> — meglio di annuire a caso</td></tr>
+        <tr><td>Chiedere la strada</td><td><b>«Excuse me, where is Nyhavn?»</b> — ma è più veloce mostrare il telefono con la mappa aperta e il dito sul posto</td></tr>
+        <tr><td>Il bagno</td><td><b>«Where is the toilet?»</b> — in danese si scrive <i>toilet</i> uguale, lo riconosci sulle porte</td></tr>
+        <tr><td>Deposito bagagli, sabato</td><td><b>«Luggage storage, please. Until five o’clock.»</b></td></tr>
+        <tr><td>Il wi-fi</td><td><b>«What’s the wi-fi password?»</b></td></tr>
+        <tr><td>Ti parlano in danese</td><td><b>«Sorry, I’m Italian. English, please?»</b> — passano subito</td></tr>
+        <tr><td>Ti sei perso davvero</td><td>Scheda <b>SOS</b>: c’è il riquadro con l’indirizzo di casa da mostrare senza dire niente</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card" style="margin:18px 0 0">
+    <p class="eyebrow">Le uniche che senti davvero</p>
+    <h3 class="sec-h" style="font-size:1.08rem">Otto parole danesi</h3>
+    <div class="tw" style="margin:10px 0 0"><table>
+      <thead><tr><th>Parola</th><th>Si legge</th><th>Vuol dire</th></tr></thead>
+      <tbody>
+        <tr><td><b>hej</b></td><td>«hai»</td><td>ciao — si dice entrando <i>e</i> uscendo</td></tr>
+        <tr><td><b>tak</b></td><td>«tag»</td><td>grazie. L’unica che vale la pena imparare</td></tr>
+        <tr><td><b>undskyld</b></td><td>«onskül»</td><td>scusi</td></tr>
+        <tr><td><b>ja / nej</b></td><td>«ia» / «nai»</td><td>sì / no</td></tr>
+        <tr><td><b>pose</b></td><td>«pose»</td><td>sacchetto</td></tr>
+        <tr><td><b>kort</b></td><td>«kort»</td><td>carta di pagamento</td></tr>
+        <tr><td><b>kvittering</b></td><td>«kvitterìng»</td><td>scontrino</td></tr>
+        <tr><td><b>pant</b></td><td>«pant»</td><td>la cauzione sulle bottiglie</td></tr>
+      </tbody>
+    </table></div>
+    <div class="meta"><span class="b warn">pronunce approssimate, e le frasi al banco nessuna fonte ufficiale le certifica</span></div>
+  </div>`;
+}
 /* -------- SOS -------- */
 function renderSOS(){
   document.getElementById("p-sos").innerHTML = `
@@ -1198,7 +1306,7 @@ function schermataEmergenza(err){
 }
 
 try {
-  renderOggi(); renderGiorni(); renderBiglietti(); renderCibo(); renderSOS();
+  renderOggi(); renderGiorni(); renderBiglietti(); renderCibo(); renderParlare(); renderSOS();
 } catch (err) {
   schermataEmergenza(err);
 }

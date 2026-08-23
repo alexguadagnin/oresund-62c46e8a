@@ -173,6 +173,20 @@ Verifica del **21 agosto 2026** su fonti ufficiali. Le correzioni trovate allora
   distinguere casa da un negozio: scrivi la via **senza civico** e lascia il resto al campo `map:`.
   Non allargare la regex per farci passare un indirizzo.
 
+### La scheda «Parlare»
+
+Sesta scheda, `id="p-parlare"`, render in `renderParlare()`. Contiene gli scambi che il viaggiatore
+si aspetta di sentire — trasporti, musei, banchi, imprevisti — nel formato **ti dicono / vuol dire /
+rispondi**, piu' otto parole danesi con la pronuncia approssimata.
+
+- **Il contenuto e' tutto 🟡 e lo dichiara in fondo**: nessuna fonte ufficiale certifica come parla
+  un commesso. Non promuoverlo a verde.
+- **In inglese, non in danese.** In Danimarca e Svezia l'inglese lo sanno tutti: le frasi da dare
+  sono inglesi e corte. Il danese serve solo a *riconoscere* cosa ti stanno chiedendo.
+- La barra delle schede e' `grid-template-columns:repeat(6,1fr)`. **Se ne aggiungi una settima**,
+  le etichette non ci stanno piu' a 320px: misura prima di aggiungere.
+- `verifica.py` controlla che la scheda esista.
+
 ⚠️ **Domini che non rispondono a WebFetch** (403, 404 o pagine JavaScript vuote): `skanetrafiken.se`,
 `ft.dk`, `cph.dk`, `timeanddate.com`. Vanno letti con un browser.
 
