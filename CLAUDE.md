@@ -187,6 +187,18 @@ rispondi**, piu' otto parole danesi con la pronuncia approssimata.
   le etichette non ci stanno piu' a 320px: misura prima di aggiungere.
 - `verifica.py` controlla che la scheda esista.
 
+### La scheda Cibo, dopo l'aggiunta della spesa
+
+Quattro blocchi, in quest'ordine: **Sotto casa a Kastrup** (i locali del quartiere, Burger 161
+compreso, e il perche' la consegna a domicilio non conviene) · **Al banco** (come si ordina, il
+kebab, le aliquote) · **Il carrello del lunedi** (la lista della spesa con il nome danese di ogni
+prodotto, i prezzi indicativi e il *madpakke*) · **La spesa senza dover parlare** (le casse).
+
+- **I prezzi del carrello sono 🟡 e devono restarci.** Sono fasce da discount danese, non listini:
+  nessuno li puo' garantire da remoto e cambiano di settimana in settimana.
+- **La colonna in corsivo e' il nome danese sullo scaffale.** E' quella che rende la lista usabile
+  da chi non parla la lingua: se aggiungi una riga, mettici il nome danese o non serve a niente.
+
 ⚠️ **Domini che non rispondono a WebFetch** (403, 404 o pagine JavaScript vuote): `skanetrafiken.se`,
 `ft.dk`, `cph.dk`, `timeanddate.com`. Vanno letti con un browser.
 

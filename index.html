@@ -335,7 +335,7 @@ const DAYS = [
   {t:"13:35", h:"A Kastrup", hop:"<b>M2</b> dir. <b>Vanløse</b> → <b>prima fermata: KASTRUP</b>. Circa 2 minuti.", map:"Kastrup St København metro"},
   {t:"13:45", h:"Qualcosa al volo, con la valigia dietro", key:1,
    b:"Il check-in è alle 15: hai un’ora e un quarto e non puoi ancora entrare. Prima cosa, mangia. In <b>aeroporto</b>, prima di scendere in metro, ci sono forni e banchi ed è l’opzione a rischio zero. A Kastrup, attorno alla stazione: <b>KonditorBager</b>, <b>Salat Take Away</b> in Saltværksvej, <b>Tårnby Pizza og Grill</b> in Tårnbyvej (lun–ven 11–22). E il <b>7-Eleven</b> in stazione fa panini e dolci sui 30–50 corone senza doverci parlare.",
-   b2:"<b>Guardati intorno anche sotto casa.</b> Kastrup è un quartiere vero, non un dormitorio: forni, grill, pizzerie al taglio. Quello che vedi aperto e pieno di gente del posto va bene — non serve che sia in questa lista.",
+   b2:"<b>Guardati intorno anche sotto casa.</b> Kastrup è un quartiere vero, non un dormitorio: forni, grill, pizzerie al taglio. Quello che vedi aperto e pieno di gente del posto va bene — non serve che sia in questa lista. Quella completa, <b>Burger 161</b> compreso, è nella scheda <b>Cibo</b>.",
    badge:["warn","posti trovati sugli elenchi danesi, non su fonte ufficiale: guarda l’insegna e gli orari sul posto"], map:"Saltværksvej Kastrup"},
   {t:"14:05", h:"Kastrup Søbad — «la lumaca»", v:8, key:1,
    b:"Un anello di legno che entra nel mare, White Arkitekter 2005, con il trampolino a cinque metri in fondo al pontile. Davanti hai Saltholm e, in fondo, la Svezia. È il primo assaggio di Danimarca migliore di Nyhavn, ed è pieno di gente di qui e di nessun turista.",
@@ -349,6 +349,7 @@ const DAYS = [
   {t:"15:20", h:"Spesa a Kastrup", key:1,
    b:"È la spesa che regge tutta la settimana: colazioni, pranzi al sacco, cene a casa. Rugbrød, burro salato, aringa marinata, koldskål con i kammerjunker, frutta, caffè. Netto, Rema 1000 e Lidl sono tutti su Amager, il Rema 1000 di Kastrup è in Præstefælledvej.",
    warn:"Il sacchetto <b>si paga</b> e te lo chiedono (<i>«pose?»</i>): portati una borsa da casa e la domanda non arriva nemmeno. E le bottiglie hanno la cauzione, il <i>pant</i>, che riprendi dalla macchina all’ingresso del supermercato — dettagli nella scheda Cibo.",
+   b2:"<b>Cosa metterci dentro sta nella scheda Cibo</b>, blocco «Il carrello del lunedì»: la lista con il nome danese di ogni cosa, i prezzi indicativi, e come si monta un <i>madpakke</i> — il pranzo al sacco che sulla settimana ti fa risparmiare 200–400 corone.",
    badge:["warn","orari da confermare sul posto"], map:"Rema 1000 Præstefælledvej Kastrup"},
   {t:"16:00", h:"Verso il centro", hop:"<b>M2</b> dir. <b>Vanløse</b> → scendi a <b>Kongens Nytorv</b>."},
   {t:"16:20", h:"Nyhavn", v:8, key:1, b:"Le case colorate del Seicento, a duecento metri dall’uscita della metro. Poi cinque minuti a nord fino a <b>Ofelia Plads</b> <span class='v'>7</span>, il molo con le scale che scendono in acqua: è dove si siedono i danesi dopo il lavoro, e non c’è un turista.", price:"gratis", badge:["ok","sempre aperto"], map:"Nyhavn, København"},
@@ -901,6 +902,49 @@ function renderCibo(){
   </table></div>
 
   <div class="card" style="margin-bottom:14px">
+    <p class="eyebrow">Sotto casa, a Kastrup</p>
+    <h3 class="sec-h" style="font-size:1.08rem">Il quartiere, non solo l’aeroporto</h3>
+    <p style="font-size:.9rem;color:var(--ink-2);margin:10px 0 0">
+      Kastrup è un quartiere vero e ci sono più posti di quelli che si trovano da qui. Questi
+      valgono la pena di saperli prima; il resto lo scopri camminando.</p>
+    <div class="tw" style="margin:10px 0 0"><table>
+      <thead><tr><th>Posto</th><th>Cosa</th><th>Prezzo</th></tr></thead>
+      <tbody>
+        <tr><td><b>Burger 161</b><br>su Kastrupvej</td><td>Burger di manzo da 180 g. <b>4,8 su oltre 670 recensioni</b>, il posto è piccolo e a tema pugilato</td><td><b>109</b> la sola<br>fino a 169 il menù</td></tr>
+        <tr><td><b>KonditorBager</b></td><td>Forno di catena: pane, dolci, panini. La colazione e il volo</td><td>25–50</td></tr>
+        <tr><td><b>Salat Take Away</b><br>Saltværksvej</td><td>Insalate e pizza d’asporto</td><td>60–100</td></tr>
+        <tr><td><b>Tårnby Pizza og Grill</b><br>Tårnbyvej</td><td>Pizza e grill · lun–ven 11–22</td><td>70–110</td></tr>
+        <tr><td><b>7-Eleven</b><br>in stazione</td><td>Panini e dolci, aperto sempre</td><td>30–50</td></tr>
+      </tbody>
+    </table></div>
+    <div class="call note" style="margin:14px 0 0"><h4>Burger 161: sì, ma sappi che</h4>
+      <p>109 corone sono <b>14 euro e mezzo per un panino</b>, ed è il doppio di tutto il resto della
+      giornata. Venerdì hai già <b>il duello dei due burger</b> a Christianshavn, che è la stessa
+      spesa fatta meglio. Se lo fai qui, fallo <b>invece</b> di quello, non in più.</p>
+    </div>
+    <p style="font-size:.9rem;color:var(--ink-2);margin:14px 0 0">
+      <b>Il metodo vale più della lista.</b> Quello che trovi aperto e pieno di gente del posto va
+      bene. Guardi la vetrina, indichi, dici <b>«take away»</b>. Non serve che sia in questa tabella.</p>
+
+    <h3 class="sec-h" style="font-size:1.08rem;margin-top:18px">Dove mangiartelo, che è il punto</h3>
+    <p style="font-size:.9rem;color:var(--ink-2);margin:10px 0 0">
+      <b>Kastrup Søbad</b> — il pontile di legno, seduto sul bordo con i piedi verso il mare e la
+      Svezia davanti. È il posto migliore di tutta la zona e non costa niente.
+      <b>Kastrup Havn</b>, il porticciolo, e <b>Amager Strandpark</b>, la spiaggia lunga, sono le
+      altre due. Tre sere su sei torni tardi: quella libera, cena comprata sotto casa e mangiata lì.</p>
+
+    <div class="call do" style="margin:14px 0 0"><h4>Farsi consegnare il cibo in giro: lascia perdere</h4>
+      <p><b>Wolt e Just Eat consegnano a un indirizzo, non «dove sei adesso».</b> Una panchina al
+      parco non è un indirizzo, e il fattorino se non ti trova ti telefona — in inglese, con te che
+      cammini.</p>
+      <p>E i conti non tornano: su Wolt il <b>minimo d’ordine è 100 corone</b> solo per i ristoranti,
+      più il costo di consegna, e l’abbonamento che lo azzera costa 59 corone al mese. Il banco più
+      la panchina costa meno, e non devi rispondere a nessuno.</p>
+    </div>
+    <div class="meta"><span class="b warn">posti e prezzi da recensioni ed elenchi danesi, non da fonte ufficiale: controlla insegna e orari sul posto</span></div>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
     <p class="eyebrow">Al banco, senza dover parlare</p>
     <h3 class="sec-h" style="font-size:1.08rem">Si ordina indicando</h3>
     <p style="font-size:.9rem;color:var(--ink-2);margin:10px 0 0">
@@ -964,6 +1008,74 @@ function renderCibo(){
       </tbody>
     </table></div>
     <div class="meta"><span class="b warn">le frasi al banco nessuna fonte ufficiale le certifica</span></div>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
+    <p class="eyebrow">Il carrello del lunedì</p>
+    <h3 class="sec-h" style="font-size:1.08rem">Cosa comprare, con il nome che c’è sullo scaffale</h3>
+    <p style="font-size:.9rem;color:var(--ink-2);margin:10px 0 0">
+      La colonna in corsivo è <b>il nome danese</b>: cerca quello sulla confezione e non devi chiedere
+      niente a nessuno. I prezzi sono indicativi da discount — <b>Netto, Lidl, Rema 1000</b> — e vanno
+      guardati sullo scaffale.</p>
+
+    <h4 style="font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:16px 0 0">Colazione</h4>
+    <div class="tw" style="margin:8px 0 0"><table>
+      <thead><tr><th>Cosa</th><th>Sullo scaffale</th><th>DKK</th><th>A che serve</th></tr></thead>
+      <tbody>
+        <tr><td><b>Pane di segale scuro</b></td><td><i>rugbrød</i></td><td class="num">15–25</td><td>La base di tutto: colazione, pranzo al sacco, cena</td></tr>
+        <tr><td><b>Burro salato</b></td><td><i>smør, saltet</i></td><td class="num">20–30</td><td>Sul rugbrød ci va sempre, e salato è la versione giusta</td></tr>
+        <tr><td><b>Skyr o yogurt bianco</b></td><td><i>skyr</i></td><td class="num">12–20</td><td>Sazia molto e costa poco. Con la frutta è colazione fatta</td></tr>
+        <tr><td><b>Fiocchi d’avena</b></td><td><i>havregryn</i></td><td class="num">10–15</td><td>Il pacco costa niente e dura tutta la settimana</td></tr>
+        <tr><td><b>Caffè</b></td><td><i>kaffe</i></td><td class="num">30–50</td><td>Al bar è 35–45 a tazza: farlo a casa si ripaga il primo giorno</td></tr>
+      </tbody>
+    </table></div>
+
+    <h4 style="font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:18px 0 0">Il companatico — in danese <i>pålæg</i>, ed è una parola che ti serve</h4>
+    <div class="tw" style="margin:8px 0 0"><table>
+      <thead><tr><th>Cosa</th><th>Sullo scaffale</th><th>DKK</th><th>A che serve</th></tr></thead>
+      <tbody>
+        <tr><td><b>Paté di fegato</b></td><td><i>leverpostej</i></td><td class="num">10–15</td><td>Il più danese e il più economico di tutti. Va caldo o freddo</td></tr>
+        <tr><td><b>Sgombro al pomodoro</b></td><td><i>makrel i tomat</i></td><td class="num">12–18</td><td>In scatola. Proteine a due euro, ed è un classico vero</td></tr>
+        <tr><td><b>Formaggio a fette</b></td><td><i>ost · danbo, havarti</i></td><td class="num">25–40</td><td>Il pranzo più veloce da montare</td></tr>
+        <tr><td><b>Prosciutto cotto</b></td><td><i>skinke</i></td><td class="num">20–30</td><td>Se il resto ti sembra troppo esotico</td></tr>
+        <tr><td><b>Aringa marinata</b></td><td><i>marineret sild</i></td><td class="num">25–35</td><td>In vasetto. È il sapore che ricorderai</td></tr>
+        <tr><td><b>Salsa danese</b></td><td><i>remoulade</i></td><td class="num">15–20</td><td>Va su tutto e trasforma due fette di pane in un pranzo</td></tr>
+      </tbody>
+    </table></div>
+
+    <h4 style="font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:18px 0 0">Da mettere sopra, e da portarsi dietro</h4>
+    <div class="tw" style="margin:8px 0 0"><table>
+      <thead><tr><th>Cosa</th><th>Sullo scaffale</th><th>DKK</th><th>A che serve</th></tr></thead>
+      <tbody>
+        <tr><td><b>Cetriolo</b></td><td><i>agurk</i></td><td class="num">8–12</td><td>Sul leverpostej ci va sempre. Dura tutta la settimana</td></tr>
+        <tr><td><b>Pomodori · cipolla rossa</b></td><td><i>tomater · rødløg</i></td><td class="num">15–25</td><td>Sullo sgombro la cipolla rossa è d’obbligo</td></tr>
+        <tr><td><b>Banane e mele</b></td><td><i>bananer · æbler</i></td><td class="num">15–25 al kg</td><td>Lo spuntino che sta in tasca e non si schiaccia</td></tr>
+        <tr><td><b>Gallette di segale</b></td><td><i>knækbrød · rugkiks</i></td><td class="num">12–20</td><td>Non si sbriciolano nello zaino come il pane</td></tr>
+        <tr><td><b>Frutta secca</b></td><td><i>nødder</i></td><td class="num">25–40</td><td>Il sacchetto regge tre giorni di camminate</td></tr>
+        <tr><td><b>Latticello dolce freddo</b></td><td><i>koldskål + kammerjunker</i></td><td class="num">~25</td><td>Quello che i danesi mangiano davvero ad agosto</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="call do" style="margin:18px 0 0"><h4>Il pranzo al sacco danese si chiama <i>madpakke</i>, e si fa così</h4>
+      <p>Due fette di <b>rugbrød</b>, burro salato su tutt’e due, e sopra <b>una cosa sola</b> — non
+      si impila. Le tre combinazioni che funzionano:</p>
+      <p><b>1 ·</b> leverpostej + fette di cetriolo &nbsp;·&nbsp; <b>2 ·</b> makrel i tomat + cipolla
+      rossa &nbsp;·&nbsp; <b>3 ·</b> formaggio + remoulade</p>
+      <p>Si avvolge nella carta forno e sta in piedi nello zaino. <b>Non è un panino:</b> il pane
+      resta aperto e si mangia con le mani, oppure lo chiudi per portarlo.</p>
+      <p><b>Quanto ti fa risparmiare:</b> un madpakke fatto da te sta sui <b>15–20 corone</b>. Un
+      pranzo a Torvehallerne è 70–150. Su tre giorni sono <b>200–400 corone</b>, cioè 27–54 euro —
+      un museo e una cena.</p>
+    </div>
+
+    <div class="call note" style="margin:14px 0 0"><h4>Le cinque cose che tagliano il conto</h4>
+      <p><b>1 ·</b> <b>Netto, Lidl e Rema 1000</b> sono i discount. Føtex costa di più, Irma molto di più.</p>
+      <p><b>2 ·</b> Cerca i cartellini gialli: <b><i>tilbud</i></b> vuol dire offerta. È l’unica parola danese che ti serve al supermercato.</p>
+      <p><b>3 ·</b> Le marche del supermercato costano molto meno delle marche note, e per rugbrød, burro e skyr non cambia niente.</p>
+      <p><b>4 ·</b> <b>Too Good To Go</b> per le colazioni: i forni svendono il sacco a fine giornata a un terzo del prezzo.</p>
+      <p><b>5 ·</b> L’acqua dal rubinetto, e il <b>pant</b> delle bottiglie riportato indietro.</p>
+    </div>
+    <div class="meta"><span class="b warn">prezzi indicativi da discount danese: guarda il cartellino, non questa tabella</span></div>
   </div>
 
   <div class="card" style="margin-bottom:14px">
