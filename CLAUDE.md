@@ -214,6 +214,22 @@ Il Rema 1000 di Præstefælledvej era indicato nel piano come «il supermercato 
 sbagliato**, e con la spesa della settimana in mano quell'errore costava un'ora. I due giusti sono
 in Kastruplundgade.
 
+### Due trappole di impaginazione, trovate il 23 agosto sul telefono vero
+
+**1 · Il `<!DOCTYPE html>` deve restare la primissima riga.** Il file non ce l'ha mai avuto e la
+pagina girava in *quirks mode* (`document.compatMode === "BackCompat"`): sul telefono il browser
+non rispettava la larghezza reale dello schermo, si poteva dezoomare e il contenuto sfondava a
+destra. Ora `verifica.py` lo controlla e senza non si pubblica.
+
+**2 · I bollini non devono essere lunghi.** `.b` era `white-space:nowrap`: un bollino con un testo
+di ottanta caratteri diventa una pillola da 670px che sfonda la pagina. Ora `.b` va a capo
+(`white-space:normal; max-width:100%`), ma **tienili corti lo stesso** — una pillola su tre righe
+e' brutta. Cinque parole, non una frase.
+
+Come si verifica un sospetto di sfondamento, senza telefono: si serve la pagina in locale, si
+forza `documentElement.style.width` alla larghezza da provare e si cercano gli elementi con
+`getBoundingClientRect().right` oltre quella larghezza **che non hanno un antenato con overflow**.
+
 ⚠️ **Domini che non rispondono a WebFetch** (403, 404 o pagine JavaScript vuote): `skanetrafiken.se`,
 `ft.dk`, `cph.dk`, `timeanddate.com`. Vanno letti con un browser.
 
