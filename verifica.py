@@ -60,6 +60,12 @@ elif src.read_bytes().replace(b"\r\n", b"\n") != idx.read_bytes().replace(b"\r\n
 
 testo = idx.read_text(encoding="utf-8") if idx.exists() else ""
 
+# --- 2-bis. il DOCTYPE, o il browser va in quirks mode -----------------------
+if testo and not testo.lstrip().lower().startswith("<!doctype html>"):
+    err("manca <!DOCTYPE html> in cima al file. Senza, il browser rende la pagina in "
+        "«quirks mode»: sul telefono ignora la larghezza reale dello schermo e il layout "
+        "sfonda a destra. Deve essere la primissima riga.")
+
 # --- 3. il JavaScript deve almeno compilare --------------------------------
 m = re.search(r"<script>(.*)</script>", testo, re.S)
 if not m:
