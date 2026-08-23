@@ -199,6 +199,21 @@ prodotto, i prezzi indicativi e il *madpakke*) · **La spesa senza dover parlare
 - **La colonna in corsivo e' il nome danese sullo scaffale.** E' quella che rende la lista usabile
   da chi non parla la lingua: se aggiungi una riga, mettici il nome danese o non serve a niente.
 
+### Distanze a Kastrup, misurate su Maps il 23 agosto
+
+A piedi dalla fermata **Kastrup**, tutto pianeggiante. **Non contraddirle a occhio.**
+
+| Da Kastrup St a | a piedi |
+|---|---|
+| Kastrup Søbad (la lumaca) | **1,2 km · 15 min** |
+| Netto + 365discount, Kastruplundgade | **1,2 km · 16 min** |
+| Lidl, su Amager Landevej | 2,1 km · 29 min |
+| **Rema 1000, Præstefælledvej** | **4,7 km · 1 ora** ⚠ |
+
+Il Rema 1000 di Præstefælledvej era indicato nel piano come «il supermercato di Kastrup»: **era
+sbagliato**, e con la spesa della settimana in mano quell'errore costava un'ora. I due giusti sono
+in Kastruplundgade.
+
 ⚠️ **Domini che non rispondono a WebFetch** (403, 404 o pagine JavaScript vuote): `skanetrafiken.se`,
 `ft.dk`, `cph.dk`, `timeanddate.com`. Vanno letti con un browser.
 
