@@ -327,9 +327,21 @@ const DAYS = [
    b:"Cerca «City Pass», poi Small, poi 120 hours, Adult × 1. Carta contactless. Esce un biglietto di carta con data e ora stampate: quello è tutto.",
    warn:"Il conteggio parte dall’acquisto, non dall’attivazione. Comprato alle 13:20 di lunedì scade sabato alle 13:20 — ed è per questo che sabato pomeriggio ti serve un singolo.",
    price:"340 DKK", badge:["ok","City Pass"]},
-  {t:"13:35", h:"A casa", hop:"<b>M2</b> dir. <b>Vanløse</b> → <b>prima fermata: KASTRUP</b>. Circa 2 minuti.", map:"Kastrup St København metro"},
-  {t:"13:50", h:"Check-in", b:"Disfa la valigia, metti la carta d’identità nel portafoglio — martedì ti serve in tasca, non in borsa."},
-  {t:"14:45", h:"Spesa a Kastrup", key:1,
+  {t:"13:35", h:"A Kastrup", hop:"<b>M2</b> dir. <b>Vanløse</b> → <b>prima fermata: KASTRUP</b>. Circa 2 minuti.", map:"Kastrup St København metro"},
+  {t:"13:45", h:"Qualcosa al volo, con la valigia dietro", key:1,
+   b:"Il check-in è alle 15: hai un’ora e un quarto e non puoi ancora entrare. Prima cosa, mangia. In <b>aeroporto</b>, prima di scendere in metro, ci sono forni e banchi ed è l’opzione a rischio zero. A Kastrup, attorno alla stazione: <b>KonditorBager</b>, <b>Salat Take Away</b> in Saltværksvej, <b>Tårnby Pizza og Grill</b> in Tårnbyvej (lun–ven 11–22). E il <b>7-Eleven</b> in stazione fa panini e dolci sui 30–50 corone senza doverci parlare.",
+   b2:"<b>Guardati intorno anche sotto casa.</b> Kastrup è un quartiere vero, non un dormitorio: forni, grill, pizzerie al taglio. Quello che vedi aperto e pieno di gente del posto va bene — non serve che sia in questa lista.",
+   badge:["warn","posti trovati sugli elenchi danesi, non su fonte ufficiale: guarda l’insegna e gli orari sul posto"], map:"Saltværksvej Kastrup"},
+  {t:"14:05", h:"Kastrup Søbad — «la lumaca»", v:8, key:1,
+   b:"Un anello di legno che entra nel mare, White Arkitekter 2005, con il trampolino a cinque metri in fondo al pontile. Davanti hai Saltholm e, in fondo, la Svezia. È il primo assaggio di Danimarca migliore di Nyhavn, ed è pieno di gente di qui e di nessun turista.",
+   b2:"<b>Gratis, aperta tutto l’anno</b>, spogliatoi e docce aperti d’estate. È su Amager Strandvej, in fondo. Se hai la valigia non è un problema: è lungomare piatto e asfaltato.",
+   warn:"<b>Controlla il percorso su Maps prima di incamminarti.</b> Sono circa 1,5 km dalla fermata Kastrup, ma con la valigia venti minuti di troppo si sentono. Se ti sembra lunga, <b>Femøren</b> è una fermata più avanti ed è più vicina.",
+   price:"gratis", badge:["warn","gratis e sempre aperta, verificato; la distanza a piedi controllala su Maps"], src:"https://www.visitcopenhagen.com/copenhagen/planning/kastrup-sea-bath-gdk412208", map:"Kastrup Søbad"},
+  {t:"15:00", h:"Check-in", key:1,
+   b:"Disfa la valigia, metti la carta d’identità nel portafoglio — martedì ti serve in tasca, non in borsa.",
+   warn:"<b>L’orario dell’host è le 15:00</b>, non prima. Se stasera gli scrivi e ti lascia posare i bagagli verso le 13:45, tutto il pomeriggio si allarga: la lumaca la fai leggero e la spesa la anticipi. È una richiesta normale, chiedila.",
+   badge:["warn","conferma l’ora esatta con l’host"]},
+  {t:"15:20", h:"Spesa a Kastrup", key:1,
    b:"È la spesa che regge tutta la settimana: colazioni, pranzi al sacco, cene a casa. Rugbrød, burro salato, aringa marinata, koldskål con i kammerjunker, frutta, caffè. Netto, Rema 1000 e Lidl sono tutti su Amager, il Rema 1000 di Kastrup è in Præstefælledvej.",
    warn:"Il sacchetto <b>si paga</b> e te lo chiedono (<i>«pose?»</i>): portati una borsa da casa e la domanda non arriva nemmeno. E le bottiglie hanno la cauzione, il <i>pant</i>, che riprendi dalla macchina all’ingresso del supermercato — dettagli nella scheda Cibo.",
    badge:["warn","orari da confermare sul posto"], map:"Rema 1000 Præstefælledvej Kastrup"},
@@ -341,6 +353,7 @@ const DAYS = [
    badge:["ok","verificato su marmorkirken.dk"], src:"https://www.marmorkirken.dk/", map:"Amalienborg Slotsplads"},
   {t:"18:15", h:"Cena: Killer Kebab", v:8,
    b:"Borgergade 18, a cinque minuti da Amalienborg. Kebab marinato in casa e falafel dentro un pane piatto a lievito madre sfornato lì. Da asporto: si mangia camminando verso Kastellet.",
+   b2:"<b>Sì, ti chiedono cosa metterci dentro — tre domande, e le risposte sono corte.</b> <b>1</b> Il pane: <i>durum</i> (piadina arrotolata, la più comoda camminando), <i>pita</i> (tasca, più abbondante) o <i>box</i> (vaschetta con patate). Di’ <b>«durum»</b>. <b>2</b> La verdura: chiedono <i>«alt i?»</i>, cioè «dentro tutto?». Di’ <b>«yes, everything»</b> e arriva insalata, pomodoro, cipolla, cavolo. <b>3</b> La salsa: <i>hvidløg</i> è aglio, <i>stærk</i> è piccante, <i>mild</i> è dolce. Se non sai, <b>«garlic, mild»</b> e non sbagli.",
    price:"90–110 DKK", badge:["ok","lun–gio 11:30–20:30"], map:"Killer Kebab Borgergade 18"},
   {t:"19:15", h:"Kastellet", v:8, b:"La fortezza a stella del 1662, ancora militare, coi bastioni erbosi e il mulino. Si cammina sul perimetro al tramonto. Poi <b>Gefionspringvandet</b> <span class='v'>7</span> e, se ti va, la <b>Sirenetta</b> <span class='v'>5</span> — piccola e sempre circondata, ma è lì.", price:"gratis", badge:["ok","sempre aperto"], map:"Kastellet København"},
   {t:"20:26", h:"Tramonto", b:"Oggi il sole va giù alle 20:26. Dai bastioni di Kastellet guarda verso l’Øresund: domani sei dall’altra parte.", badge:["ok","effemeridi verificate"]},
@@ -609,10 +622,15 @@ const DAYS = [
    b2:"Da Schønnemann un pranzo costa 400–500 corone: qui assaggi dieci cucine con 150–250. <b>Ingresso gratuito, i gettoni si comprano sul posto.</b>",
    warn:"PORTATE PIATTO E POSATE DA CASA. Non è una dimenticanza degli organizzatori: è parte del concetto, e se non li avete mangiate con le mani.",
    price:"150–250 DKK", badge:["ok","evento e orari verificati"], map:"Flæsketorvet 45 København"},
-  {t:"15:05", h:"Strøget, il centro e lo shopping", v:8, key:1,
+  {t:"15:05", h:"Istedgade — l’usato, se vi va", v:7,
+   b:"Da Flæsketorvet verso il centro si può passare per <b>Istedgade</b> invece che per la via diretta: è la strada dell’usato di Vesterbro, e non costa un minuto in più perché è la stessa direzione. Il <b>Røde Kors Genbrug</b> è quello che le guide danno come miglior rapporto qualità/prezzo della via; le boutique vintage accanto sono parecchio più care.",
+   b2:"<b>Quanto costa:</b> nei genbrug (i negozi caritatevoli) si sta sui <b>20–100 corone</b>, cioè 3–13 euro. Le boutique vintage vere stanno sui <b>100–500</b>, e l’usato firmato in conto vendita parte da 500 e arriva a 2.000. Col budget di questo viaggio, genbrug.",
+   warn:"<b>O questa o Strøget fatta bene, non tutt’e due.</b> Alle 17 chiude tutto e alle 16:45 dovete essere in aeroporto: se vi fermate qui, Strøget diventa una camminata veloce. Scegliete prima di partire da Kødbyen.",
+   price:"20–100 DKK nei genbrug", badge:["warn","negozi e prezzi da guide, non da fonte ufficiale: orari da controllare sulla porta"], map:"Istedgade København"},
+  {t:"15:30", h:"Strøget, il centro e lo shopping", v:8, key:1,
    b:"Da Flæsketorvet a <b>Rådhuspladsen</b> sono dieci minuti a piedi, e lì comincia lo <b>Strøget</b>: <b>1,1 km di strada pedonale</b> fino a Kongens Nytorv. È la spina dorsale della città vecchia — Gammeltorv con la fontana del 1610, Amagertorv, la Rundetårn che spunta a destra su Købmagergade — e insieme è la via dello shopping.",
    b2:"È il pezzo di Copenaghen che tua sorella si aspetta di vedere, e finora nel piano non c'era. Passandoci a piedi verso la fine, ci arrivate senza spostare niente.",
-   warn:"Il sabato i negozi chiudono alle 17:00. Uscite dallo smørrebrød alle 15 e siete larghi; uscite alle 16 e fate solo la passeggiata.",
+   warn:"Il sabato i negozi chiudono alle 17:00, e alle 16:45 dovete essere in aeroporto: qui avete un’ora e mezza scarsa. Se avete fatto Istedgade, questa diventa la passeggiata e non lo shopping.",
    price:"gratis", badge:["ok","sab 10–17, verificato"], map:"Strøget København"},
   {t:"16:20", h:"Kongens Nytorv e Nyhavn di giorno", v:8,
    b:"Lo Strøget finisce dentro <b>Kongens Nytorv</b>, e Nyhavn è a duecento metri. Per lei è la chiusura giusta: l'ha vista illuminata giovedì sera, adesso la vede con la luce. Venti minuti sul molo e poi si scende in metro, che parte da qui.",
@@ -894,6 +912,22 @@ function renderCibo(){
       <b>«take away»</b> (capiscono in Danimarca e in Svezia), e il pagamento, a cui non si risponde
       affatto: avvicini la carta e basta.</p>
     </div>
+
+    <h3 class="sec-h" style="font-size:1.08rem;margin-top:18px">Il kebab: le tre domande</h3>
+    <p style="font-size:.9rem;color:var(--ink-2);margin:10px 0 0">
+      È l’unico banco dove ti fanno scegliere davvero. Ma sono sempre le stesse tre domande, in
+      quest’ordine, e le risposte stanno in due parole.</p>
+    <div class="tw" style="margin:10px 0 0"><table>
+      <thead><tr><th>Ti chiedono</th><th>Vuol dire</th><th>Rispondi</th></tr></thead>
+      <tbody>
+        <tr><td><i>durum, pita eller box?</i></td><td>piadina arrotolata, tasca, o vaschetta con patate</td><td><b>«durum»</b> — è quello che si mangia camminando</td></tr>
+        <tr><td><i>alt i?</i></td><td>«dentro tutto?» — insalata, pomodoro, cipolla, cavolo</td><td><b>«yes, everything»</b></td></tr>
+        <tr><td><i>hvilken sovs?</i></td><td>quale salsa: <i>hvidløg</i> aglio · <i>stærk</i> piccante · <i>mild</i> dolce</td><td><b>«garlic, mild»</b></td></tr>
+      </tbody>
+    </table></div>
+    <p style="font-size:.9rem;color:var(--ink-2);margin:12px 0 0">
+      Se ti chiedono anche la carne: <i>kylling</i> è pollo, <i>oksekød</i> è manzo, <i>blandet</i> è
+      misto. Vale lo stesso in ogni grill danese, non solo da Killer Kebab.</p>
 
     <h3 class="sec-h" style="font-size:1.08rem;margin-top:18px">Te lo chiedono? E cambia il prezzo?</h3>
     <div class="tw" style="margin:10px 0 0"><table>

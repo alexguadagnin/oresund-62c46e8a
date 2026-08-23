@@ -166,6 +166,12 @@ Verifica del **21 agosto 2026** su fonti ufficiali. Le correzioni trovate allora
   sempre, perché sono obbligati a battere due aliquote. Sta nella scheda Cibo, blocco «Al banco».
 - **Kystbanen:** nessun lavoro annunciato per la settimana 24–29 agosto, ma **non confermabile da
   remoto** — l'API 1.0 di Rejseplanen è chiusa. Va guardato su Rejseplanen la mattina stessa.
+- **Il check-in dell'Airbnb è alle 15:00**, non alle 13:50 come diceva il piano. Lunedì è stato
+  riscritto: atterraggio 12:55 → City Pass → Kastrup 13:35 → mangiare 13:45 → **Kastrup Søbad**
+  14:05 → check-in 15:00 → spesa 15:20 → centro 16:00. **Non rimettere il check-in prima delle 15.**
+- **Il gate sugli indirizzi blocca anche i locali pubblici.** La regex `...vej <numero>` non sa
+  distinguere casa da un negozio: scrivi la via **senza civico** e lascia il resto al campo `map:`.
+  Non allargare la regex per farci passare un indirizzo.
 
 ⚠️ **Domini che non rispondono a WebFetch** (403, 404 o pagine JavaScript vuote): `skanetrafiken.se`,
 `ft.dk`, `cph.dk`, `timeanddate.com`. Vanno letti con un browser.
