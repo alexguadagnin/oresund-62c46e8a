@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Sei Giorni sull'Øresund</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow, noarchive">
@@ -439,8 +440,9 @@ const DAYS = [
    price:"gratis oggi · 110 DKK", badge:["ok","regola comunale verificata"], src:"https://cphmuseum.kk.dk/en/news/change-regarding-free-admission-on-wednesdays", map:"Thorvaldsens Museum"},
   {t:"15:25", h:"Ny Carlsberg Glyptotek", v:9, key:1,
    b:"Il colpo grosso della giornata: antichità egizie, etrusche, romane, e la seconda collezione di Rodin al mondo, dentro un giardino d’inverno con le palme sotto la cupola di vetro.",
-   warn:"PRENOTA DA CASA il biglietto da 0 corone. Il museo scrive che <b>nei giorni gratuiti la capienza è limitata e consiglia vivamente di riservare</b>, per non trovare la fila e andarci per niente. Chiude alle 17: entra entro le 15:30.",
-   price:"gratis oggi · 150 DKK", badge:["ok","mar–dom 10–17"], src:"https://glyptoteket.com/visit/tickets", map:"Ny Carlsberg Glyptotek"},
+   b2:"<b>Una parte del museo è chiusa.</b> Fino a ottobre stanno risistemando la scultura greca e romana e la sala centrale: alcune sale sono chiuse e alcune opere non sono esposte. Quali esattamente, non lo dicono. Rodin, i francesi e gli egizi restano il grosso della visita — ed è gratis: vale comunque la pena.",
+   warn:"NON devi prenotare niente, e soprattutto <b>non comprare niente online</b>. Oggi è l’ultimo mercoledì del mese e si entra gratis: passi e basta. Il sito vende <b>solo</b> biglietti a pagamento da 135–150 corone, e non esiste nessun biglietto da 0 corone da riservare: se ne compri uno, sono soldi buttati. Chiude alle 17: entra entro le 15:30.",
+   price:"gratis oggi · 150 DKK", badge:["ok","gratis e orari verificati il 23 agosto"], src:"https://glyptoteket.com/visit/tickets", map:"Ny Carlsberg Glyptotek"},
   {t:"17:10", h:"Torre di Christiansborg", v:9, key:1,
    b:"La torre più alta di Copenaghen, e la vista è <b>gratis</b>. Si entra dal <b>Kongeporten</b>, il portone su Christiansborg Slotsplads: ci sono <b>due file</b>, una per la vista e una per il ristorante — mettiti in quella giusta. C’è un controllo di sicurezza tipo aeroporto. In cima si sale <b>max 40 persone alla volta</b>, quindi la coda è normale.",
    b2:"Aperta <b>mar–sab 11:00–21:00</b>, ultimo ingresso 15 minuti prima. Nessuna prenotazione. La piattaforma è a 44 m; i 106 m sono l’altezza della torre.",
@@ -713,16 +715,18 @@ function renderOggi(){
     </div>
     ${next?`<div class="stack">
       <div class="call do"><h4>Da fare stasera, da casa</h4>
-        <p>1 · <b>Prenota il biglietto da 0 corone del Glyptotek</b> per mercoledì 26, fascia verso le 15:30. È gratis ma la capienza è limitata.</p>
-        <p>2 · <b>Compra Kronborg online</b>: 135 invece di 150, e il biglietto vale un anno.</p>
-        <p>3 · <b>Compra il biglietto svedese nell’app Skånetrafiken</b> scegliendo «attiva più tardi». Vedi la scheda Biglietti.</p>
-        <p>4 · <b>Prenota la guglia di Vor Frelsers</b> per venerdì pomeriggio.</p>
-        <p>5 · Scarica <b>Google Maps offline</b> di Copenaghen e Malmö, e il pacchetto danese di Google Traduttore.</p>
+        <p>1 · <b>Installa l’app Skånetrafiken, registrati e collega la carta.</b> Non comprare niente: basta arrivare al punto in cui l’app funziona e la carta è accettata. È l’unica cosa stasera che toglie un rischio vero — se martedì mattina a Kastrup la carta viene rifiutata, salta la giornata in Svezia. Il biglietto lo compri lì, martedì.</p>
+        <p>2 · Scarica <b>Google Maps offline</b> di Copenaghen e Malmö, e il pacchetto danese di Google Traduttore. Cinque minuti sul wifi di casa.</p>
+        <p>3 · <b>Kronborg online, se ti va</b>: 135 invece di 150. Nessuna data da scegliere e vale un anno, quindi puoi comprarlo anche giovedì dal treno. Sono 15 corone: nessuna fretta.</p>
+        <p>4 · <b>La guglia di Vor Frelsers: non prenotarla adesso.</b> Costa 70 corone uguali online e allo sportello, quindi prenotare serve solo a saltare la fila — e venerdì è dato vento forte, con cui la torre chiude. Guarda il meteo giovedì sera e decidi allora.</p>
+        <p>5 · <b>Il Glyptotek non si prenota, e non si compra.</b> Mercoledì è l’ultimo mercoledì del mese: si entra gratis e basta. Online vendono solo biglietti a pagamento — non cercarlo e non comprarlo.</p>
       </div>
       <div class="call note"><h4>Da mettere in valigia</h4>
         <p><b>Carta d’identità o passaporto</b> — martedì in Svezia la polizia controlla a Hyllie, e la patente non vale.</p>
         <p><b>Un piatto e delle posate</b> — servono davvero sabato a Smørrebrødets Dag.</p>
         <p><b>Una borraccia</b> — in Danimarca l’acqua del rubinetto è ottima e si beve ovunque.</p>
+        <p><b>Una giacca antipioggia leggera</b> — venerdì e sabato sono dati piovosi e ventosi, e sono proprio i due giorni con più roba all’aperto.</p>
+        <p><b>Una borsa della spesa</b> — pieghevole, di stoffa. In Danimarca il sacchetto si paga e te lo chiedono ogni volta: con la tua, la domanda non arriva nemmeno.</p>
       </div>
     </div>`:""}
     <hr class="rule">
@@ -872,6 +876,56 @@ function renderCibo(){
       <tr><td><b>Lille Bakery</b></td><td>Refshaleøen</td><td>focaccia, sausage roll</td><td>chiusa lun e mar</td></tr>
     </tbody>
   </table></div>
+
+  <div class="card" style="margin-bottom:14px">
+    <p class="eyebrow">Al banco, senza dover parlare</p>
+    <h3 class="sec-h" style="font-size:1.08rem">Si ordina indicando</h3>
+    <p style="font-size:.9rem;color:var(--ink-2);margin:10px 0 0">
+      Ti metti in fila, <b>indichi col dito</b> e dici il numero: <b>«One, please»</b>. Se ne vuoi due,
+      mostri due dita. Indicare è normalissimo, lo fanno tutti, nessuno ti guarda male.</p>
+    <p style="font-size:.9rem;color:var(--ink-2);margin:12px 0 0">
+      Poi ti fanno una domanda che non capisci. Quasi sempre è <i>«var der andet?»</i> (altro?) oppure
+      <i>«skal du have en pose?»</i> (vuoi un sacchetto?).</p>
+
+    <div class="call do" style="margin:14px 0 0"><h4>La regola d’oro</h4>
+      <p>A quasi tutto quello che ti chiedono al banco, la risposta giusta è <b>«no, thank you»</b>.
+      Praticamente ogni domanda è l’offerta di qualcosa in più — così non sbagli mai.</p>
+      <p>Le uniche due che <b>non</b> sono offerte: <b>«eat in or take away?»</b>, a cui rispondi
+      <b>«take away»</b> (capiscono in Danimarca e in Svezia), e il pagamento, a cui non si risponde
+      affatto: avvicini la carta e basta.</p>
+    </div>
+
+    <h3 class="sec-h" style="font-size:1.08rem;margin-top:18px">Te lo chiedono? E cambia il prezzo?</h3>
+    <div class="tw" style="margin:10px 0 0"><table>
+      <thead><tr><th>Dove</th><th>Te lo chiedono</th><th>Cambia il prezzo</th></tr></thead>
+      <tbody>
+        <tr><td><b>Danimarca</b></td><td>solo dove ci sono i tavoli</td><td><b>No.</b> IVA 25% su tutto, mangiato lì o portato via</td></tr>
+        <tr><td><b>Svezia</b> 🇸🇪</td><td><b>sì, sempre</b></td><td><b>Sì.</b> Da asporto <b>6%</b>, seduto <b>12%</b></td></tr>
+      </tbody>
+    </table></div>
+    <p style="font-size:.9rem;color:var(--ink-2);margin:12px 0 0">
+      <b>Martedì in Svezia, quindi, «ta med» ti fa pagare meno.</b> Dal 1° aprile 2026 il cibo da
+      asporto conta come alimentare e paga il 6%, mentre sedersi è un servizio di ristorazione e paga
+      il 12%. Su un pranzo da 130 corone al Saluhall sono ~7 corone: poco, ma adesso te lo chiederanno
+      di sicuro, perché sono obbligati a battere due aliquote diverse. E il piano ti manda comunque
+      fuori a mangiare.</p>
+    <div class="meta"><span class="b ok">aliquote verificate su Skatteverket e sul fisco danese</span>
+    <a class="src" href="https://www.skatteverket.se/foretag/moms/saljavarorochtjanster/momssatserochundantagfranmoms.4.58d555751259e4d66168000409.html" target="_blank" rel="noopener">fonte</a></div>
+
+    <h3 class="sec-h" style="font-size:1.08rem;margin-top:18px">Chi ha i tavoli, nel tuo piano</h3>
+    <div class="tw" style="margin:10px 0 0"><table>
+      <thead><tr><th>Posto</th><th>Quando</th><th>Cosa succede</th></tr></thead>
+      <tbody>
+        <tr><td><b>Juno the Bakery</b></td><td>ven 10:20</td><td>Nessun posto a sedere. Ti danno il sacchetto e mangi in strada — è così che funziona, non ti stanno liquidando</td></tr>
+        <tr><td><b>Sankt Peders</b> · BUKA · Apotek 57</td><td>mer 10:05</td><td>Banchi da forno: non te lo chiedono</td></tr>
+        <tr><td><b>DØP</b> · i carretti</td><td>a piacere</td><td>Finestrella, te lo passano, mangi in piedi</td></tr>
+        <tr><td><b>Killer Kebab</b></td><td>lun 18:15</td><td>Qui i tavoli ci sono e te lo chiedono. Tu vuoi <b>take away</b>: alle 19:15 sei al Kastellet</td></tr>
+        <tr><td><b>Torvehallerne</b></td><td>mer 13:15</td><td>Te lo chiedono, e i posti sono pochi e contesi. Take away e vai ai giardini</td></tr>
+        <tr><td><b>Malmö Saluhall</b> 🇸🇪</td><td>mar 14:10</td><td>Tavoli comuni, e la tentazione di sedersi. Sappi che sederti costa il 6% in più</td></tr>
+      </tbody>
+    </table></div>
+    <div class="meta"><span class="b warn">le frasi al banco nessuna fonte ufficiale le certifica</span></div>
+  </div>
 
   <div class="card" style="margin-bottom:14px">
     <p class="eyebrow">La spesa senza dover parlare</p>
