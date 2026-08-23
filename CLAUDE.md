@@ -140,11 +140,32 @@ Verifica del **21 agosto 2026** su fonti ufficiali. Le correzioni trovate allora
 - **Bus 35 il sabato: ai minuti :06 e :36, 18 minuti di viaggio.** Il bus delle 10:25 non esiste.
 - **Glyptotek e Thorvaldsens sono gratis solo l'ULTIMO mercoledì del mese** (regola comunale dal
   1º luglio 2024). Il 26 agosto 2026 lo è — per coincidenza, non per regola.
-- **Il biglietto del Glyptotek va prenotato** anche se è gratis: capienza limitata.
+- ~~Il biglietto del Glyptotek va prenotato~~ — **era sbagliato, corretto il 23 agosto 2026.**
+  Il biglietto da 0 corone **non esiste**: lo shop ufficiale (`billet.glyptoteket.dk`) vende solo
+  adulto 135, u27 108 e gruppi 121,50, **senza selettore di data né fascia oraria**, e su ogni voce
+  c'è scritto «NB: Free entry on the last Wednesday of every month». Mercoledì si entra e basta.
+  Non rimetterlo: chi lo legge rischia di comprare un biglietto a pagamento in un giorno gratis.
 - Prezzi corretti: Glyptotek **150** (non 120), M/S Søfart **145** (non 130), Juno **30** (non 45–55).
 - **Torre di Christiansborg: mar–sab 11–21**, gratis, senza prenotazione. Un aggregatore diceva
   «lun–ven 10–17» ed era falso: ha vinto il sito del Folketinget.
 - **Christiania:** Pusher Street smantellata dagli abitanti nell'aprile 2024, oggi **si fotografa**.
+
+### Ricontrollo del 23 agosto 2026, alla vigilia della partenza
+
+- **Glyptotek: parte del museo è chiusa.** «From week 16 until October 2026, we are rearranging the
+  museum's collection of Greek and Roman Sculpture and the Central Hall» → «some artworks or objects
+  are temporarily unavailable, and certain galleries are closed». Mercoledì 10–17 confermato.
+- **Kronborg:** 150 in cassa, **135 online**, valido 1 anno, nessuna data da scegliere. Ago: lun–dom 10–18.
+- **Guglia di Vor Frelsers:** 70 DKK **uguali online e allo sportello** — prenotare non fa risparmiare,
+  serve solo a saltare la fila. Tutti i giorni 9–20, ultimo ingresso 19:30, chiude con pioggia o vento forte.
+- **Fredagsrock venerdì 28: TV-2 alle 22:00**, confermato, più un support act alle 19:00.
+- **Smørrebrødets Dag sabato 29: 11:00–15:00**, Festivalpladsen, Flæsketorvet 45, ingresso gratuito.
+- **IVA sul cibo — è una differenza di prezzo, non una formalità.** Danimarca: 25% piatta, mangiato lì
+  o da asporto è uguale. **Svezia: dal 1º aprile 2026 l'asporto è al 6%, il servizio al tavolo al 12%**
+  (riduzione temporanea fino al 31 dicembre 2027, fonte Skatteverket). In Svezia te lo chiederanno
+  sempre, perché sono obbligati a battere due aliquote. Sta nella scheda Cibo, blocco «Al banco».
+- **Kystbanen:** nessun lavoro annunciato per la settimana 24–29 agosto, ma **non confermabile da
+  remoto** — l'API 1.0 di Rejseplanen è chiusa. Va guardato su Rejseplanen la mattina stessa.
 
 ⚠️ **Domini che non rispondono a WebFetch** (403, 404 o pagine JavaScript vuote): `skanetrafiken.se`,
 `ft.dk`, `cph.dk`, `timeanddate.com`. Vanno letti con un browser.
