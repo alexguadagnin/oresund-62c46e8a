@@ -118,7 +118,8 @@ console.log(JSON.stringify(out));
 for elemento, perche in [
     ('id="p-oggi"', "scheda Oggi"), ('id="p-giorni"', "scheda Giorni"),
     ('id="p-biglietti"', "scheda Biglietti"), ('id="p-cibo"', "scheda Cibo"),
-    ('id="p-sos"', "scheda SOS"), ('id="updbar"', "barra di aggiornamento"),
+    ('id="p-parlare"', "scheda Parlare"), ('id="p-sos"', "scheda SOS"),
+    ('id="updbar"', "barra di aggiornamento"),
     ('id="addrView"', "riquadro dell'indirizzo"), ("schermataEmergenza", "schermata di emergenza"),
     ('href="./stabile/"', "via d'uscita verso la copia bloccata"),
 ]:

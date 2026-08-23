@@ -76,16 +76,18 @@ button{font:inherit; color:inherit}
   background:var(--surface); border-top:1px solid var(--line);
   padding-bottom:env(safe-area-inset-bottom,0px);
 }
-.tabs-in{max-width:600px; margin:0 auto; display:grid; grid-template-columns:repeat(5,1fr)}
+.tabs-in{max-width:600px; margin:0 auto; display:grid; grid-template-columns:repeat(6,1fr)}
 .tab{
   appearance:none; background:none; border:0; cursor:pointer;
   height:var(--tab-h); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
-  font-size:.66rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-3);
+  font-size:.62rem; font-weight:600; letter-spacing:.01em; text-transform:uppercase; color:var(--ink-3);
+  white-space:nowrap; min-width:0;
   border-top:2px solid transparent; margin-top:-1px;
 }
 .tab svg{width:21px; height:21px; stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round}
 .tab[aria-selected="true"]{color:var(--accent); border-top-color:var(--accent)}
 .tab:focus-visible{outline:2px solid var(--accent); outline-offset:-3px}
+@media (max-width:359px){ .tab{font-size:.54rem; letter-spacing:0} .tab svg{width:19px; height:19px} }
 
 /* ---------- generic ---------- */
 .panel{display:none; padding-top:16px}
@@ -282,6 +284,7 @@ td.num{font-family:var(--f-mono); font-variant-numeric:tabular-nums; white-space
   <section id="p-giorni" class="panel"></section>
   <section id="p-biglietti" class="panel"></section>
   <section id="p-cibo" class="panel"></section>
+  <section id="p-parlare" class="panel"></section>
   <section id="p-sos" class="panel"></section>
 </main>
 
@@ -300,6 +303,8 @@ td.num{font-family:var(--f-mono); font-variant-numeric:tabular-nums; white-space
       <svg viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4Z"/><path d="M14 6v12"/></svg>Biglietti</button>
     <button class="tab" role="tab" aria-selected="false" data-p="cibo">
       <svg viewBox="0 0 24 24"><path d="M5 3v8a3 3 0 0 0 6 0V3M8 11v10"/><path d="M18 3c-1.7 1.5-2.5 3.5-2.5 6 0 1.7.8 2.6 2.5 2.6V21"/></svg>Cibo</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="parlare">
+      <svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.9 8.9 0 0 1-4-.9L3 21l1.9-4.9A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4Z"/></svg>Parlare</button>
     <button class="tab" role="tab" aria-selected="false" data-p="sos">
       <svg viewBox="0 0 24 24"><path d="M12 3 3 7v6c0 4.5 3.8 7.6 9 8 5.2-.4 9-3.5 9-8V7Z"/><path d="M12 9v4M12 16h.01"/></svg>SOS</button>
   </div>
@@ -327,11 +332,24 @@ const DAYS = [
    b:"Cerca «City Pass», poi Small, poi 120 hours, Adult × 1. Carta contactless. Esce un biglietto di carta con data e ora stampate: quello è tutto.",
    warn:"Il conteggio parte dall’acquisto, non dall’attivazione. Comprato alle 13:20 di lunedì scade sabato alle 13:20 — ed è per questo che sabato pomeriggio ti serve un singolo.",
    price:"340 DKK", badge:["ok","City Pass"]},
-  {t:"13:35", h:"A casa", hop:"<b>M2</b> dir. <b>Vanløse</b> → <b>prima fermata: KASTRUP</b>. Circa 2 minuti.", map:"Kastrup St København metro"},
-  {t:"13:50", h:"Check-in", b:"Disfa la valigia, metti la carta d’identità nel portafoglio — martedì ti serve in tasca, non in borsa."},
-  {t:"14:45", h:"Spesa a Kastrup", key:1,
+  {t:"13:35", h:"A Kastrup", hop:"<b>M2</b> dir. <b>Vanløse</b> → <b>prima fermata: KASTRUP</b>. Circa 2 minuti.", map:"Kastrup St København metro"},
+  {t:"13:45", h:"Qualcosa al volo, con la valigia dietro", key:1,
+   b:"Il check-in è alle 15: hai un’ora e un quarto e non puoi ancora entrare. Prima cosa, mangia. In <b>aeroporto</b>, prima di scendere in metro, ci sono forni e banchi ed è l’opzione a rischio zero. A Kastrup, attorno alla stazione: <b>KonditorBager</b>, <b>Salat Take Away</b> in Saltværksvej, <b>Tårnby Pizza og Grill</b> in Tårnbyvej (lun–ven 11–22). E il <b>7-Eleven</b> in stazione fa panini e dolci sui 30–50 corone senza doverci parlare.",
+   b2:"<b>Guardati intorno anche sotto casa.</b> Kastrup è un quartiere vero, non un dormitorio: forni, grill, pizzerie al taglio. Quello che vedi aperto e pieno di gente del posto va bene — non serve che sia in questa lista. Quella completa, <b>Burger 161</b> compreso, è nella scheda <b>Cibo</b>.",
+   badge:["warn","posti trovati sugli elenchi danesi, non su fonte ufficiale: guarda l’insegna e gli orari sul posto"], map:"Saltværksvej Kastrup"},
+  {t:"14:05", h:"Kastrup Søbad — «la lumaca»", v:8, key:1,
+   b:"Un anello di legno che entra nel mare, White Arkitekter 2005, con il trampolino a cinque metri in fondo al pontile. Davanti hai Saltholm e, in fondo, la Svezia. È il primo assaggio di Danimarca migliore di Nyhavn, ed è pieno di gente di qui e di nessun turista.",
+   b2:"<b>Gratis, aperta tutto l’anno</b>, spogliatoi e docce aperti d’estate. È su Amager Strandvej, in fondo. Se hai la valigia non è un problema: è lungomare piatto e asfaltato.",
+   warn:"<b>Controlla il percorso su Maps prima di incamminarti.</b> Sono circa 1,5 km dalla fermata Kastrup, ma con la valigia venti minuti di troppo si sentono. Se ti sembra lunga, <b>Femøren</b> è una fermata più avanti ed è più vicina.",
+   price:"gratis", badge:["warn","gratis e sempre aperta, verificato; la distanza a piedi controllala su Maps"], src:"https://www.visitcopenhagen.com/copenhagen/planning/kastrup-sea-bath-gdk412208", map:"Kastrup Søbad"},
+  {t:"15:00", h:"Check-in", key:1,
+   b:"Disfa la valigia, metti la carta d’identità nel portafoglio — martedì ti serve in tasca, non in borsa.",
+   warn:"<b>L’orario dell’host è le 15:00</b>, non prima. Se stasera gli scrivi e ti lascia posare i bagagli verso le 13:45, tutto il pomeriggio si allarga: la lumaca la fai leggero e la spesa la anticipi. È una richiesta normale, chiedila.",
+   badge:["warn","conferma l’ora esatta con l’host"]},
+  {t:"15:20", h:"Spesa a Kastrup", key:1,
    b:"È la spesa che regge tutta la settimana: colazioni, pranzi al sacco, cene a casa. Rugbrød, burro salato, aringa marinata, koldskål con i kammerjunker, frutta, caffè. Netto, Rema 1000 e Lidl sono tutti su Amager, il Rema 1000 di Kastrup è in Præstefælledvej.",
    warn:"Il sacchetto <b>si paga</b> e te lo chiedono (<i>«pose?»</i>): portati una borsa da casa e la domanda non arriva nemmeno. E le bottiglie hanno la cauzione, il <i>pant</i>, che riprendi dalla macchina all’ingresso del supermercato — dettagli nella scheda Cibo.",
+   b2:"<b>Cosa metterci dentro sta nella scheda Cibo</b>, blocco «Il carrello del lunedì»: la lista con il nome danese di ogni cosa, i prezzi indicativi, e come si monta un <i>madpakke</i> — il pranzo al sacco che sulla settimana ti fa risparmiare 200–400 corone.",
    badge:["warn","orari da confermare sul posto"], map:"Rema 1000 Præstefælledvej Kastrup"},
   {t:"16:00", h:"Verso il centro", hop:"<b>M2</b> dir. <b>Vanløse</b> → scendi a <b>Kongens Nytorv</b>."},
   {t:"16:20", h:"Nyhavn", v:8, key:1, b:"Le case colorate del Seicento, a duecento metri dall’uscita della metro. Poi cinque minuti a nord fino a <b>Ofelia Plads</b> <span class='v'>7</span>, il molo con le scale che scendono in acqua: è dove si siedono i danesi dopo il lavoro, e non c’è un turista.", price:"gratis", badge:["ok","sempre aperto"], map:"Nyhavn, København"},
@@ -341,6 +359,7 @@ const DAYS = [
    badge:["ok","verificato su marmorkirken.dk"], src:"https://www.marmorkirken.dk/", map:"Amalienborg Slotsplads"},
   {t:"18:15", h:"Cena: Killer Kebab", v:8,
    b:"Borgergade 18, a cinque minuti da Amalienborg. Kebab marinato in casa e falafel dentro un pane piatto a lievito madre sfornato lì. Da asporto: si mangia camminando verso Kastellet.",
+   b2:"<b>Sì, ti chiedono cosa metterci dentro — tre domande, e le risposte sono corte.</b> <b>1</b> Il pane: <i>durum</i> (piadina arrotolata, la più comoda camminando), <i>pita</i> (tasca, più abbondante) o <i>box</i> (vaschetta con patate). Di’ <b>«durum»</b>. <b>2</b> La verdura: chiedono <i>«alt i?»</i>, cioè «dentro tutto?». Di’ <b>«yes, everything»</b> e arriva insalata, pomodoro, cipolla, cavolo. <b>3</b> La salsa: <i>hvidløg</i> è aglio, <i>stærk</i> è piccante, <i>mild</i> è dolce. Se non sai, <b>«garlic, mild»</b> e non sbagli.",
    price:"90–110 DKK", badge:["ok","lun–gio 11:30–20:30"], map:"Killer Kebab Borgergade 18"},
   {t:"19:15", h:"Kastellet", v:8, b:"La fortezza a stella del 1662, ancora militare, coi bastioni erbosi e il mulino. Si cammina sul perimetro al tramonto. Poi <b>Gefionspringvandet</b> <span class='v'>7</span> e, se ti va, la <b>Sirenetta</b> <span class='v'>5</span> — piccola e sempre circondata, ma è lì.", price:"gratis", badge:["ok","sempre aperto"], map:"Kastellet København"},
   {t:"20:26", h:"Tramonto", b:"Oggi il sole va giù alle 20:26. Dai bastioni di Kastellet guarda verso l’Øresund: domani sei dall’altra parte.", badge:["ok","effemeridi verificate"]},
@@ -609,10 +628,15 @@ const DAYS = [
    b2:"Da Schønnemann un pranzo costa 400–500 corone: qui assaggi dieci cucine con 150–250. <b>Ingresso gratuito, i gettoni si comprano sul posto.</b>",
    warn:"PORTATE PIATTO E POSATE DA CASA. Non è una dimenticanza degli organizzatori: è parte del concetto, e se non li avete mangiate con le mani.",
    price:"150–250 DKK", badge:["ok","evento e orari verificati"], map:"Flæsketorvet 45 København"},
-  {t:"15:05", h:"Strøget, il centro e lo shopping", v:8, key:1,
+  {t:"15:05", h:"Istedgade — l’usato, se vi va", v:7,
+   b:"Da Flæsketorvet verso il centro si può passare per <b>Istedgade</b> invece che per la via diretta: è la strada dell’usato di Vesterbro, e non costa un minuto in più perché è la stessa direzione. Il <b>Røde Kors Genbrug</b> è quello che le guide danno come miglior rapporto qualità/prezzo della via; le boutique vintage accanto sono parecchio più care.",
+   b2:"<b>Quanto costa:</b> nei genbrug (i negozi caritatevoli) si sta sui <b>20–100 corone</b>, cioè 3–13 euro. Le boutique vintage vere stanno sui <b>100–500</b>, e l’usato firmato in conto vendita parte da 500 e arriva a 2.000. Col budget di questo viaggio, genbrug.",
+   warn:"<b>O questa o Strøget fatta bene, non tutt’e due.</b> Alle 17 chiude tutto e alle 16:45 dovete essere in aeroporto: se vi fermate qui, Strøget diventa una camminata veloce. Scegliete prima di partire da Kødbyen.",
+   price:"20–100 DKK nei genbrug", badge:["warn","negozi e prezzi da guide, non da fonte ufficiale: orari da controllare sulla porta"], map:"Istedgade København"},
+  {t:"15:30", h:"Strøget, il centro e lo shopping", v:8, key:1,
    b:"Da Flæsketorvet a <b>Rådhuspladsen</b> sono dieci minuti a piedi, e lì comincia lo <b>Strøget</b>: <b>1,1 km di strada pedonale</b> fino a Kongens Nytorv. È la spina dorsale della città vecchia — Gammeltorv con la fontana del 1610, Amagertorv, la Rundetårn che spunta a destra su Købmagergade — e insieme è la via dello shopping.",
    b2:"È il pezzo di Copenaghen che tua sorella si aspetta di vedere, e finora nel piano non c'era. Passandoci a piedi verso la fine, ci arrivate senza spostare niente.",
-   warn:"Il sabato i negozi chiudono alle 17:00. Uscite dallo smørrebrød alle 15 e siete larghi; uscite alle 16 e fate solo la passeggiata.",
+   warn:"Il sabato i negozi chiudono alle 17:00, e alle 16:45 dovete essere in aeroporto: qui avete un’ora e mezza scarsa. Se avete fatto Istedgade, questa diventa la passeggiata e non lo shopping.",
    price:"gratis", badge:["ok","sab 10–17, verificato"], map:"Strøget København"},
   {t:"16:20", h:"Kongens Nytorv e Nyhavn di giorno", v:8,
    b:"Lo Strøget finisce dentro <b>Kongens Nytorv</b>, e Nyhavn è a duecento metri. Per lei è la chiusura giusta: l'ha vista illuminata giovedì sera, adesso la vede con la luce. Venti minuti sul molo e poi si scende in metro, che parte da qui.",
@@ -878,6 +902,49 @@ function renderCibo(){
   </table></div>
 
   <div class="card" style="margin-bottom:14px">
+    <p class="eyebrow">Sotto casa, a Kastrup</p>
+    <h3 class="sec-h" style="font-size:1.08rem">Il quartiere, non solo l’aeroporto</h3>
+    <p style="font-size:.9rem;color:var(--ink-2);margin:10px 0 0">
+      Kastrup è un quartiere vero e ci sono più posti di quelli che si trovano da qui. Questi
+      valgono la pena di saperli prima; il resto lo scopri camminando.</p>
+    <div class="tw" style="margin:10px 0 0"><table>
+      <thead><tr><th>Posto</th><th>Cosa</th><th>Prezzo</th></tr></thead>
+      <tbody>
+        <tr><td><b>Burger 161</b><br>su Kastrupvej</td><td>Burger di manzo da 180 g. <b>4,8 su oltre 670 recensioni</b>, il posto è piccolo e a tema pugilato</td><td><b>109</b> la sola<br>fino a 169 il menù</td></tr>
+        <tr><td><b>KonditorBager</b></td><td>Forno di catena: pane, dolci, panini. La colazione e il volo</td><td>25–50</td></tr>
+        <tr><td><b>Salat Take Away</b><br>Saltværksvej</td><td>Insalate e pizza d’asporto</td><td>60–100</td></tr>
+        <tr><td><b>Tårnby Pizza og Grill</b><br>Tårnbyvej</td><td>Pizza e grill · lun–ven 11–22</td><td>70–110</td></tr>
+        <tr><td><b>7-Eleven</b><br>in stazione</td><td>Panini e dolci, aperto sempre</td><td>30–50</td></tr>
+      </tbody>
+    </table></div>
+    <div class="call note" style="margin:14px 0 0"><h4>Burger 161: sì, ma sappi che</h4>
+      <p>109 corone sono <b>14 euro e mezzo per un panino</b>, ed è il doppio di tutto il resto della
+      giornata. Venerdì hai già <b>il duello dei due burger</b> a Christianshavn, che è la stessa
+      spesa fatta meglio. Se lo fai qui, fallo <b>invece</b> di quello, non in più.</p>
+    </div>
+    <p style="font-size:.9rem;color:var(--ink-2);margin:14px 0 0">
+      <b>Il metodo vale più della lista.</b> Quello che trovi aperto e pieno di gente del posto va
+      bene. Guardi la vetrina, indichi, dici <b>«take away»</b>. Non serve che sia in questa tabella.</p>
+
+    <h3 class="sec-h" style="font-size:1.08rem;margin-top:18px">Dove mangiartelo, che è il punto</h3>
+    <p style="font-size:.9rem;color:var(--ink-2);margin:10px 0 0">
+      <b>Kastrup Søbad</b> — il pontile di legno, seduto sul bordo con i piedi verso il mare e la
+      Svezia davanti. È il posto migliore di tutta la zona e non costa niente.
+      <b>Kastrup Havn</b>, il porticciolo, e <b>Amager Strandpark</b>, la spiaggia lunga, sono le
+      altre due. Tre sere su sei torni tardi: quella libera, cena comprata sotto casa e mangiata lì.</p>
+
+    <div class="call do" style="margin:14px 0 0"><h4>Farsi consegnare il cibo in giro: lascia perdere</h4>
+      <p><b>Wolt e Just Eat consegnano a un indirizzo, non «dove sei adesso».</b> Una panchina al
+      parco non è un indirizzo, e il fattorino se non ti trova ti telefona — in inglese, con te che
+      cammini.</p>
+      <p>E i conti non tornano: su Wolt il <b>minimo d’ordine è 100 corone</b> solo per i ristoranti,
+      più il costo di consegna, e l’abbonamento che lo azzera costa 59 corone al mese. Il banco più
+      la panchina costa meno, e non devi rispondere a nessuno.</p>
+    </div>
+    <div class="meta"><span class="b warn">posti e prezzi da recensioni ed elenchi danesi, non da fonte ufficiale: controlla insegna e orari sul posto</span></div>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
     <p class="eyebrow">Al banco, senza dover parlare</p>
     <h3 class="sec-h" style="font-size:1.08rem">Si ordina indicando</h3>
     <p style="font-size:.9rem;color:var(--ink-2);margin:10px 0 0">
@@ -894,6 +961,22 @@ function renderCibo(){
       <b>«take away»</b> (capiscono in Danimarca e in Svezia), e il pagamento, a cui non si risponde
       affatto: avvicini la carta e basta.</p>
     </div>
+
+    <h3 class="sec-h" style="font-size:1.08rem;margin-top:18px">Il kebab: le tre domande</h3>
+    <p style="font-size:.9rem;color:var(--ink-2);margin:10px 0 0">
+      È l’unico banco dove ti fanno scegliere davvero. Ma sono sempre le stesse tre domande, in
+      quest’ordine, e le risposte stanno in due parole.</p>
+    <div class="tw" style="margin:10px 0 0"><table>
+      <thead><tr><th>Ti chiedono</th><th>Vuol dire</th><th>Rispondi</th></tr></thead>
+      <tbody>
+        <tr><td><i>durum, pita eller box?</i></td><td>piadina arrotolata, tasca, o vaschetta con patate</td><td><b>«durum»</b> — è quello che si mangia camminando</td></tr>
+        <tr><td><i>alt i?</i></td><td>«dentro tutto?» — insalata, pomodoro, cipolla, cavolo</td><td><b>«yes, everything»</b></td></tr>
+        <tr><td><i>hvilken sovs?</i></td><td>quale salsa: <i>hvidløg</i> aglio · <i>stærk</i> piccante · <i>mild</i> dolce</td><td><b>«garlic, mild»</b></td></tr>
+      </tbody>
+    </table></div>
+    <p style="font-size:.9rem;color:var(--ink-2);margin:12px 0 0">
+      Se ti chiedono anche la carne: <i>kylling</i> è pollo, <i>oksekød</i> è manzo, <i>blandet</i> è
+      misto. Vale lo stesso in ogni grill danese, non solo da Killer Kebab.</p>
 
     <h3 class="sec-h" style="font-size:1.08rem;margin-top:18px">Te lo chiedono? E cambia il prezzo?</h3>
     <div class="tw" style="margin:10px 0 0"><table>
@@ -925,6 +1008,74 @@ function renderCibo(){
       </tbody>
     </table></div>
     <div class="meta"><span class="b warn">le frasi al banco nessuna fonte ufficiale le certifica</span></div>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
+    <p class="eyebrow">Il carrello del lunedì</p>
+    <h3 class="sec-h" style="font-size:1.08rem">Cosa comprare, con il nome che c’è sullo scaffale</h3>
+    <p style="font-size:.9rem;color:var(--ink-2);margin:10px 0 0">
+      La colonna in corsivo è <b>il nome danese</b>: cerca quello sulla confezione e non devi chiedere
+      niente a nessuno. I prezzi sono indicativi da discount — <b>Netto, Lidl, Rema 1000</b> — e vanno
+      guardati sullo scaffale.</p>
+
+    <h4 style="font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:16px 0 0">Colazione</h4>
+    <div class="tw" style="margin:8px 0 0"><table>
+      <thead><tr><th>Cosa</th><th>Sullo scaffale</th><th>DKK</th><th>A che serve</th></tr></thead>
+      <tbody>
+        <tr><td><b>Pane di segale scuro</b></td><td><i>rugbrød</i></td><td class="num">15–25</td><td>La base di tutto: colazione, pranzo al sacco, cena</td></tr>
+        <tr><td><b>Burro salato</b></td><td><i>smør, saltet</i></td><td class="num">20–30</td><td>Sul rugbrød ci va sempre, e salato è la versione giusta</td></tr>
+        <tr><td><b>Skyr o yogurt bianco</b></td><td><i>skyr</i></td><td class="num">12–20</td><td>Sazia molto e costa poco. Con la frutta è colazione fatta</td></tr>
+        <tr><td><b>Fiocchi d’avena</b></td><td><i>havregryn</i></td><td class="num">10–15</td><td>Il pacco costa niente e dura tutta la settimana</td></tr>
+        <tr><td><b>Caffè</b></td><td><i>kaffe</i></td><td class="num">30–50</td><td>Al bar è 35–45 a tazza: farlo a casa si ripaga il primo giorno</td></tr>
+      </tbody>
+    </table></div>
+
+    <h4 style="font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:18px 0 0">Il companatico — in danese <i>pålæg</i>, ed è una parola che ti serve</h4>
+    <div class="tw" style="margin:8px 0 0"><table>
+      <thead><tr><th>Cosa</th><th>Sullo scaffale</th><th>DKK</th><th>A che serve</th></tr></thead>
+      <tbody>
+        <tr><td><b>Paté di fegato</b></td><td><i>leverpostej</i></td><td class="num">10–15</td><td>Il più danese e il più economico di tutti. Va caldo o freddo</td></tr>
+        <tr><td><b>Sgombro al pomodoro</b></td><td><i>makrel i tomat</i></td><td class="num">12–18</td><td>In scatola. Proteine a due euro, ed è un classico vero</td></tr>
+        <tr><td><b>Formaggio a fette</b></td><td><i>ost · danbo, havarti</i></td><td class="num">25–40</td><td>Il pranzo più veloce da montare</td></tr>
+        <tr><td><b>Prosciutto cotto</b></td><td><i>skinke</i></td><td class="num">20–30</td><td>Se il resto ti sembra troppo esotico</td></tr>
+        <tr><td><b>Aringa marinata</b></td><td><i>marineret sild</i></td><td class="num">25–35</td><td>In vasetto. È il sapore che ricorderai</td></tr>
+        <tr><td><b>Salsa danese</b></td><td><i>remoulade</i></td><td class="num">15–20</td><td>Va su tutto e trasforma due fette di pane in un pranzo</td></tr>
+      </tbody>
+    </table></div>
+
+    <h4 style="font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:18px 0 0">Da mettere sopra, e da portarsi dietro</h4>
+    <div class="tw" style="margin:8px 0 0"><table>
+      <thead><tr><th>Cosa</th><th>Sullo scaffale</th><th>DKK</th><th>A che serve</th></tr></thead>
+      <tbody>
+        <tr><td><b>Cetriolo</b></td><td><i>agurk</i></td><td class="num">8–12</td><td>Sul leverpostej ci va sempre. Dura tutta la settimana</td></tr>
+        <tr><td><b>Pomodori · cipolla rossa</b></td><td><i>tomater · rødløg</i></td><td class="num">15–25</td><td>Sullo sgombro la cipolla rossa è d’obbligo</td></tr>
+        <tr><td><b>Banane e mele</b></td><td><i>bananer · æbler</i></td><td class="num">15–25 al kg</td><td>Lo spuntino che sta in tasca e non si schiaccia</td></tr>
+        <tr><td><b>Gallette di segale</b></td><td><i>knækbrød · rugkiks</i></td><td class="num">12–20</td><td>Non si sbriciolano nello zaino come il pane</td></tr>
+        <tr><td><b>Frutta secca</b></td><td><i>nødder</i></td><td class="num">25–40</td><td>Il sacchetto regge tre giorni di camminate</td></tr>
+        <tr><td><b>Latticello dolce freddo</b></td><td><i>koldskål + kammerjunker</i></td><td class="num">~25</td><td>Quello che i danesi mangiano davvero ad agosto</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="call do" style="margin:18px 0 0"><h4>Il pranzo al sacco danese si chiama <i>madpakke</i>, e si fa così</h4>
+      <p>Due fette di <b>rugbrød</b>, burro salato su tutt’e due, e sopra <b>una cosa sola</b> — non
+      si impila. Le tre combinazioni che funzionano:</p>
+      <p><b>1 ·</b> leverpostej + fette di cetriolo &nbsp;·&nbsp; <b>2 ·</b> makrel i tomat + cipolla
+      rossa &nbsp;·&nbsp; <b>3 ·</b> formaggio + remoulade</p>
+      <p>Si avvolge nella carta forno e sta in piedi nello zaino. <b>Non è un panino:</b> il pane
+      resta aperto e si mangia con le mani, oppure lo chiudi per portarlo.</p>
+      <p><b>Quanto ti fa risparmiare:</b> un madpakke fatto da te sta sui <b>15–20 corone</b>. Un
+      pranzo a Torvehallerne è 70–150. Su tre giorni sono <b>200–400 corone</b>, cioè 27–54 euro —
+      un museo e una cena.</p>
+    </div>
+
+    <div class="call note" style="margin:14px 0 0"><h4>Le cinque cose che tagliano il conto</h4>
+      <p><b>1 ·</b> <b>Netto, Lidl e Rema 1000</b> sono i discount. Føtex costa di più, Irma molto di più.</p>
+      <p><b>2 ·</b> Cerca i cartellini gialli: <b><i>tilbud</i></b> vuol dire offerta. È l’unica parola danese che ti serve al supermercato.</p>
+      <p><b>3 ·</b> Le marche del supermercato costano molto meno delle marche note, e per rugbrød, burro e skyr non cambia niente.</p>
+      <p><b>4 ·</b> <b>Too Good To Go</b> per le colazioni: i forni svendono il sacco a fine giornata a un terzo del prezzo.</p>
+      <p><b>5 ·</b> L’acqua dal rubinetto, e il <b>pant</b> delle bottiglie riportato indietro.</p>
+    </div>
+    <div class="meta"><span class="b warn">prezzi indicativi da discount danese: guarda il cartellino, non questa tabella</span></div>
   </div>
 
   <div class="card" style="margin-bottom:14px">
@@ -972,6 +1123,109 @@ function renderCibo(){
     <p><b>BUKA</b> e <b>Apotek 57</b> sono a Copenaghen ed esistono davvero. <b>Örum invece è a Malmö</b>, non in Danimarca — Citadellsvägen 23, ed è aperta proprio il martedì, sulla strada che fai già. Il reel mescolava i due paesi.</p></div>`;
 }
 
+/* -------- PARLARE -------- */
+function renderParlare(){
+  document.getElementById("p-parlare").innerHTML = `
+  <p class="eyebrow">Quello che ti diranno, e cosa rispondere</p>
+  <h2 class="sec-h">Parlare</h2>
+  <p class="lede">Nessuno ti parlerà danese. In Danimarca e in Svezia l’inglese lo sanno tutti e lo sanno bene, e appena sentono l’accento passano all’inglese da soli. Quello che serve a te sta tutto qui sotto, ed è corto apposta.</p>
+
+  <div class="call do" style="margin:16px 0 0"><h4>Le due frasi che aprono tutto</h4>
+    <p><b>«Sorry, my English is very bad. Slowly, please.»</b><br>
+    Questa la usi quando <b>vuoi</b> capire: rallentano, semplificano, e spesso tirano fuori il telefono per farti vedere. Funziona molto meglio del silenzio.</p>
+    <p><b>«Sorry, I don’t speak English. I’m Italian.»</b><br>
+    Questa la usi quando <b>non</b> vuoi la conversazione: chi ti ferma per strada, chi vende qualcosa. Chiude e basta.</p>
+  </div>
+
+  <div class="card" style="margin:18px 0 0">
+    <p class="eyebrow">Treni, metro, controlli</p>
+    <h3 class="sec-h" style="font-size:1.08rem">In viaggio</h3>
+    <div class="tw" style="margin:10px 0 0"><table>
+      <thead><tr><th>Ti dicono</th><th>Vuol dire</th><th>Rispondi</th></tr></thead>
+      <tbody>
+        <tr><td><i>Tickets, please</i></td><td>il controllore, in Danimarca</td><td><b>Non dici niente: tiri fuori il biglietto di carta e glielo mostri</b></td></tr>
+        <tr><td><i>Your ticket?</i></td><td>il controllore, in Svezia</td><td><b>«It’s in the app» e giri lo schermo verso di lui</b></td></tr>
+        <tr><td><i>(silenzio, in divisa)</i></td><td>la polizia a Hyllie, martedì</td><td><b>Mostri la carta d’identità. Non si dice niente, e non riguarda te: controllano tutti</b></td></tr>
+        <tr><td><i>Where are you going?</i></td><td>polizia o controllore</td><td><b>«Lund.» Martedì è la risposta vera</b></td></tr>
+        <tr><td><i>(la macchinetta non funziona)</i></td><td>capita</td><td><b>Vai al 7-Eleven in stazione: «City Pass Small, one hundred twenty hours, please»</b></td></tr>
+        <tr><td><i>(sul bus)</i></td><td>in Danimarca si sale davanti</td><td><b>Mostri il biglietto all’autista passando. Un cenno e basta</b></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card" style="margin:18px 0 0">
+    <p class="eyebrow">Biglietterie, ingressi, guardaroba</p>
+    <h3 class="sec-h" style="font-size:1.08rem">Ai musei</h3>
+    <div class="tw" style="margin:10px 0 0"><table>
+      <thead><tr><th>Ti dicono</th><th>Vuol dire</th><th>Rispondi</th></tr></thead>
+      <tbody>
+        <tr><td><i>One adult?</i></td><td>quanti biglietti</td><td><b>«One, please.» Da giovedì in poi: «Two, please»</b></td></tr>
+        <tr><td><i>Do you have a ticket?</i></td><td>l’hai già comprato online?</td><td><b>Mostri il QR sul telefono. Kronborg e Louisiana funzionano così</b></td></tr>
+        <tr><td><i>That’s one hundred fifty kroner</i></td><td>il totale</td><td><b>Non rispondi: avvicini la carta al terminale</b></td></tr>
+        <tr><td><i>Student?</i></td><td>hai lo sconto studenti?</td><td><b>Solo se hai un tesserino da mostrare. Altrimenti «No»</b></td></tr>
+        <tr><td><i>You can leave your bag here</i></td><td>il guardaroba, spesso obbligatorio per gli zaini</td><td><b>«Thank you» e lo lasci. È gratis e sorvegliato</b></td></tr>
+        <tr><td><i>(Glyptotek, mercoledì)</i></td><td>vuoi essere sicuro che sia gratis</td><td><b>«It’s free today, right?» — la risposta è sì, è l’ultimo mercoledì del mese</b></td></tr>
+        <tr><td><i>(la guglia, venerdì)</i></td><td>col vento la chiudono</td><td><b>«Is the tower open today?» prima di pagare, non dopo</b></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card" style="margin:18px 0 0">
+    <p class="eyebrow">Banchi, forni, casse</p>
+    <h3 class="sec-h" style="font-size:1.08rem">Quando mangi o compri</h3>
+    <div class="tw" style="margin:10px 0 0"><table>
+      <thead><tr><th>Ti dicono</th><th>Vuol dire</th><th>Rispondi</th></tr></thead>
+      <tbody>
+        <tr><td><i>Anything else? · Var der andet?</i></td><td>altro?</td><td><b>«No, thank you»</b></td></tr>
+        <tr><td><i>Eat in or take away?</i></td><td>qui o d’asporto</td><td><b>«Take away.» In Svezia ti fa anche pagare meno</b></td></tr>
+        <tr><td><i>Do you want a bag? · Pose?</i></td><td>il sacchetto, che si paga</td><td><b>«No, thank you» — hai la tua borsa</b></td></tr>
+        <tr><td><i>Durum, pita eller box?</i></td><td>al kebab: piadina, tasca o vaschetta</td><td><b>«Durum»</b></td></tr>
+        <tr><td><i>Alt i?</i></td><td>al kebab: dentro tutto?</td><td><b>«Yes, everything»</b></td></tr>
+        <tr><td><i>Hvilken sovs?</i></td><td>quale salsa</td><td><b>«Garlic, mild»</b></td></tr>
+        <tr><td><i>(alla cassa automatica, si blocca)</i></td><td>hai messo dell’alcol: è la verifica dell’età</td><td><b>Non hai sbagliato niente. Aspetti, arriva un commesso e sblocca</b></td></tr>
+      </tbody>
+    </table></div>
+    <p style="font-size:.9rem;color:var(--ink-2);margin:12px 0 0">
+      Il dettaglio lungo — chi ha i tavoli, dove si paga senza aprire bocca, le aliquote — sta nella
+      scheda <b>Cibo</b>.</p>
+  </div>
+
+  <div class="card" style="margin:18px 0 0">
+    <p class="eyebrow">Quando qualcosa va storto</p>
+    <h3 class="sec-h" style="font-size:1.08rem">Imprevisti</h3>
+    <div class="tw" style="margin:10px 0 0"><table>
+      <thead><tr><th>Ti serve</th><th>Dici</th></tr></thead>
+      <tbody>
+        <tr><td>Non hai capito</td><td><b>«Sorry? Slowly, please.»</b> — meglio di annuire a caso</td></tr>
+        <tr><td>Chiedere la strada</td><td><b>«Excuse me, where is Nyhavn?»</b> — ma è più veloce mostrare il telefono con la mappa aperta e il dito sul posto</td></tr>
+        <tr><td>Il bagno</td><td><b>«Where is the toilet?»</b> — in danese si scrive <i>toilet</i> uguale, lo riconosci sulle porte</td></tr>
+        <tr><td>Deposito bagagli, sabato</td><td><b>«Luggage storage, please. Until five o’clock.»</b></td></tr>
+        <tr><td>Il wi-fi</td><td><b>«What’s the wi-fi password?»</b></td></tr>
+        <tr><td>Ti parlano in danese</td><td><b>«Sorry, I’m Italian. English, please?»</b> — passano subito</td></tr>
+        <tr><td>Ti sei perso davvero</td><td>Scheda <b>SOS</b>: c’è il riquadro con l’indirizzo di casa da mostrare senza dire niente</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card" style="margin:18px 0 0">
+    <p class="eyebrow">Le uniche che senti davvero</p>
+    <h3 class="sec-h" style="font-size:1.08rem">Otto parole danesi</h3>
+    <div class="tw" style="margin:10px 0 0"><table>
+      <thead><tr><th>Parola</th><th>Si legge</th><th>Vuol dire</th></tr></thead>
+      <tbody>
+        <tr><td><b>hej</b></td><td>«hai»</td><td>ciao — si dice entrando <i>e</i> uscendo</td></tr>
+        <tr><td><b>tak</b></td><td>«tag»</td><td>grazie. L’unica che vale la pena imparare</td></tr>
+        <tr><td><b>undskyld</b></td><td>«onskül»</td><td>scusi</td></tr>
+        <tr><td><b>ja / nej</b></td><td>«ia» / «nai»</td><td>sì / no</td></tr>
+        <tr><td><b>pose</b></td><td>«pose»</td><td>sacchetto</td></tr>
+        <tr><td><b>kort</b></td><td>«kort»</td><td>carta di pagamento</td></tr>
+        <tr><td><b>kvittering</b></td><td>«kvitterìng»</td><td>scontrino</td></tr>
+        <tr><td><b>pant</b></td><td>«pant»</td><td>la cauzione sulle bottiglie</td></tr>
+      </tbody>
+    </table></div>
+    <div class="meta"><span class="b warn">pronunce approssimate, e le frasi al banco nessuna fonte ufficiale le certifica</span></div>
+  </div>`;
+}
 /* -------- SOS -------- */
 function renderSOS(){
   document.getElementById("p-sos").innerHTML = `
@@ -1164,7 +1418,7 @@ function schermataEmergenza(err){
 }
 
 try {
-  renderOggi(); renderGiorni(); renderBiglietti(); renderCibo(); renderSOS();
+  renderOggi(); renderGiorni(); renderBiglietti(); renderCibo(); renderParlare(); renderSOS();
 } catch (err) {
   schermataEmergenza(err);
 }

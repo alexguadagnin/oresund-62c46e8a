@@ -166,6 +166,38 @@ Verifica del **21 agosto 2026** su fonti ufficiali. Le correzioni trovate allora
   sempre, perché sono obbligati a battere due aliquote. Sta nella scheda Cibo, blocco «Al banco».
 - **Kystbanen:** nessun lavoro annunciato per la settimana 24–29 agosto, ma **non confermabile da
   remoto** — l'API 1.0 di Rejseplanen è chiusa. Va guardato su Rejseplanen la mattina stessa.
+- **Il check-in dell'Airbnb è alle 15:00**, non alle 13:50 come diceva il piano. Lunedì è stato
+  riscritto: atterraggio 12:55 → City Pass → Kastrup 13:35 → mangiare 13:45 → **Kastrup Søbad**
+  14:05 → check-in 15:00 → spesa 15:20 → centro 16:00. **Non rimettere il check-in prima delle 15.**
+- **Il gate sugli indirizzi blocca anche i locali pubblici.** La regex `...vej <numero>` non sa
+  distinguere casa da un negozio: scrivi la via **senza civico** e lascia il resto al campo `map:`.
+  Non allargare la regex per farci passare un indirizzo.
+
+### La scheda «Parlare»
+
+Sesta scheda, `id="p-parlare"`, render in `renderParlare()`. Contiene gli scambi che il viaggiatore
+si aspetta di sentire — trasporti, musei, banchi, imprevisti — nel formato **ti dicono / vuol dire /
+rispondi**, piu' otto parole danesi con la pronuncia approssimata.
+
+- **Il contenuto e' tutto 🟡 e lo dichiara in fondo**: nessuna fonte ufficiale certifica come parla
+  un commesso. Non promuoverlo a verde.
+- **In inglese, non in danese.** In Danimarca e Svezia l'inglese lo sanno tutti: le frasi da dare
+  sono inglesi e corte. Il danese serve solo a *riconoscere* cosa ti stanno chiedendo.
+- La barra delle schede e' `grid-template-columns:repeat(6,1fr)`. **Se ne aggiungi una settima**,
+  le etichette non ci stanno piu' a 320px: misura prima di aggiungere.
+- `verifica.py` controlla che la scheda esista.
+
+### La scheda Cibo, dopo l'aggiunta della spesa
+
+Quattro blocchi, in quest'ordine: **Sotto casa a Kastrup** (i locali del quartiere, Burger 161
+compreso, e il perche' la consegna a domicilio non conviene) · **Al banco** (come si ordina, il
+kebab, le aliquote) · **Il carrello del lunedi** (la lista della spesa con il nome danese di ogni
+prodotto, i prezzi indicativi e il *madpakke*) · **La spesa senza dover parlare** (le casse).
+
+- **I prezzi del carrello sono 🟡 e devono restarci.** Sono fasce da discount danese, non listini:
+  nessuno li puo' garantire da remoto e cambiano di settimana in settimana.
+- **La colonna in corsivo e' il nome danese sullo scaffale.** E' quella che rende la lista usabile
+  da chi non parla la lingua: se aggiungi una riga, mettici il nome danese o non serve a niente.
 
 ⚠️ **Domini che non rispondono a WebFetch** (403, 404 o pagine JavaScript vuote): `skanetrafiken.se`,
 `ft.dk`, `cph.dk`, `timeanddate.com`. Vanno letti con un browser.
