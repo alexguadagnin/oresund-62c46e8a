@@ -527,7 +527,8 @@ const DAYS = [
  stops:[
   {t:"10:15", h:"Colazione a casa, senza fretta",
    b:"Oggi la giornata è costruita al contrario: <b>due tappe sole</b>, e il treno che riempie il resto. Non c’è niente che apra o chiuda per cui devi correre — Kronborg resta aperto fino alle <b>18</b> e Louisiana fino alle <b>22</b>.",
-   b2:"Prepara il sacco per il pranzo mentre fai colazione: oggi vale doppio, perché a Helsingør si paga da posto turistico. E oggi è l’ultimo giorno che cammini da solo: stasera arriva tua sorella.",
+   b2:"Il pranzo di oggi è il sacco da casa, quindi <b>preparalo stasera</b>, non domattina di corsa: due panini di rugbrød, frutta, una bottiglia d’acqua. Se stasera vedi che il pane è finito, il Netto di Kastruplundgade è aperto — ma vacci <b>oggi</b>: domattina sarebbero 32 minuti a piedi e ti mangerebbero la partenza.",
+   warn:"Riempi la bottiglia al rubinetto prima di uscire. L’acqua del Nord è buona e in giro una bottiglietta costa 25–30 corone.",
    badge:["ok","nessun orario da rincorrere"]},
   {t:"10:40", h:"Macchinetta a Kastrup → City Pass Large 24 ore", key:1,
    b:"Oggi esci dalle zone 1–4: Helsingør e Humlebæk richiedono il Large. Cerca «City Pass», poi <b>Large</b>, poi <b>24 hours</b>, Adult × 1.",
@@ -540,15 +541,15 @@ const DAYS = [
    b:"Parte circa <b>ogni 20 minuti</b>: sul tabellone di Nørreport cerchi <b>Helsingør</b> e sali sul primo che c’è. <b>Non devi prendere un treno preciso</b> — se lo perdi, il prossimo è venti minuti dopo e non salta niente.",
    b2:"Nessun bus sostitutivo previsto: i lavori Snekkersten–Helsingør erano le sere del 25 e 26. <b>Dai comunque un’occhiata a Rejseplanen prima di uscire</b>: è l’unica voce della giornata che nessuno può garantirti in anticipo.",
    badge:["warn","orario da leggere sul tabellone"]},
-  {t:"12:15", h:"Pranzo sul porto di Helsingør",
-   b:"Arrivi verso le 12:07 e mangi <b>prima</b> del castello, non dopo: così a Kronborg ci entri sazio e senza guardare l’ora. Il centro pedonale è fra la stazione e il castello — panetterie e chioschi, si compra e si mangia seduti sul molo, con la Svezia a quattro chilometri davanti.",
-   b2:"Col sacco da casa è anche meglio: panchine sul porto, nessuna coda, nessuno da cui farsi capire.",
-   price:"60–100 DKK", badge:["warn","da scegliere sul posto"]},
+  {t:"12:15", h:"Il sacco, sul porto di Helsingør",
+   b:"Arrivi verso le 12:07 e mangi <b>prima</b> del castello, non dopo: così a Kronborg ci entri sazio e senza guardare l’ora. Esci dalla stazione, gira verso l’acqua e siediti sul molo: panchine, la Svezia a quattro chilometri davanti, e il castello che si vede in fondo.",
+   b2:"<b>Non devi comprare niente e non devi parlare con nessuno.</b> È il pranzo che costa meno e funziona meglio di tutta la giornata: nessuna coda, nessun menù da decifrare, e ti siedi dove vuoi tu.",
+   price:"già pagato lunedì", badge:["ok","niente da comprare"]},
   {t:"13:00", h:"Kronborg", v:8, key:1,
    hop:"<b>Porto di Helsingør</b> → <b>15 minuti a piedi</b> lungo l’acqua, tutto piano. Nessun mezzo da prendere.",
    b:"Il castello di Amleto sullo stretto, patrimonio UNESCO: le casematte sotterranee con Holger Danske che dorme, gli appartamenti reali, il cortile rinascimentale. <b>Agosto: tutti i giorni 10:00–18:00.</b>",
    b2:"<b>Compra online:</b> 135 invece di 150, e salti la cassa. Il biglietto vale un anno, quindi puoi comprarlo adesso da casa senza rischi.",
-   warn:"Non devi vederlo tutto. Casematte, cortile e bastioni sono il castello; il resto è in più. Hai due ore e chiude alle 18: se ti siedi mezz’ora sui bastioni, va benissimo così.",
+   warn:"Non devi vederlo tutto. Casematte, cortile e bastioni sono il castello; il resto è in più. Hai due ore e chiude alle 18: se ti siedi mezz’ora sui bastioni, va benissimo così. Se ti avanza mezzo panino, i bastioni sono il posto migliore dove finirlo.",
    price:"150 DKK · 135 online", badge:["ok","prezzo e orari verificati"], src:"https://kronborg.dk/en/tickets/day-ticket", map:"Kronborg Slot Helsingør"},
   {t:"15:15", h:"A Humlebæk",
    hop:"<b>Kronborg</b> → <b>15 minuti a piedi</b> fino alla stazione → treno regionale dir. sud → <b>Humlebæk</b>. 11 min. Poi <b>10 minuti a piedi</b> fino al museo.",
@@ -581,10 +582,10 @@ const DAYS = [
   {t:"22:45", h:"A casa insieme", hop:"<b>Kongens Nytorv</b> → <b>M2</b> dir. <b>Lufthavnen</b> → <b>KASTRUP</b>. 13 min.", b:"Senza fretta: domani si comincia alle 9:45."}
  ],
  food:{
-  intro:"Giornata fuori città: qui il sacco dalla spesa di lunedì vale doppio, perché a Helsingør e Humlebæk si paga da posto turistico.",
+  intro:"Oggi non compri niente da mangiare: il pranzo è il sacco da casa e la cena si fa in cucina. Fuori città si paga da posto turistico, e oggi quel prezzo non lo paghi.",
   items:[
-   {n:"Il sacco da casa", w:"Panini di rugbrød, frutta, acqua. Il treno è di 52 minuti, il porto di Helsingør ha le panchine e Louisiana ha il prato delle sculture: oggi ci sono tre posti buoni dove tirarlo fuori.", p:"~0", u:"", h:"", badge:"flat"},
-   {n:"Helsingør, centro pedonale", w:"Fra la stazione e il castello. Panetterie e chioschi da asporto, si mangia sul porto — <b>prima</b> di salire a Kronborg, così il castello te lo godi senza fame.", p:"60–100", u:"DKK", h:"pranzo", badge:"warn", map:"Helsingør centro"},
+   {n:"Il sacco da casa", w:"<b>È il pranzo di oggi.</b> Due panini di rugbrød, frutta, la bottiglia riempita al rubinetto. Preparalo <b>la sera prima</b>. Tre posti buoni dove tirarlo fuori: il molo di Helsingør (il piano dice lì), i bastioni di Kronborg, il prato delle sculture di Louisiana.", p:"già pagato", u:"", h:"pranzo", badge:"flat"},
+   {n:"Helsingør, centro pedonale", w:"<b>Solo se il sacco non basta.</b> Fra la stazione e il castello: panetterie e chioschi da asporto. Non è nel piano di oggi — è la riserva se ti alzi tardi e parti senza.", p:"60–100", u:"DKK", h:"riserva", badge:"warn", map:"Helsingør centro"},
    {n:"Louisiana, il caffè", w:"Bella terrazza sul mare, ma prezzi da museo. Se hai il sacco, mangia sul prato delle sculture: è meglio e non costa niente.", p:"alto", u:"", h:"", badge:"flat"},
    {n:"Cena a casa", w:"Lei atterra e nessuno sa a che ora esce dal nastro. <b>Non prenotate niente stasera</b>: si mangia con quello che c'è, e poi si esce verso Nyhavn quando siete pronti. POPL è spostato a venerdì a pranzo, dove ci sta senza corse.", p:"~0", u:"", h:"", badge:"flat"}
   ]
