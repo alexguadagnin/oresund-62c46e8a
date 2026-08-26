@@ -149,6 +149,14 @@ Verifica del **21 agosto 2026** su fonti ufficiali. Le correzioni trovate allora
 - **Torre di Christiansborg: mar–sab 11–21**, gratis, senza prenotazione. Un aggregatore diceva
   «lun–ven 10–17» ed era falso: ha vinto il sito del Folketinget.
 - **Christiania:** Pusher Street smantellata dagli abitanti nell'aprile 2024, oggi **si fotografa**.
+- **Rundetårn: nel 2026 l'osservatorio è chiuso.** Cupola calata il 12 gennaio 2026 per rifare il
+  rame, telescopio smontato e spedito in Germania, **riapertura dell'osservatorio a ottobre 2026**.
+  La rampa e la sala della biblioteca restano aperte, ~60 DKK. **Non è mai gratis** — ma
+  **Trinitatis Kirke, la sua chiesa, sì**: porta autonoma su Landemærket, tutti i giorni 9:30–16:30
+  (domenica solo messa), nessun banco, nessun biglietto. È 🟡: il sito della parrocchia è bloccato.
+- **La torre di Christiansborg si sale in ascensore**, le scale non sono agibili. Quindi mettercela
+  **non viola** la regola «nessuna salita» del mercoledì. Aperta fino alle **21**: è l'unica cosa che
+  regge dopo le 17, e per questo nel piano di mercoledì sta **dopo** il Glyptotek, non prima.
 
 ### Ricontrollo del 23 agosto 2026, alla vigilia della partenza
 
@@ -172,6 +180,24 @@ Verifica del **21 agosto 2026** su fonti ufficiali. Le correzioni trovate allora
 - **Il gate sugli indirizzi blocca anche i locali pubblici.** La regex `...vej <numero>` non sa
   distinguere casa da un negozio: scrivi la via **senza civico** e lascia il resto al campo `map:`.
   Non allargare la regex per farci passare un indirizzo.
+
+### Come si spiegano i trasporti
+
+La spiegazione **generale** della metro sta in **un posto solo**, nella scheda Biglietti
+(«In metro: il binario si legge, non si indovina»). Nei riquadri `hop:` delle giornate va solo il
+tragitto concreto. Le tre cose che quel blocco deve continuare a dire, perché sono quelle che il
+viaggiatore sbaglia:
+
+1. **Il binario si sceglie cercando il nome della propria fermata nell'elenco sul cartello**, non
+   dal capolinea. È la regola che risolve tutto il resto.
+2. **La M3 è un anello di 17 fermate**: da tutti e due i binari si arriva ovunque, il binario
+   sbagliato è più lungo e basta. Non è un errore da rimediare scendendo.
+3. **Dove due linee dividono il binario si guarda il numero sul muso del treno.** I punti veri:
+   **Kongens Nytorv** (M1 Vestamager / **M2 Lufthavnen**, solo la M2 va a Kastrup) e
+   **København H** verso Nørrebro (**M3** / M4 Ny Ellebjerg). A **Gammel Strand** e **Kongens
+   Nytorv** verso København H vanno bene tutte e due.
+
+E ovunque: **non contare le fermate**, si legge il nome sul display.
 
 ### La scheda «Parlare»
 
@@ -232,6 +258,10 @@ forza `documentElement.style.width` alla larghezza da provare e si cercano gli e
 
 ⚠️ **Domini che non rispondono a WebFetch** (403, 404 o pagine JavaScript vuote): `skanetrafiken.se`,
 `ft.dk`, `cph.dk`, `timeanddate.com`. Vanno letti con un browser.
+
+⚠️ **Domini bloccati dal proxy della sessione cloud** (`EGRESS_BLOCKED`, non è un 403 del sito):
+`m.dk`, `rundetaarn.dk`, `trinitatiskirke.dk`, `kongeligeslotte.dk`. Di questi si riesce a leggere
+solo quello che affiora dalla ricerca: **restano 🟡**, non promuoverli a verde da una sessione cloud.
 
 ## Le voci 🟡 da ricontrollare in loco
 

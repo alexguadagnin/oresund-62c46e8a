@@ -439,7 +439,7 @@ const DAYS = [
 {
  id:"mer", iso:"2026-08-26", label:"Mer 26", sub:"Ritmo lento",
  title:"Il mercoledì gratis, senza scarpinate",
- lede:"Rifatto sulle gambe di ieri: metà chilometri, la metro e il bus dove prima si camminava, e nessuna salita. <b>I due musei gratis ci sono tutti e due</b> — chiudono alle 17, quindi il pomeriggio è pieno e la sera è vuota apposta. Le torri restano fuori dal conto: quella di Christiansborg la vedi da sotto uscendo da Thorvaldsens, e non costa niente. La Rundetårn dal basso è un cilindro di mattoni in mezzo a una via di negozi: se non sali non c’è niente da vedere, ed è 600 metri da Nørreport se proprio ti incuriosisce. <b>Se parti tardi</b>, l’unico orario che non si recupera è <b>le 17</b>: è quando chiudono i due musei, e il Glyptotek è gratis solo oggi. Si taglia in quest’ordine, dall’alto: Davids Samling (è gratis sempre, ci torni quando vuoi), poi la panchina a Kongens Have, poi Thorvaldsens. Il Glyptotek per ultimo.",
+ lede:"Rifatto sulle gambe di ieri: metà chilometri, la metro e il bus dove prima si camminava, e nessuna salita. <b>I due musei gratis ci sono tutti e due</b> — chiudono alle 17, quindi il pomeriggio è pieno e la sera è vuota apposta. <b>La torre di Christiansborg si sale, ed è gratis</b> — 106 metri, con l’ascensore, aperta fino alle 21: per questo sta <b>dopo</b> i musei, è l’unica cosa che alle 17 non chiude. La <b>Rundetårn</b> invece resta fuori: costa 60 corone e quest’anno l’osservatorio è chiuso per il restauro della cupola. Ma <b>la sua chiesa si visita gratis</b>, ha una porta sua, ed è sulla strada fra il pranzo e Slotsholmen: è entrata nel piano al posto di un cambio di metro. <b>Se parti tardi</b>, l’unico orario che non si recupera è <b>le 17</b>: è quando chiudono i due musei, e il Glyptotek è gratis solo oggi. Si taglia in quest’ordine, dall’alto: Davids Samling (è gratis sempre, ci torni quando vuoi), poi la panchina a Kongens Have, poi la chiesa, poi Thorvaldsens. Il Glyptotek per ultimo — e la torre, che chiude alle 21, non la tagli comunque.",
  sun:"20:21",
  stops:[
   {t:"09:45", h:"Verso Nørreport", hop:"<b>M2</b> dir. <b>Vanløse</b> → <b>Nørreport</b>. 25 minuti seduto."},
@@ -464,35 +464,48 @@ const DAYS = [
   {t:"13:35", h:"Pranzo a Torvehallerne", v:8,
    b:"Frederiksborggade 21, addosso a Nørreport: dal giardino sono 900 metri. Due padiglioni di vetro, smørrebrød da 68 corone al pezzo, tacos di Hija de Sanchez da ~56, il caffè di Coffee Collective. <b>Compra e portalo fuori</b>, c’è la piazza davanti.",
    price:"70–150 DKK", badge:["ok","lun–ven 10–19"], map:"Torvehallerne København"},
-  {t:"14:20", h:"Verso Christiansborg, tutto sotto terra", key:1,
-   hop:"<b>Nørreport</b> → <b>M1</b> o <b>M2</b> → <b>Kongens Nytorv</b> (una fermata) → cambi binario, <b>M3</b> dal binario dove la prima fermata scritta è <b>Gammel Strand</b> → scendi lì (una fermata). Poi 3 minuti a piedi.",
-   b:"⚠️ A <b>Nørreport la M3 non c’è</b>: ci passano solo M1 e M2. Per prendere la linea del centro storico si cambia a Kongens Nytorv, sullo stesso piano. Sono due fermate in tutto e ti risparmi un chilometro e mezzo di marciapiede.",
-   badge:["ok","M1/M2 a Nørreport, M3 da Kongens Nytorv"]},
-  {t:"14:35", h:"Thorvaldsens Museum", v:8, key:1,
+  {t:"14:10", h:"Trinitatis, la chiesa della Rundetårn", v:7, key:1,
+   hop:"<b>Torvehallerne</b> → a piedi per <b>Frederiksborggade</b> → <b>Kultorvet</b> → <b>Købmagergade</b>. 700 metri, 8 minuti, tutto piatto e pedonale.",
+   b:"La Rundetårn è nata come campanile-osservatorio di questa chiesa, e la chiesa <b>ha una porta sua</b>: sta sul fianco di <b>Landemærket</b>, quello che sbuca su Købmagergade davanti al Regensen. <b>Quella porta non passa dalla biglietteria della torre</b>: spingi ed entri, non c’è nessun banco e non si paga niente. Dentro: navata bianca e oro, l’altare del 1731, l’organo. Dieci minuti, tutto al piano.",
+   b2:"<b>Sulla torre, invece, non salgo.</b> Sono <b>~60 corone</b> — il sito ufficiale da qui non si apre, quindi il prezzo lo leggi alla cassa — e nel 2026 il telescopio è stato smontato e spedito in Germania per il restauro della cupola: <b>l’osservatorio riapre a ottobre</b>. Restano la rampa a spirale e la sala della biblioteca. Oggi la torre gratis e alta il triplo ce l’hai alle 17:20. <b>Il carretto DØP</b> degli hot dog biologici è esattamente sotto la torre, su Købmagergade: se il pranzo è stato leggero, è qui.",
+   price:"gratis", badge:["warn","orari da controllare sulla porta"],
+   src:"https://www.trinitatiskirke.dk/kontakt/aabningstider", map:"Trinitatis Kirke Landemærket København"},
+  {t:"14:35", h:"A Slotsholmen, a piedi", key:1,
+   hop:"<b>Købmagergade</b> in discesa → <b>Amagertorv</b> (la fontana) → <b>Højbro Plads</b>, la statua a cavallo → passi il <b>ponte</b> → sei a <b>Slotsholmen</b>. 800 metri, 10 minuti, tutto pedonale.",
+   b:"È il pezzo centrale dello <b>Strøget</b> e non ci si perde: da Købmagergade vai sempre dritto in discesa finché la via si apre in piazza, poi tieni il canale davanti a te e attraversa. Il museo giallo-ocra è appena passato il ponte.",
+   b2:"<b>Se le gambe non ci sono</b>, la metro c’è lo stesso, ma devi tornare indietro a Nørreport (600 m) e fare <b>M1 o M2 → Kongens Nytorv → M3 → Gammel Strand</b>, due fermate e un cambio. A conti fatti ci metti uguale: a piedi è più semplice e non devi leggere nessun cartello."},
+  {t:"14:50", h:"Thorvaldsens Museum", v:8, key:1,
    b:"Il museo giallo-ocra accanto a Christiansborg, tutto per un solo scultore. <b>Oggi è gratis</b> perché è l’ultimo mercoledì del mese: negli altri giorni sono 110 corone.",
    b2:"<b>Come si entra:</b> banco all’ingresso, «<b>One, please — it’s free today, right?</b>», ti danno il biglietto e passi. Niente prenotazione, niente coda vera. <b>Onesto:</b> Thorvaldsen ha lavorato <b>quarant’anni a Roma</b> e i marmi non ti diranno niente di nuovo. Quello che si viene a vedere è la scatola: pareti pompeiane rosse, azzurre, gialle, i mosaici per terra, e lui sepolto nel cortile in mezzo alle sue statue. <b>Mezz’ora</b>, tutto al piano, e se non ti prende esci senza rimpianti: non hai pagato niente.",
    price:"gratis oggi · 110 DKK", badge:["ok","regola comunale verificata"], src:"https://cphmuseum.kk.dk/en/news/change-regarding-free-admission-on-wednesdays", map:"Thorvaldsens Museum"},
-  {t:"15:15", h:"La torre di Christiansborg, da sotto", v:7,
-   b:"Esci da Thorvaldsens e ce l’hai davanti: <b>106 metri</b>, la più alta della città, e dal basso si vede tutta — di lassù, in fondo, la torre non la vedi, è l’unico posto da cui non si vede. <b>Slotsplads è aperta e gratis</b>, ci cammini dentro senza chiedere niente a nessuno.",
-   b2:"Se ti va di stare fermo cinque minuti, il <b>Ridebane</b>, il cortile lungo dei cavalli dietro al palazzo, è il posto più tranquillo del centro: colonnati, ciottoli, e quasi nessuno. Zero salite, zero biglietti.",
-   price:"gratis", badge:["ok","piazza pubblica, sempre aperta"], map:"Christiansborg Slotsplads"},
   {t:"15:35", h:"Al Glyptotek", hop:"<b>Gammel Strand</b> → <b>M3</b> dir. <b>Rådhuspladsen</b> → <b>København H</b>. Due fermate, poi 4 minuti a piedi lungo il Tivoli."},
   {t:"15:50", h:"Ny Carlsberg Glyptotek", v:9, key:1,
    b:"Rimesso, perché oggi è gratis e perché non è solo Egitto ed Etruria: c’è la <b>seconda collezione di Rodin al mondo</b>, i francesi (Gauguin, Degas, Van Gogh) e i danesi dell’Ottocento. E soprattutto c’è il <b>giardino d’inverno</b>: palme vere sotto una cupola di vetro, una fontana, e <b>sedie</b>. Con le gambe di oggi, quella sala da sola vale la tappa. <b>Una parte però è chiusa:</b> fino a ottobre stanno risistemando la scultura greca e romana e la sala centrale, quindi alcune sale sono chiuse e alcune opere non sono esposte. Rodin, i francesi e gli egizi restano.",
    b2:"<b>Come si entra:</b> passi comunque dal <b>banco della biglietteria</b>, dentro l’atrio. Anche nei giorni gratis il biglietto te lo danno lì, a zero corone: «<b>One, please — it’s free today, right?</b>». Aspettati <b>più gente del solito</b>, i mercoledì gratis sono i giorni pieni. Lo <b>zaino</b> va lasciato all’ingresso. <b>Non ti serve una moneta:</b> il guardaroba con gli attaccapanni è gratis e sorvegliato, e gli armadietti a moneta — dove ci sono — la moneta te la ridanno quando riapri. Se non ce l’hai, al banco: «<b>I don’t have a coin — can I leave my bag here?</b>» e te lo tengono loro. È un problema che risolvono dieci volte al giorno.",
    warn:"NON devi prenotare niente, e soprattutto <b>non comprare niente online</b>. Il sito vende <b>solo</b> biglietti a pagamento da 135–150 corone e il biglietto da 0 corone <b>non esiste</b>: se ne compri uno, sono soldi buttati in un giorno gratis. <b>Chiude alle 17</b>: entra entro le 16:15 e hai il tempo che serve.",
    price:"gratis oggi · 150 DKK", badge:["ok","gratis e orari verificati il 23 agosto"], src:"https://glyptoteket.com/visit/tickets", map:"Ny Carlsberg Glyptotek"},
-  {t:"17:10", h:"A Nørrebro", key:1,
-   hop:"<b>København H</b> → <b>M3</b> dal binario dove la prima fermata scritta è <b>Enghave Plads</b> → scendi a <b>Nørrebros Runddel</b>. 7 fermate, ~14 minuti.",
-   b:"La M3 è un anello: se prendi il binario sbagliato ci arrivi lo stesso, girando dall’altra parte — 10 fermate invece di 7. Non è un errore da rimediare, è solo più lungo. <b>Leggi la lista delle fermate sul cartello del binario, non il capolinea.</b>"},
-  {t:"17:40", h:"Assistens Kirkegård", v:8, key:1,
+  {t:"17:05", h:"Torni a Slotsholmen", key:1,
+   hop:"<b>København H</b> → <b>M3</b> o <b>M4</b>, binario dove nell’elenco c’è <b>Gammel Strand</b> → scendi a <b>Gammel Strand</b>. Due fermate, poi 3 minuti a piedi.",
+   b:"Qui M3 e M4 fanno lo stesso pezzo: <b>vanno bene tutte e due</b>, sali sulla prima che arriva."},
+  {t:"17:20", h:"La torre di Christiansborg, in cima", v:8, key:1,
+   b:"<b>106 metri, la più alta della città, e non costa niente.</b> È l’unica cosa aperta fino a <b>sera</b> nel giorno in cui tutto chiude alle 17: per questo sta qui e non nel pomeriggio. <b>Si sale in ascensore</b> — le scale non si possono usare nemmeno volendo — quindi la regola di oggi, zero salite, resta in piedi.",
+   b2:"<b>Come si entra:</b> l’ingresso della torre è sul cortile, segui le indicazioni <b>Tårnet</b>. C’è un <b>controllo di sicurezza</b> come in aeroporto, zaino sul nastro, e poi l’ascensore. Non serve prenotare e non si paga: se qualcuno ti ferma, «<b>the tower, please</b>» basta. In cima lo spazio è poco e <b>ci può essere coda per l’ascensore</b>: se ne trovi tanta, torna dopo cena, chiude alle 21.",
+   price:"gratis", badge:["ok","mar–sab 11–21, gratis"], src:"https://www.kongeligeslotte.dk/en/palaces-and-gardens/christiansborg-palace/the-tower.html", map:"Christiansborgs Tårn"},
+  {t:"17:55", h:"A Nørrebro", key:1,
+   hop:"<b>Gammel Strand</b> → <b>M3</b> (non la M4) → scendi a <b>Nørrebros Runddel</b>. ~18 minuti.",
+   b:"Qui l’anello è quasi in pari: da un verso sono <b>8 fermate</b>, dall’altro <b>9</b>. <b>Prendi il primo treno che arriva, da qualunque binario</b> — l’unica cosa da controllare è che sul muso ci sia scritto <b>M3</b>: la M4 passa di qui ma a Nørrebro non ci va.",
+   b2:"Prima di scendere: <b>leggi il nome sul display dentro il vagone</b>, non contare le fermate."},
+  {t:"18:20", h:"Assistens Kirkegård", v:8, key:1,
    b:"Il cimitero del 1760 che i danesi usano come parco, e l’ingresso è a due passi dalla metro. Kierkegaard e Andersen sono qui, ma il punto è la gente sdraiata sull’erba a leggere. <b>D’estate aperto fino alle 22</b>: è il posto giusto per stare fermo un’ora prima di cena.",
    b2:"Superkilen, la piazza rossa e nera di BIG, è dieci minuti più a nord: oggi la lascerei perdere, ma se ti gira bene è lì.",
    price:"gratis", badge:["ok","estate 7–22"], map:"Assistens Kirkegård"},
   {t:"19:15", h:"Cena in Jægersborggade", v:8,
    b:"La via più bella di Nørrebro, e sbuca dal cimitero: botteghe, ceramisti, <b>Coffee Collective</b> e il gelato all’azoto liquido di <b>Istid</b>. La cena la componi camminando su duecento metri di strada, e poi ti siedi.",
    price:"varie", map:"Jægersborggade København"},
-  {t:"21:00", h:"Rientro", hop:"<b>Nørrebros Runddel</b> → <b>M3</b> → <b>Kongens Nytorv</b> → <b>M2</b> dir. <b>Lufthavnen</b> → <b>KASTRUP</b>."}
+  {t:"21:00", h:"Rientro", key:1,
+   hop:"<b>Nørrebros Runddel</b> → <b>M3</b>, il primo che arriva → <b>Kongens Nytorv</b> → cambi, <b>M2</b> dir. <b>Lufthavnen</b> → scendi a <b>KASTRUP</b>.",
+   b:"A Nørrebros Runddel passa <b>solo la M3</b> e i due versi sono quasi uguali (8 fermate contro 9): non scegliere, sali sul primo.",
+   b2:"⚠️ <b>A Kongens Nytorv sta l’unico errore possibile della giornata.</b> Sullo stesso binario arrivano <b>M1</b> e <b>M2</b>: solo la <b>M2</b> va a Kastrup, e sul muso c’è scritto <b>Lufthavnen</b>. Se sale la M1 (Vestamager) la lasci partire e aspetti tre minuti."}
  ],
  food:{
   intro:"Giornata a tappe corte: colazione grossa a Nørrebro, pranzo dentro Torvehallerne, cena a pezzi in Jægersborggade. Nessuno dei tre richiede di camminare per arrivarci.",
@@ -500,6 +513,7 @@ const DAYS = [
    {n:"Andersen &amp; Maillard", w:"Colazione, Nørrebrogade 62. Il <b>cube croissant al pistacchio</b> e un caffè, seduto. Si ordina in inglese.", p:"~50–65", u:"DKK", h:"~7–19", badge:"warn", map:"Andersen Maillard Nørrebrogade 62"},
    {n:"Sankt Peders Bageri", w:"L’<i>onsdagssnegl</i> alla cannella esiste <b>solo il mercoledì</b>, dal forno del 1652. Non è sulla strada di oggi: sono 8 minuti a piedi da Nørreport, andata e ritorno. Se ci passi, comprala e portala via — regge fino a stasera.", p:"~25", u:"DKK", h:"lun–ven 7:30–17", badge:"ok", map:"Sankt Peders Bageri Sankt Peders Stræde 29"},
    {n:"Torvehallerne", w:"Pranzo. Smørrebrød da 68, tacos da 56, formaggi, caffè. Compra e mangia fuori.", p:"70–150", u:"DKK", h:"lun–ven 10–19", badge:"ok", map:"Torvehallerne København"},
+   {n:"DØP · Den Økologiske Pølsemand", w:"Il carretto dell’hot dog biologico, <b>sotto la Rundetårn</b> su Købmagergade: oggi ci passi davanti alle 14:10 andando alla chiesa. Se il pranzo è stato leggero, cinque euro qui e sei a posto. <b>Chiude alle 18.</b>", p:"34–39", u:"DKK", h:"lun–ven 11:00–18:00", badge:"ok", map:"DØP Købmagergade 52"},
    {n:"Jægersborggade", w:"Cena a pezzi: Coffee Collective, Istid, botteghe. Nørrebro, la sera.", p:"varie", u:"", h:"sera", badge:"warn", map:"Jægersborggade"},
    {n:"Poulette", w:"Møllegade 1, a due passi da Jægersborggade. Panino di pollo fritto piccante, solo asporto: si mangia al parco. <b>Chiude alle 20.</b>", p:"~95", u:"DKK", h:"fino alle 20", badge:"warn", map:"Poulette Møllegade 1 København"}
   ]
@@ -864,6 +878,24 @@ function renderBiglietti(){
     <p>In Danimarca il bus si prende <b>dalla porta anteriore</b>: passi accanto all’autista e gli <b>mostri il biglietto di carta</b> senza fermarti. Un cenno e sei dentro. <b>Non si timbra e non si tocca niente</b>: il City Pass è già valido, data e ora sono stampate sopra. Se l’autista nemmeno alza gli occhi va bene lo stesso — l’obbligo è averlo, non farlo vedere.</p>
     <p style="margin-top:8px">Si scende dalle porte <b>di mezzo o in fondo</b>, e per fermarsi si preme <b>STOP</b> un po’ prima. Il capolinea è sul display sopra il parabrezza; la fermata la leggi sul display dentro il bus: <b>non contare le fermate</b>.</p>
     <p style="margin-top:8px">In <b>metro</b>, sui <b>treni</b> e sui <b>traghetti del porto</b> non devi mostrare niente a nessuno: niente tornelli, sali e basta. Il biglietto lo tiri fuori solo se sale un controllore.</p></div>
+
+  <h3 class="sec-h" style="font-size:1.12rem;margin-bottom:8px">In metro: il binario si legge, non si indovina</h3>
+  <div class="call do" style="margin-bottom:12px"><h4>La regola che risolve tutto</h4>
+    <p>Su ogni banchina, sul cartello, c’è <b>l’elenco delle prossime fermate</b> in ordine. <b>Cerca il nome della tua fermata in quell’elenco.</b> Se c’è, è quel binario. Se non c’è, è quello di fronte.</p>
+    <p>Non ti serve sapere dove va il treno né come si chiama il capolinea: ti serve trovare <b>una parola in una lista</b>. Poi, dentro il vagone, il display annuncia una fermata dopo l’altra e <b>non devi contare niente</b>.</p>
+    <p>Passa un treno ogni <b>3–5 minuti</b>. In metro non ti serve mai un orario: se sbagli, aspetti.</p></div>
+
+  <div class="call note" style="margin-bottom:12px"><h4>La M3 è un anello: non puoi sbagliare davvero</h4>
+    <p>La <b>M3</b> non ha capolinea, gira in tondo su <b>17 fermate</b>. Da tutti e due i binari si arriva ovunque: se prendi quello «sbagliato» fai il giro largo, ma ci arrivi lo stesso. <b>Binario sbagliato = più lungo, mai perso.</b> Non scendere per rimediare: resta seduto.</p>
+    <p>L’anello, in ordine: <b>København H → Rådhuspladsen → Gammel Strand → Kongens Nytorv → Marmorkirken → Østerport → Trianglen → Poul Henningsens Plads → Vibenshus Runddel → Skjolds Plads → Nørrebro → Nørrebros Runddel → Nuuks Plads → Aksel Møllers Have → Frederiksberg → Frederiksberg Allé → Enghave Plads</b> → e si ricomincia.</p>
+    <div class="meta"><span class="b warn">m.dk non si apre da qui</span></div></div>
+
+  <div class="call stop" style="margin-bottom:18px"><h4>Dove due linee dividono lo stesso binario</h4>
+    <p>In alcuni punti sullo stesso marciapiede arrivano <b>due linee diverse</b>, e l’elenco delle fermate vale solo per una. Lì il binario non basta: <b>guarda il numero sul muso del treno</b>, è grande e illuminato.</p>
+    <p><b>Kongens Nytorv, per tornare a casa:</b> arrivano <b>M1</b> e <b>M2</b>. Solo la <b>M2</b> va a Kastrup e dice <b>Lufthavnen</b>. La M1 va a Vestamager, dall’altra parte di Amager.</p>
+    <p><b>København H, verso Nørrebro:</b> arrivano <b>M3</b> e <b>M4</b> dallo stesso binario e poi si dividono. Ti serve la <b>M3</b>: la M4 scende a sud verso Ny Ellebjerg.</p>
+    <p><b>Gammel Strand e Kongens Nytorv verso København H:</b> arrivano M3 e M4 e qui <b>vanno bene tutte e due</b>, fanno lo stesso pezzo.</p>
+    <p>Se arriva quella sbagliata, lasciala partire: il prossimo è a tre minuti.</p></div>
 
   <h3 class="sec-h" style="font-size:1.12rem;margin-bottom:8px">Controlli e multe</h3>
   <div class="tw" style="margin-bottom:18px"><table>
