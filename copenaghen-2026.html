@@ -686,6 +686,14 @@ const DAYS = [
    b2:"È il pezzo di Copenaghen che tua sorella si aspetta di vedere, e finora nel piano non c'era. Passandoci a piedi verso la fine, ci arrivate senza spostare niente.",
    warn:"Il sabato i negozi chiudono alle 17:00, e alle 16:45 dovete essere in aeroporto: qui avete un’ora e mezza scarsa. Se avete fatto Istedgade, questa diventa la passeggiata e non lo shopping.",
    price:"gratis", badge:["ok","sab 10–17, verificato"], map:"Strøget København"},
+  {t:"15:45", h:"Købmagergade: il carretto e il succo", v:8, key:1,
+   hop:"Sullo Strøget, arrivati ad <b>Amagertorv</b>, giri a <b>sinistra</b> in <b>Købmagergade</b>. <b>Joe &amp; The Juice è al 30</b>, cento metri sulla destra. <b>DØP è al 52</b>, altri duecento metri verso la Rundetårn. Poi torni ad Amagertorv e riprendi lo Strøget verso Kongens Nytorv: cinque minuti di deviazione in tutto.",
+   b:"<b>L’hot dog danese, finalmente.</b> Al carretto <b>DØP</b> chiedi <b>«one ristet pølse, please»</b>: <i>ristet</i> vuol dire arrostito sulla piastra, non lessato, ed è quello giusto. <b>34–39 corone</b>, si mangia in piedi in due minuti. Se ti chiedono cosa metterci, <b>«everything, please»</b> e arriva tutto: cipolla fritta, cetriolini, senape, remoulade.",
+   b2:"<b>Per tua sorella, Joe &amp; The Juice.</b> È al 30, cioè prima del carretto: si ordina al banco in inglese, si paga con la carta, si esce col bicchiere in mano. <b>Succhi 40–52 corone</b> secondo la taglia, panini sui <b>70–85</b>. È caro per il metro di questo viaggio — un panino qui sono due hot dog e mezzo — ma è quello che ha chiesto ed è sulla strada che facevate comunque.",
+   warn:"⚠️ Il sabato di nessuno dei due è confermato. Di DØP l’orario verificato è <b>lun–ven 11–18</b> e il sito ufficiale da qui non si apre; di Joe &amp; The Juice gli elenchi danesi dicono 9–20, ma il sito ufficiale è irraggiungibile pure quello. Sono a duecento metri l’uno dall’altro: se uno è chiuso, mangiate all’altro. E questa sosta costa venti minuti allo Strøget, che alle 17 chiude.",
+   price:"34–39 DKK · Joe 40–85",
+   badge:["warn","orari del sabato non confermati"],
+   map:"Købmagergade 30 København"},
   {t:"16:20", h:"Kongens Nytorv e Nyhavn di giorno", v:8,
    b:"Lo Strøget finisce dentro <b>Kongens Nytorv</b>, e Nyhavn è a duecento metri. Per lei è la chiusura giusta: l'ha vista illuminata giovedì sera, adesso la vede con la luce. Venti minuti sul molo e poi si scende in metro, che parte da qui.",
    price:"gratis", map:"Nyhavn København"},
@@ -701,6 +709,8 @@ const DAYS = [
   items:[
    {n:"Smørrebrødets Dag", w:"Flæsketorvet 45, 11:00–15:00. Dieci cucine a gettoni. <b>Piatto e posate da casa.</b>", p:"150–250", u:"DKK", h:"sab 11–15", badge:"ok", map:"Flæsketorvet 45 København"},
    {n:"CPH Smash", w:"Slagterboderne 12, a duecento metri dal mercato. Se dopo i gettoni avete ancora fame, è qui e non altrove — dalle 15 in poi camminate verso il centro e non ripassate.", p:"105", u:"DKK", h:"tutti i giorni", badge:"warn", map:"CPH Smash Slagterboderne 12"},
+   {n:"DØP · Den Økologiske Pølsemand", w:"Il carretto dell’hot dog biologico, Købmagergade 52. Alle 15:45 ci passate davanti. <b>L’orario verificato è lun–ven</b>: gli elenchi danesi lo danno aperto anche il sabato, ma nessuna fonte ufficiale lo conferma da qui.", p:"34–39", u:"DKK", h:"sabato da verificare", badge:"warn", map:"DØP Købmagergade 52"},
+   {n:"Joe &amp; The Juice", w:"Købmagergade 30, duecento metri prima del carretto. Succhi spremuti, panini caldi, si ordina al banco in inglese. <b>Caro per il metro di questo viaggio</b>, ma è quello che ha chiesto tua sorella.", p:"40–85", u:"DKK a testa", h:"sab ~9–20, da verificare", badge:"warn", map:"Joe and the Juice Købmagergade 30"},
    {n:"Sullo Strøget", w:"Panetterie ovunque, e <b>BUKA</b> ha due sedi proprio lì (Frederiksberggade 21 e Nytorv 3). Caffè e dolce mentre lei guarda le vetrine.", p:"~58", u:"DKK", h:"fino alle 19", badge:"warn", map:"BUKA Bakery Nytorv 3"},
    {n:"Colazione a casa", w:"Finite quello che c’è in frigo. Il koldskål coi kammerjunker è il modo giusto di chiudere.", p:"~0", u:"", h:"", badge:"flat"},
    {n:"In aeroporto", w:"Caro come tutti gli aeroporti. Se avanzano gettoni di fame, usateli a Kødbyen prima di partire.", p:"alto", u:"", h:"", badge:"flat"}
